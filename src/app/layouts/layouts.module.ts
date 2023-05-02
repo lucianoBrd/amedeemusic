@@ -1,0 +1,57 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LayoutsRoutingModule } from './layouts-routing.module';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { SwiperModule } from 'swiper/angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../shared/shared.module'
+import { CountToModule } from 'angular-count-to';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { NgxPayPalModule } from 'ngx-paypal';
+import { Ng5SliderModule } from 'ng5-slider';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
+
+// Music Layout
+import { MusicComponent } from './music/music.component';
+import { MusicNavComponent } from './music/music-nav/music-nav.component';
+import { MusicHeaderComponent } from './music/music-header/music-header.component';
+import { MusicAlbumComponent } from './music/music-album/music-album.component';
+import { MusicArtistComponent } from './music/music-artist/music-artist.component';
+import { MusicSponsorComponent } from './music/music-sponsor/music-sponsor.component';
+import { MusicGalleryComponent } from './music/music-gallery/music-gallery.component';
+import { MusicVideoComponent } from './music/music-video/music-video.component';
+import { MusicBookingComponent } from './music/music-booking/music-booking.component';
+import { MusicBlogComponent } from './music/music-blog/music-blog.component';
+import { MusicSubscribeComponent } from './music/music-subscribe/music-subscribe.component';
+import { MusicTestimonialComponent } from './music/music-testimonial/music-testimonial.component';
+import { MusicFooterComponent } from './music/music-footer/music-footer.component';
+import { MusicCopyrightComponent } from './music/music-copyright/music-copyright.component';
+
+
+
+@NgModule({
+  declarations: [
+    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicAlbumComponent, MusicArtistComponent, MusicSponsorComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
+
+  imports: [
+    CommonModule,
+    LayoutsRoutingModule,
+    SwiperModule,
+    CarouselModule,
+    NgbModule,
+    GalleryModule,
+    SharedModule,
+    CountToModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // NgxPayPalModule,
+    Ng5SliderModule,
+    LightboxModule,
+    NgxMasonryModule
+  ],
+  exports: [],
+})
+
+export class LayoutsModule { }
