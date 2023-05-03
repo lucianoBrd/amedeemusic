@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavService, Menu } from '../../../service/nav.service';
+import { NavService } from '../../../service/nav.service';
+import { Router } from '@angular/router';
+import { TextService } from 'src/app/shared/service/text.service';
+import { Language } from 'src/app/shared/models/language.interface';
+import { Menu } from '../../../models/menu.interface';
 
 @Component({
   selector: 'app-menu',
@@ -8,30 +12,37 @@ import { NavService, Menu } from '../../../service/nav.service';
 })
 export class MenuComponent implements OnInit {
   public menuItems: Menu[];
-  public openSide : boolean = false;
+  public openSide: boolean = false;
   public activeItem: string = 'home';
   public active: boolean = false;
-  public activeChildItem : string = '' 
+  public activeChildItem: string = ''
   public overlay: boolean = false;
-  
-  constructor( public navServices: NavService) { }
- 
+  public url: string = "";
+  public mobile: boolean = false;
+  public language: Language;
+
+  constructor(public navServices: NavService, private router: Router, private textService: TextService) {
+    this.language = this.textService.getTextByLocal();
+  }
+
   ngOnInit() {
+    this.url = this.router.url;
+    this.mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     this.navServices.items.subscribe(menuItems => {
       this.menuItems = menuItems
     });
   }
 
-  toggleSidebar(){
+  toggleSidebar() {
     this.openSide = !this.openSide
   }
 
-  closeOverlay(){
+  closeOverlay() {
     this.openSide = false
   }
 
   //For Active Main menu in Mobile View
-  setActive(menuItem){
+  setActive(menuItem) {
     if (this.activeItem === menuItem) {
       this.activeItem = ''
     } else {
@@ -39,12 +50,12 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  isActive(item){
-    return this.activeItem === item 
+  isActive(item) {
+    return this.activeItem === item
   }
 
   // For Active Child Menu in Mobile View
-  setChildActive(subMenu){
+  setChildActive(subMenu) {
     if (this.activeChildItem === subMenu) {
       this.activeChildItem = ''
     } else {
@@ -52,8 +63,8 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  ischildActive(subMenu){
-    return this.activeChildItem === subMenu 
+  ischildActive(subMenu) {
+    return this.activeChildItem === subMenu
   }
 
 

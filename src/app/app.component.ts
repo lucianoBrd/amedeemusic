@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { TextService } from './shared/service/text.service';
 import { Language } from './shared/models/language.interface';
 import { LanguageService } from './shared/service/language.service';
+import { ConfigDB } from './shared/data/config';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ import { LanguageService } from './shared/service/language.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   public url: any;
-  title = 'AmedeeMusic';
+  title = ConfigDB.data.appName;
   public layoutType: string = 'light';
   public language: Language;
 

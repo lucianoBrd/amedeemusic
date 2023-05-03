@@ -105,7 +105,7 @@ export class TextService {
       cvDesc: 'Mon parcours et les compétences que j\'ai pu acquérir sont détaillées sur mon CV.',
       educationDesc: 'Les principales formations que j\'ai suivies durant ma vie sont résumée dans cette page.',
       notFound: '404',
-      notFoundDesc: 'La page que vous essayez d\'atteindre n\'est pasdisponible actuellement. Cela peut être dû au fait que la page n\'existe pas ou a été déplacée.',
+      notFoundDesc: 'La page que vous essayez d\'atteindre n\'est pas disponible actuellement. Cela peut être dû au fait que la page n\'existe pas ou a été déplacée.',
       goHome: 'Retour à l\'accueil',
       notFoundTitle: 'Page non trouvée',
       download: 'Télécharger',

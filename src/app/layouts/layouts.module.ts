@@ -51,7 +51,11 @@ import { MusicCopyrightComponent } from './music/music-copyright/music-copyright
     LightboxModule,
     NgxMasonryModule
   ],
-  exports: [],
+  exports: [
+    MusicNavComponent,
+    MusicFooterComponent,
+    MusicCopyrightComponent
+  ],
 })
 
 export class LayoutsModule { }
