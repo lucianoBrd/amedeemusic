@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { Language } from 'src/app/shared/models/language.interface';
+import { MetaService } from 'src/app/shared/service/meta.service';
+import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
   selector: 'app-music',
@@ -9,12 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MusicComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,
-    private title: Title) { }
+  public language: Language;
+  
+  constructor(private metaService: MetaService, private textService: TextService) {
+    this.language = this.textService.getTextByLocal();
+  }
 
   ngOnInit() {
-    this.title.setTitle(this.route.snapshot.data['title']);
-
+    /* Set title + meta */
+    this.metaService.setTitle(this.language.home);
+    this.metaService.setKeywords(this.language.homeDesc);
+    this.metaService.setDescription(this.language.homeDesc);
   }
 
 }

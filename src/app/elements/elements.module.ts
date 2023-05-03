@@ -10,22 +10,13 @@ import { CountToModule } from 'angular-count-to';
 import { ElementsComponent } from './elements.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { EducationComponent } from './education/education.component';
 import { LayoutsModule } from '../layouts/layouts.module'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { CvComponent } from './cv/cv.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SecurityContext } from '@angular/core';
-import { BlogComponent } from './blog/blog.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMasonryModule } from 'ngx-masonry';
-import { SidebarComponent } from './blog/sidebar/sidebar.component';
-import { PostComponent } from './blog/post/post.component';
 import { DownloadComponent } from './download/download.component';
-import { CommentComponent } from './blog/comment/comment.component';
 import { JsonDateInterceptorService } from '../shared/service/jsonDateInterceptor.service';
 
 RecaptchaComponent.prototype.ngOnDestroy = function() {
@@ -38,16 +29,9 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
   declarations: [
     ElementsComponent, 
     AboutComponent, 
-    BlogComponent, 
     ContactComponent, 
-    CvComponent, 
-    EducationComponent, 
-    SidebarComponent, 
-    PostComponent, 
     PageNotFoundComponent, 
-    ProjectsComponent,
     DownloadComponent,
-    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -62,10 +46,6 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     RecaptchaModule,
     RecaptchaFormsModule,
     NgxMasonryModule,
-    MarkdownModule.forRoot({
-      loader: HttpClient,
-      sanitize: SecurityContext.NONE
-    }),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JsonDateInterceptorService, multi: true}
