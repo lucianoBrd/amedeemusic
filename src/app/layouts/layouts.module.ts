@@ -18,7 +18,7 @@ import { MusicComponent } from './music/music.component';
 import { MusicNavComponent } from './music/music-nav/music-nav.component';
 import { MusicHeaderComponent } from './music/music-header/music-header.component';
 import { MusicAlbumComponent } from './music/music-album/music-album.component';
-import { MusicArtistComponent } from './music/music-artist/music-artist.component';
+import { MusicProjectComponent } from './music/music-project/music-project.component';
 import { MusicSponsorComponent } from './music/music-sponsor/music-sponsor.component';
 import { MusicGalleryComponent } from './music/music-gallery/music-gallery.component';
 import { MusicVideoComponent } from './music/music-video/music-video.component';
@@ -33,7 +33,7 @@ import { MusicCopyrightComponent } from './music/music-copyright/music-copyright
 
 @NgModule({
   declarations: [
-    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicAlbumComponent, MusicArtistComponent, MusicSponsorComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
+    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicAlbumComponent, MusicProjectComponent, MusicSponsorComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
 
   imports: [
     CommonModule,

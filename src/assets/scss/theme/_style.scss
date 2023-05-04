@@ -3811,12 +3811,14 @@ booking section end
         transform: translate(-50%, -25%);
         .cd-animation {
           transition: all 0.3s ease;
+          height: 334px;
         }
         .elipse {
           display: inline;
           width: auto;
           top: 50%;
           transform: translate(80%, -50%);
+          height: 80px;
         }
         img {
           display: inline;
