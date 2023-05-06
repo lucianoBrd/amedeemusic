@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarService } from 'src/app/shared/service/sidebar.service';
 
 @Component({
   selector: 'app-music-header',
@@ -6,15 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./music-header.component.scss']
 })
 export class MusicHeaderComponent implements OnInit {
-sideBarDispaly:string="none";
-
-  constructor() { }
+  constructor(private sidebarService: SidebarService) { }
 
   ngOnInit() {
   }
 
-  sideBar(){
-    (this.sideBarDispaly=='none')?this.sideBarDispaly='block':this.sideBarDispaly='none'
+  sideBar(value) {
+    this.sidebarService.sendClickEvent(value);
   }
 
 }

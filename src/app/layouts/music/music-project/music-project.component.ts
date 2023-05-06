@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarService } from 'src/app/shared/service/sidebar.service';
 
 @Component({
   selector: 'app-music-project',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MusicProjectComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sidebarService: SidebarService) { }
 
   ngOnInit() {
+  }
+
+  sideBar(value) {
+    this.sidebarService.sendClickEvent(value);
   }
 
   projects = [

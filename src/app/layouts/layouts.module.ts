@@ -17,8 +17,9 @@ import { LightboxModule } from 'ng-gallery/lightbox';
 import { MusicComponent } from './music/music.component';
 import { MusicNavComponent } from './music/music-nav/music-nav.component';
 import { MusicHeaderComponent } from './music/music-header/music-header.component';
-import { MusicAlbumComponent } from './music/music-album/music-album.component';
+import { MusicEventComponent } from './music/music-event/music-event.component';
 import { MusicProjectComponent } from './music/music-project/music-project.component';
+import { MusicSidebarComponent } from './music/music-sidebar/music-sidebar.component';
 import { MusicSponsorComponent } from './music/music-sponsor/music-sponsor.component';
 import { MusicGalleryComponent } from './music/music-gallery/music-gallery.component';
 import { MusicVideoComponent } from './music/music-video/music-video.component';
@@ -33,7 +34,7 @@ import { MusicCopyrightComponent } from './music/music-copyright/music-copyright
 
 @NgModule({
   declarations: [
-    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicAlbumComponent, MusicProjectComponent, MusicSponsorComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
+    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicEventComponent, MusicProjectComponent, MusicSidebarComponent, MusicSponsorComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
 
   imports: [
     CommonModule,
