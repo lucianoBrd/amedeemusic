@@ -1,5 +1,5 @@
 export interface Social {
-    id: number,
+    id: Readonly<number>,
     link: string,
-    fa: string;
+    fa: string,
 }

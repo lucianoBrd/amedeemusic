@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-music-sponsor',
-  templateUrl: './music-sponsor.component.html',
-  styleUrls: ['./music-sponsor.component.scss']
+  selector: 'app-music-social',
+  templateUrl: './music-social.component.html',
+  styleUrls: ['./music-social.component.scss']
 })
-export class MusicSponsorComponent implements OnInit {
+export class MusicSocialComponent implements OnInit {
 
   constructor() { }
 

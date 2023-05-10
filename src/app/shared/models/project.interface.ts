@@ -1,11 +1,13 @@
+import { ProjectPlatform } from "./projectPlatform.interface";
+import { Title } from "./title.interface";
+import { Type } from "./type.interface";
+
 export interface Project {
-    id: number,
+    id: Readonly<number>,
+    name: string,
+    date: Date,
     image: string,
-    title: string,
-    type: string,
-    date: string,
-    url: string,
-    git: string,
-    content: string,
-    document: string;
+    titles: Title[],
+    projectPlatforms: ProjectPlatform[],
+    type: Type,
 }

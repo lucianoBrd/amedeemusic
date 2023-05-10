@@ -20,7 +20,7 @@ import { MusicHeaderComponent } from './music/music-header/music-header.componen
 import { MusicEventComponent } from './music/music-event/music-event.component';
 import { MusicProjectComponent } from './music/music-project/music-project.component';
 import { MusicSidebarComponent } from './music/music-sidebar/music-sidebar.component';
-import { MusicSponsorComponent } from './music/music-sponsor/music-sponsor.component';
+import { MusicSocialComponent } from './music/music-social/music-social.component';
 import { MusicGalleryComponent } from './music/music-gallery/music-gallery.component';
 import { MusicVideoComponent } from './music/music-video/music-video.component';
 import { MusicBookingComponent } from './music/music-booking/music-booking.component';
@@ -34,7 +34,7 @@ import { MusicCopyrightComponent } from './music/music-copyright/music-copyright
 
 @NgModule({
   declarations: [
-    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicEventComponent, MusicProjectComponent, MusicSidebarComponent, MusicSponsorComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
+    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicEventComponent, MusicProjectComponent, MusicSidebarComponent, MusicSocialComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
 
   imports: [
     CommonModule,
