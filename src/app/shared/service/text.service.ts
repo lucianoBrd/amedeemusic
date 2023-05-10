@@ -122,6 +122,8 @@ export class TextService {
       search: 'Rechercher',
       subscribe: 'S\'abonner',
       subscribeSuccess: 'Merci de vous être abonné.',
+
+      listenToMe: 'Écoutez-moi',
     };
   }
 
@@ -214,6 +216,8 @@ export class TextService {
       search: 'Search',
       subscribe: 'Subscribe',
       subscribeSuccess: 'Thank you for subscribing.',
+
+      listenToMe: 'Listen to me',
     };
   }
 

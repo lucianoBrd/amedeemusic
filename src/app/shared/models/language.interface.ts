@@ -81,4 +81,6 @@ export interface Language {
     search: string,
     subscribe: string,
     subscribeSuccess: string,
+
+    listenToMe: string,
 }

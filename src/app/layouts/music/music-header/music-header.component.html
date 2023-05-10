@@ -16,13 +16,18 @@
         </div>
         <h1>2019 <span class="">18</span></h1>
     </div>
-    <div class="left-side">
-        <h6 class="follow-text">follow us</h6>
+    <div class="left-side" *ngIf="socials?.length > 0">
+        <h6 class="follow-text">{{language.listenToMe}}</h6>
         <ul>
-            <li><a href="#"><img src="assets/images/music/icons/insta.png" alt="" class="img-fluid"></a></li>
-            <li><a href="#"><img src="assets/images/music/icons/twitter.png" alt="" class="img-fluid"></a></li>
-            <li><a href="#"><img src="assets/images/music/icons/facebook.png" alt="" class="img-fluid"></a></li>
+            <li *ngFor="let social of socials" class="mr-2">
+                <a target="_blank" href="{{social.link}}">
+                    <i aria-hidden="true" class="fa {{social.fa}}"></i>
+                </a>
+            </li>
         </ul>
+    </div>
+    <div class="left-side pt-5" *ngIf="!socials">
+        <app-loader-bis-white></app-loader-bis-white>
     </div>
     <div class="container music-container">
         <div class="row">
@@ -44,7 +49,11 @@
                         <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
                             <div class="jp-type-playlist">
                                 <div class="jp-gui jp-interface p-0 d-flex">
-                                    <div class="jp-controls"><button class="jp-play m-r-15" role="button" tabindex="0"></button></div>
+                                    <div class="jp-controls">
+                                        <button class="jp-play m-r-15" role="button" tabindex="0">
+                                            <i class="fa fa-play" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
                                     <a (click)="sideBar(1)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
                                 </div>
                             </div>

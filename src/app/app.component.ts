@@ -60,10 +60,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.language = this.textService.getTextByLocal();
     this.mdLoad = true;
-    this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
+    /*this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
       this.politic = data['politic'] as Politic;
       this.documentPath = data['documentPath'];
-    })
+    })*/
   }
 
   ngOnDestroy() {

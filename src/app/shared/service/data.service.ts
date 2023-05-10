@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Injectable, isDevMode } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { ConfigDB } from '../data/config';
@@ -8,9 +8,15 @@ import { ConfigDB } from '../data/config';
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private httpClient: HttpClient) { }
-
   private REST_API_SERVER = "https://api." + ConfigDB.data.serverName;
+
+  constructor(private httpClient: HttpClient) { 
+    if (isDevMode()) {
+      this.REST_API_SERVER = 'http://127.0.0.1:8000';
+    }
+  }
+
+  
 
   public PAGE = null;
 
@@ -31,9 +37,27 @@ export class DataService {
   public sendGetRequest(){
     if (this.PAGE){
       if(this.PARAMS){
-        return this.httpClient.post(this.REST_API_SERVER + this.PAGE, JSON.stringify(this.PARAMS)).pipe(retry(3), catchError(this.handleError));
+        return this.httpClient.post(
+          this.REST_API_SERVER + this.PAGE, 
+          JSON.stringify(this.PARAMS)
+        ).pipe(
+          retry(3), 
+          catchError(this.handleError)
+        );
       }
-      return this.httpClient.get(this.REST_API_SERVER + this.PAGE).pipe(retry(3), catchError(this.handleError));
+      return this.httpClient.get(
+        this.REST_API_SERVER + this.PAGE, 
+        { 
+          headers: new HttpHeaders(
+            {
+              'Accept':  'application/json'
+            }
+          )
+        }
+      ).pipe(
+        retry(3), 
+        catchError(this.handleError),
+      );
     }
   }
 }
