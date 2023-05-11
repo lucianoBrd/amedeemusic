@@ -76,8 +76,7 @@ export class ContactComponent implements OnInit {
           mail: this.email, 
           message: this.message
         };
-        this.dataService.PAGE = '/contact/' + LanguageService.getLanguageCodeOnly();
-        this.dataService.sendGetRequest().subscribe((data: any[]) => {
+        this.dataService.sendGetRequest('/contact/' + LanguageService.getLanguageCodeOnly()).subscribe((data: any[]) => {
           if (data['error'] == true) {
             this.hasSentError = true;
             this.alertService.showError(this.language.contactError);

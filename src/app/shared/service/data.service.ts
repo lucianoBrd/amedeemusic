@@ -8,17 +8,11 @@ import { ConfigDB } from '../data/config';
   providedIn: 'root'
 })
 export class DataService {
-  private REST_API_SERVER = "https://api." + ConfigDB.data.serverName;
+  private REST_API_SERVER = ConfigDB.data.apiServer;
 
   constructor(private httpClient: HttpClient) { 
-    if (isDevMode()) {
-      this.REST_API_SERVER = 'http://127.0.0.1:8000';
-    }
+    
   }
-
-  
-
-  public PAGE = null;
 
   public PARAMS = null;
 
@@ -34,11 +28,11 @@ export class DataService {
     return throwError(errorMessage);
   }
 
-  public sendGetRequest(){
-    if (this.PAGE){
+  public sendGetRequest(page: string){
+    if (page){
       if(this.PARAMS){
         return this.httpClient.post(
-          this.REST_API_SERVER + this.PAGE, 
+          this.REST_API_SERVER + page, 
           JSON.stringify(this.PARAMS)
         ).pipe(
           retry(3), 
@@ -46,7 +40,7 @@ export class DataService {
         );
       }
       return this.httpClient.get(
-        this.REST_API_SERVER + this.PAGE, 
+        this.REST_API_SERVER + page, 
         { 
           headers: new HttpHeaders(
             {

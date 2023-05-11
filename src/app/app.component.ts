@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, Inject } from '@angular/core';
 import { CustomizerService } from './shared/service/customizer.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { MetaService } from './shared/service/meta.service';
@@ -11,6 +11,7 @@ import { TextService } from './shared/service/text.service';
 import { Language } from './shared/models/language.interface';
 import { LanguageService } from './shared/service/language.service';
 import { ConfigDB } from './shared/data/config';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -40,9 +41,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private textService: TextService,
     private metaService: MetaService,
     private modalService: NgbModal,
+    private _renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document: Document
   ) {
-    this.dataService.PAGE = '/politic/' + LanguageService.getLanguageCodeOnly();
-
     this.language = this.textService.getTextByLocal();
 
     /* Set title + meta */
@@ -58,9 +59,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let script = this._renderer2.createElement('script');
+    script.src  = `/assets/tilt.js`;   
+    this._renderer2.appendChild(this._document.body, script);
+    
     this.language = this.textService.getTextByLocal();
     this.mdLoad = true;
-    /*this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
+    /*this.dataService.sendGetRequest('/politic/' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
       this.politic = data['politic'] as Politic;
       this.documentPath = data['documentPath'];
     })*/

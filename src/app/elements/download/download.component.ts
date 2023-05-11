@@ -95,8 +95,7 @@ export class DownloadComponent implements OnInit, OnDestroy {
           mail: this.email, 
           file: this.file,
         };
-        this.dataService.PAGE = '/download/' + LanguageService.getLanguageCodeOnly();
-        this.dataService.sendGetRequest().subscribe((data: any[]) => {
+        this.dataService.sendGetRequest('/download/' + LanguageService.getLanguageCodeOnly()).subscribe((data: any[]) => {
           if (data['error'] == true) {
             this.hasSentError = true;
             this.alertService.showError(this.language.contactError);

@@ -1,27 +1,28 @@
 <!-- header Start-->
 <section class="music header" id="header">
     <div class="music-content">
-        <div class="music-bg bg bg-shadow-top" [ngStyle]="{'background-image': 'url(assets/images/music/slider.jpg)'}">
-            <div class="text-center w-100" aTilt data-tilt data-tilt-max="3" data-tilt-speed="400"
-                 data-tilt-perspective="400">
+        <div class="music-bg bg bg-shadow-top" [ngStyle]="{'background-image': (artist?.header ? 'url(' + artistImagePath + artist.header + ')' : 'url(assets/images/music/artist/header.jpg)')}">
+            <div class="text-center w-100" aTilt data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="400">
                 <div class="img-height">
-                    <img src="assets/images/music/artist.png" alt="" class="img-fluid">
+                    <img *ngIf="artist?.man" src="{{artistImagePath}}{{artist.man}}" alt="artist" class="img-fluid">
+                    <img *ngIf="artist && !artist.man" src="assets/images/music/artist/man.png" alt="artist" class="img-fluid">
+                    <app-loader-bis-white *ngIf="!artist"></app-loader-bis-white>
                 </div>
             </div>
         </div>
     </div>
-    <div class="right-side">
+    <div class="right-side" *ngIf="artist?.date">
         <div class="circle">
-            <img src="assets/images/music/icons/aero.png" alt="" class="img-fluid">
+            <img src="assets/images/music/icons/aero.png" alt="aero" class="img-fluid">
         </div>
-        <h1>2019 <span class="">18</span></h1>
+        <h1>{{artist.date | date:'y'}} <span class="">{{artist.date | date:'MMMM'}}</span></h1>
     </div>
     <div class="left-side" *ngIf="socials?.length > 0">
         <h6 class="follow-text">{{language.listenToMe}}</h6>
         <ul>
             <li *ngFor="let social of socials" class="mr-2">
                 <a target="_blank" href="{{social.link}}">
-                    <i aria-hidden="true" class="fa {{social.fa}}"></i>
+                    <i aria-hidden="true" class="{{social.fa}}"></i>
                 </a>
             </li>
         </ul>

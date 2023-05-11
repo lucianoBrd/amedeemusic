@@ -21,7 +21,6 @@ export class AboutComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private dataService: DataService, private metaService: MetaService, private textService: TextService) {
-    this.dataService.PAGE = '/social';
     this.language = this.textService.getTextByLocal();
   }
 
@@ -31,7 +30,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     this.metaService.setKeywords(this.language.about);
     this.metaService.setDescription(this.language.aboutPara[0]);
 
-    this.dataService.sendGetRequest().pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
+    this.dataService.sendGetRequest('/social').pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
       this.socials = data['socials'] as Social[];
     })
   }

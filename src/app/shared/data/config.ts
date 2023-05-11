@@ -1,3 +1,5 @@
+import { isDevMode } from "@angular/core";
+
 export class ConfigDB {
 	static data = {
 		settings: {
@@ -6,7 +8,8 @@ export class ConfigDB {
 			languageCode: 'en',
 		},
 		appName : 'AmédéeMusic',
-		serverName : 'amedeemusic.com',
+		apiServer : isDevMode() ? 'http://127.0.0.1:8000' : 'https://api.amedeemusic.com',
+		apiServerImages : '/uploads/images/'
 	}
 }
 
