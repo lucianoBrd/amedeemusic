@@ -124,6 +124,7 @@ export class TextService {
       subscribeSuccess: 'Merci de vous être abonné.',
 
       listenToMe: 'Écoutez-moi',
+      latestNovelty: 'Dernière nouveauté',
     };
   }
 
@@ -218,6 +219,7 @@ export class TextService {
       subscribeSuccess: 'Thank you for subscribing.',
 
       listenToMe: 'Listen to me',
+      latestNovelty: 'Latest novelty',
     };
   }
 

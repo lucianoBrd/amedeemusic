@@ -83,4 +83,5 @@ export interface Language {
     subscribeSuccess: string,
 
     listenToMe: string,
+    latestNovelty: string,
 }

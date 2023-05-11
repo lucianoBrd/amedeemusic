@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Social } from 'src/app/shared/models/social.interface';
 import { Artist } from 'src/app/shared/models/artist.interface';
+import { Project } from 'src/app/shared/models/project.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { TextService } from 'src/app/shared/service/text.service';
@@ -16,8 +17,10 @@ import { ConfigDB } from 'src/app/shared/data/config';
 export class MusicHeaderComponent implements OnInit {
   public socials: Social[];
   public artist: Artist;
+  public project: Project;
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
+  public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -35,7 +38,10 @@ export class MusicHeaderComponent implements OnInit {
     });
     this.dataService.sendGetRequest('/api/artists/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
-    })
+    });
+    this.dataService.sendGetRequest('/api/projects/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {
+      this.project = data;
+    });
   }
 
   ngOnDestroy() {

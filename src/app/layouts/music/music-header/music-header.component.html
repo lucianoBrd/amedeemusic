@@ -30,18 +30,19 @@
     <div class="left-side pt-5" *ngIf="!socials">
         <app-loader-bis-white></app-loader-bis-white>
     </div>
-    <div class="container music-container">
+    <div class="container music-container" *ngIf="project">
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <div class="play-bg d-flex">
                     <div class="song-text-container h-100">
                         <div class="d-flex h-100">
                             <div class="center-img">
-                                <img src="assets/images/music/icons/girl.png" alt="" class="img-fluid">
+                                <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid img-project">
                             </div>
                             <div class="song-text">
-                                <h5 class="text-white song-head">Latest Song</h5>
-                                <h6 class="text-white song-sub-head">Zrial doj</h6>
+                                <h5 class="text-white song-head">{{language.latestNovelty}}</h5>
+                                <h6 class="text-white song-sub-head" *ngIf="!artist">Amédée</h6>
+                                <h6 class="text-white song-sub-head" *ngIf="artist">{{project.name}} - {{artist.name}}</h6>
                             </div>
                         </div>
                     </div>
@@ -51,11 +52,10 @@
                             <div class="jp-type-playlist">
                                 <div class="jp-gui jp-interface p-0 d-flex">
                                     <div class="jp-controls">
-                                        <button class="jp-play m-r-15" role="button" tabindex="0">
+                                        <button class="jp-play m-r-15" role="button" tabindex="0" (click)="sideBar(project.id)">
                                             <i class="fa fa-play" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <a (click)="sideBar(1)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
