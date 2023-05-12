@@ -15,7 +15,7 @@
         <div class="circle">
             <img src="assets/images/music/icons/aero.png" alt="aero" class="img-fluid">
         </div>
-        <h1>{{artist.date | date:'y'}} <span class="">{{artist.date | date:'MMMM'}}</span></h1>
+        <h1>{{artist.date | date:'y'}} <span class="">{{artist.date | date:'d MMMM'}}</span></h1>
     </div>
     <div class="left-side" *ngIf="socials?.length > 0">
         <h6 class="follow-text">{{language.listenToMe}}</h6>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="song-text">
                                 <h5 class="text-white song-head">{{language.latestNovelty}}</h5>
-                                <h6 class="text-white song-sub-head" *ngIf="!artist">Amédée</h6>
+                                <h6 class="text-white song-sub-head" *ngIf="!artist">{{project.name}} - Amédée</h6>
                                 <h6 class="text-white song-sub-head" *ngIf="artist">{{project.name}} - {{artist.name}}</h6>
                             </div>
                         </div>

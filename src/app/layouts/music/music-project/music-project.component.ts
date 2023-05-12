@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { ConfigDB } from 'src/app/shared/data/config';
+import { Artist } from 'src/app/shared/models/artist.interface';
+import { Language } from 'src/app/shared/models/language.interface';
+import { Project } from 'src/app/shared/models/project.interface';
+import { ArtistService } from 'src/app/shared/service/artist.service';
+import { DataService } from 'src/app/shared/service/data.service';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
+import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
   selector: 'app-music-project',
@@ -7,35 +15,46 @@ import { SidebarService } from 'src/app/shared/service/sidebar.service';
   styleUrls: ['./music-project.component.scss']
 })
 export class MusicProjectComponent implements OnInit {
+  public artist: Artist;
+  public projects: Project[];
+  public lastProject: Project;
+  public language: Language;
+  public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
+  public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
 
-  constructor(private sidebarService: SidebarService) { }
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(
+    private dataService: DataService, 
+    private textService: TextService, 
+    private sidebarService: SidebarService,
+    private artistService: ArtistService,
+  ) {
+    this.language = this.textService.getTextByLocal();
+  }
 
   ngOnInit() {
+    this.artistService.selectedArtist$.subscribe((data: Artist) => {
+      this.artist = data;
+    });
+    this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe((data: Project[]) => {
+      this.projects = data;
+      if (data && data.length > 0) {
+        this.lastProject = data.slice(-1)[0];
+      }
+    });
   }
 
-  sideBar(value) {
-    this.sidebarService.sendClickEvent(value);
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
-  projects = [
-    { 
-      img:"assets/images/music/project/1.png",
-      name:"decorner",
-      musician:"musician",
-    },
-    { 
-      img:"assets/images/music/project/album.jpg",
-      name:"decorner",
-      musician:"musician",
-    },
-    { 
-      img:"assets/images/music/project/3.png",
-      name:"decorner",
-      musician:"musician",
-    }
-  ]
+  sideBar(idProject: number) {
+    this.sidebarService.sendClickEvent(idProject);
+  }
   
-  artistscarouselOptions= {
+  projectscarouselOptions= {
     items: 3,
     margin: 60,
     nav: false,

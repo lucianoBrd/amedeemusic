@@ -1,49 +1,57 @@
 <!-- project section Start-->
-<section class="music artist bg-artist bg-shadow-top-bottom" id="artist" [ngStyle]="{'background-image': 'url(assets/images/music/project/bg.jpg)'}">
+<section class="music artist bg-artist bg-shadow-top-bottom" id="artist" [ngStyle]="{'background-image': (artist?.project ? 'url(' + artistImagePath + artist.project + ')' : '')}">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-10 offset-md-1" *ngIf="projects?.length > 0">
                 <div class="title title4">
                     <div class="main-title">
-                        <h2>Projets</h2>
+                        <h2>{{language.myProjects}}</h2>
                     </div>
-                    <div class="sub-title">
-                        <p>Our artists 2019</p>
+                    <div class="sub-title" *ngIf="lastProject">
+                        <p>{{language.latestNovelty}}: {{lastProject.type.name}} {{lastProject.name}} {{lastProject.date | date:'d MMMM y'}}</p>
                     </div>
                 </div>
             </div>
             <div class="col-12">
-                <owl-carousel-o [options]="artistscarouselOptions" class=" artist-slider">
+                <owl-carousel-o [options]="projectscarouselOptions" class="artist-slider">
                     <ng-container *ngFor="let project of projects">
                         <ng-template carouselSlide class="item">
-                        <div class="album-artist text-center">
-                            <img [src]="project.img" alt="" class="img-fluid set-relative overlay-img">
-                            <div>
-                                <div class="overlay-box2"></div>
-                            </div>
-                            <div class="set-abs bottom-0 w-100 text-left set-z-index">
-                                <div class="singers">
-                                    <div class="m-b-10">
-                                        <h5 class="name">{{project.name}}</h5>
-                                        <h6 class="musician">{{project.musician}}</h6>
-                                    </div>
-                                    <div class="text-center">
-                                        <a (click)="sideBar(1)" class="btn btn-default btn-gradient m-0-auto">
-                                            <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                            Ecouter
-                                        </a>
+                            <div class="album-artist text-center">
+                                <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid set-relative overlay-img img-project">
+                                <div>
+                                    <div class="overlay-box2"></div>
+                                </div>
+                                <div class="set-abs bottom-0 w-100 text-left set-z-index">
+                                    <div class="singers">
+                                        <div class="m-b-10">
+                                            <h5 class="name">{{project.name}}</h5>
+                                            <h6 class="musician" *ngIf="!artist">Amédée</h6>
+                                            <h6 class="musician" *ngIf="artist">{{artist.name}}</h6>
+                                            <h6 class="musician">{{project.type.name}}</h6>
+                                        </div>
+                                        <div class="text-center">
+                                            <a (click)="sideBar(project.id)" class="btn btn-default btn-gradient m-0-auto">
+                                                <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                Ecouter
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="set-abs cds">
+                                    <img src="assets/images/music/project/cd.svg" alt="cd" class="cd-animation">
+                                    <img src="assets/images/music/project/ellipse.svg" alt="elipse" class="elipse">
+                                </div>
                             </div>
-                            <div class="set-abs cds">
-                                <img src="assets/images/music/project/cd.svg" alt="cd" class="cd-animation">
-                                <img src="assets/images/music/project/ellipse.svg" alt="elipse" class="elipse">
-                            </div>
-                        </div>
-                   </ng-template>
-                   </ng-container>
-                   </owl-carousel-o>
-                <div class="artist-text text-center">
+                        </ng-template>
+                    </ng-container>
+                </owl-carousel-o>
+                <div class="mb-5" *ngIf="!projects">
+                    <app-loader-bis-white></app-loader-bis-white>
+                </div>
+                <div *ngIf="!artist">
+                    <app-loader-bis-white></app-loader-bis-white>
+                </div>
+                <div class="artist-text text-center" *ngIf="artist">
                     <p class="text-white text-para">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
                         standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a

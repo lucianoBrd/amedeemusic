@@ -84,4 +84,5 @@ export interface Language {
 
     listenToMe: string,
     latestNovelty: string,
+    myProjects: string,
 }

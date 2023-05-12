@@ -6,14 +6,14 @@ import { Observable, Subject } from 'rxjs';
 })
 export class SidebarService {
 
-  private subject = new Subject<any>();
+  private sidebar = new Subject<any>();
 
-  sendClickEvent(value) {
-    this.subject.next(value);
+  sendClickEvent(idProject: number) {
+    this.sidebar.next(idProject);
   }
 
   getClickEvent(): Observable<any>{ 
-    return this.subject.asObservable();
+    return this.sidebar.asObservable();
   }
 
 }

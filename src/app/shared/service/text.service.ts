@@ -125,6 +125,7 @@ export class TextService {
 
       listenToMe: 'Écoutez-moi',
       latestNovelty: 'Dernière nouveauté',
+      myProjects: 'Mes projets',
     };
   }
 
@@ -220,6 +221,7 @@ export class TextService {
 
       listenToMe: 'Listen to me',
       latestNovelty: 'Latest novelty',
+      myProjects: 'My projects',
     };
   }
 

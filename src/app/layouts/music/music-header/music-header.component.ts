@@ -6,6 +6,7 @@ import { Artist } from 'src/app/shared/models/artist.interface';
 import { Project } from 'src/app/shared/models/project.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
+import { ArtistService } from 'src/app/shared/service/artist.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
 
@@ -27,7 +28,8 @@ export class MusicHeaderComponent implements OnInit {
   constructor(
     private dataService: DataService, 
     private textService: TextService, 
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private artistService: ArtistService,
   ) {
     this.language = this.textService.getTextByLocal();
   }
@@ -36,8 +38,9 @@ export class MusicHeaderComponent implements OnInit {
     this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe((data: Social[]) => {
       this.socials = data;
     });
-    this.dataService.sendGetRequest('/api/artists/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
+    this.dataService.sendGetRequest('/api/artists/last').pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
+      this.artistService.setArtist(data);
     });
     this.dataService.sendGetRequest('/api/projects/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {
       this.project = data;
@@ -49,8 +52,8 @@ export class MusicHeaderComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  sideBar(value) {
-    this.sidebarService.sendClickEvent(value);
+  sideBar(idProject: number) {
+    this.sidebarService.sendClickEvent(idProject);
   }
 
 }
