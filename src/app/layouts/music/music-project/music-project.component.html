@@ -15,7 +15,7 @@
             <div class="col-12">
                 <owl-carousel-o [options]="projectscarouselOptions" class="artist-slider">
                     <ng-container *ngFor="let project of projects">
-                        <ng-template carouselSlide class="item">
+                        <ng-template carouselSlide class="item" *ngIf="project.id != -1">
                             <div class="album-artist text-center">
                                 <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid set-relative overlay-img img-project">
                                 <div>
@@ -43,6 +43,9 @@
                                 </div>
                             </div>
                         </ng-template>
+                        <ng-template carouselSlide class="item" *ngIf="project.id == -1">
+                            
+                        </ng-template>
                     </ng-container>
                 </owl-carousel-o>
                 <div class="mb-5" *ngIf="!projects">
@@ -51,13 +54,9 @@
                 <div *ngIf="!artist">
                     <app-loader-bis-white></app-loader-bis-white>
                 </div>
-                <div class="artist-text text-center" *ngIf="artist">
-                    <p class="text-white text-para">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                        type specimen book.
-                    </p>
-                    <h4 class="text-uppercase dummy-text">“ dummy text of the ”</h4>
+                <div class="artist-text text-center" *ngIf="artistAbout">
+                    <h4 class="text-uppercase dummy-text mb-2">{{language.biography}}</h4>
+                    <p class="text-white text-para text-artist-about">{{artistAbout.about}}</p>
                 </div>
             </div>
         </div>

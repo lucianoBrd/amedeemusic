@@ -126,6 +126,7 @@ export class TextService {
       listenToMe: 'Écoutez-moi',
       latestNovelty: 'Dernière nouveauté',
       myProjects: 'Mes projets',
+      biography: 'Biographie',
     };
   }
 
@@ -222,6 +223,7 @@ export class TextService {
       listenToMe: 'Listen to me',
       latestNovelty: 'Latest novelty',
       myProjects: 'My projects',
+      biography: 'Biography',
     };
   }
 
