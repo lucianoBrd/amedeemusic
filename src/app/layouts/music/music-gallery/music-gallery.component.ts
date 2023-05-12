@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Language } from 'src/app/shared/models/language.interface';
+import { Gallery } from 'src/app/shared/models/gallery.interface';
+import { ConfigDB } from 'src/app/shared/data/config';
+import { Subject, takeUntil } from 'rxjs';
+import { DataService } from 'src/app/shared/service/data.service';
+import { TextService } from 'src/app/shared/service/text.service';
+import { ArtistService } from 'src/app/shared/service/artist.service';
+import { Artist } from 'src/app/shared/models/artist.interface';
 
 @Component({
   selector: 'app-music-gallery',
@@ -6,38 +14,55 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./music-gallery.component.scss']
 })
 export class MusicGalleryComponent implements OnInit {
+  public artist: Artist;
+  public galleries: Gallery[];
+  public language: Language;
+  public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
+  public galleryImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'gallery/';
 
-  constructor() { }
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  ngOnInit() {
+  constructor(
+    private dataService: DataService, 
+    private textService: TextService, 
+    private artistService: ArtistService,
+  ) {
+    this.language = this.textService.getTextByLocal();
   }
 
-  gallery=[
-    {
-      img:"assets/images/music/gallery/1.jpg"
-    },
-    {
-      img:"assets/images/music/gallery/2.jpg"
-    },
-    {
-      img:"assets/images/music/gallery/3.png"
-    },
-    {
-      img:"assets/images/music/gallery/4.jpg"
-    },
-    {
-      img:"assets/images/music/gallery/5.jpg"
-    },
-    {
-      img:"assets/images/music/gallery/5.jpg"
-    }
-  ]
+  ngOnInit() {
+    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+      this.artist = data;
+    });
+    this.dataService.sendGetRequest('/api/galleries').pipe(takeUntil(this.destroy$)).subscribe((data: Gallery[]) => {
+      let galleries: Gallery[] = data;
+
+      if (galleries && galleries.length > 0) {
+        let emptyGallery: Gallery = {
+          id: -1,
+          image: undefined,
+        };
+        if (galleries.length == 1) {
+          galleries.unshift(emptyGallery);
+          galleries.push(emptyGallery);
+        } else if (galleries.length == 2) {
+          galleries.unshift(emptyGallery);
+        }
+        this.galleries = galleries;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 
   galleryCarouselOptions={
     items: 3,
     autoHeight: true,
     nav: true,
-    navText: ['<img src="/assets/images/music/gallery/gallery-icon/left.png">', '<img src="/assets/images/music/gallery/gallery-icon/right.png">'],
+    navText: ['<i class="fa-solid fa-arrow-left fa-xl" aria-hidden="true"></i>', '<i class="fa-solid fa-arrow-right fa-xl" aria-hidden="true"></i>'],
     autoplay: false,
     center: true,
     slideSpeed: 300,

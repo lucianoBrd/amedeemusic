@@ -1,8 +1,8 @@
 <!-- social section Start-->
-<section class="music album bg-unset" id="sponsor">
+<section *ngIf="socials?.length > 0" class="music album bg-unset" id="sponsor">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1" *ngIf="socials?.length > 0">
+            <div class="col-md-10 offset-md-1">
                 <div class="title title4">
                     <div class="main-title">
                         <h2 class="text-uppercase">{{language.listenToMe}}</h2>
@@ -22,10 +22,19 @@
                             <i aria-hidden="true" class="{{social.fa}} fa-2xl"></i>
                         </h5>
                         <div>
-                            <h6 class="item-sublist">Accéder <i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i></h6>
+                            <h6 class="item-sublist">{{language.access}} <i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i></h6>
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="!socials" class="music album bg-unset" id="sponsor">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis-white></app-loader-bis-white>
             </div>
         </div>
     </div>

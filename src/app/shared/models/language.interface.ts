@@ -67,7 +67,6 @@ export interface Language {
     notFoundDesc: string,
     notFoundTitle: string,
     goHome: string,
-    download: string,
     website: string,
     receiveFile: string,
     receive: string,
@@ -86,4 +85,7 @@ export interface Language {
     latestNovelty: string,
     myProjects: string,
     biography: string,
+    gallery: string,
+    access: string,
+    download: string,
 }

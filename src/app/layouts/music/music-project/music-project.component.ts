@@ -50,9 +50,9 @@ export class MusicProjectComponent implements OnInit {
       }
     });
     this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe((data: Project[]) => {
-      this.projects = data;
-      if (data && data.length > 0) {
-        this.lastProject = data.slice(-1)[0];
+      let projects: Project[] = data;
+      if (projects && projects.length > 0) {
+        this.lastProject = projects.slice(-1)[0];
 
         let emptyProject: Project = {
           id: -1,
@@ -63,12 +63,13 @@ export class MusicProjectComponent implements OnInit {
           projectPlatforms: [],
           type: undefined
         };
-        if (data.length == 1) {
-          this.projects.unshift(emptyProject);
-          this.projects.push(emptyProject);
-        } else if (data.length == 2) {
-          this.projects.push(emptyProject);
+        if (projects.length == 1) {
+          projects.unshift(emptyProject);
+          projects.push(emptyProject);
+        } else if (projects.length == 2) {
+          projects.push(emptyProject);
         }
+        this.projects = projects;
       }
     });
   }
