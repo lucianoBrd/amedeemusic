@@ -7,7 +7,7 @@ import { Artist } from '../models/artist.interface';
 })
 export class ArtistService {
   private artist$ = new BehaviorSubject<any>(undefined);
-  selectedArtist$ = this.artist$.asObservable();
+  loadedArtist$ = this.artist$.asObservable();
   constructor() {}
 
   setArtist(artist: Artist) {

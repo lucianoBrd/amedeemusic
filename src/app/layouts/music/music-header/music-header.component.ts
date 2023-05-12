@@ -7,6 +7,7 @@ import { Project } from 'src/app/shared/models/project.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { ArtistService } from 'src/app/shared/service/artist.service';
+import { SocialService } from 'src/app/shared/service/social.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
 
@@ -30,6 +31,7 @@ export class MusicHeaderComponent implements OnInit {
     private textService: TextService, 
     private sidebarService: SidebarService,
     private artistService: ArtistService,
+    private socialService: SocialService,
   ) {
     this.language = this.textService.getTextByLocal();
   }
@@ -37,6 +39,7 @@ export class MusicHeaderComponent implements OnInit {
   ngOnInit() {
     this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe((data: Social[]) => {
       this.socials = data;
+      this.socialService.setSocials(data);
     });
     this.dataService.sendGetRequest('/api/artists/last').pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;

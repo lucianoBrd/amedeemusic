@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Language } from 'src/app/shared/models/language.interface';
+import { Social } from 'src/app/shared/models/social.interface';
+import { SocialService } from 'src/app/shared/service/social.service';
+import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
   selector: 'app-music-social',
@@ -6,49 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./music-social.component.scss']
 })
 export class MusicSocialComponent implements OnInit {
+  public socials: Social[];
+  public language: Language;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private textService: TextService, 
+    private socialService: SocialService,
+  ) {
+    this.language = this.textService.getTextByLocal();
   }
 
-  sponsor = [
-    {
-      img:"assets/images/music/sponser/1.png"
-    },
-    {
-      img:"assets/images/music/sponser/2.png"
-    },
-    {
-      img:"assets/images/music/sponser/3.png"
-    },
-    {
-      img:"assets/images/music/sponser/4.png"
-    },
-    {
-      img:"assets/images/music/sponser/5.png"
-    },
-    {
-      img:"assets/images/music/sponser/6.png"
-    },
-    {
-      img:"assets/images/music/sponser/7.png"
-    },
-    {
-      img:"assets/images/music/sponser/8.png"
-    },
-    {
-      img:"assets/images/music/sponser/9.png"
-    },
-    {
-      img:"assets/images/music/sponser/10.png"
-    },
-    {
-      img:"assets/images/music/sponser/11.png"
-    },
-    {
-      img:"assets/images/music/sponser/12.png"
-    }
-   ]
-
+  ngOnInit() {
+    this.socialService.loadedSocials$.subscribe((data: Social[]) => {
+      this.socials = data;
+    });
+  }
 }

@@ -37,7 +37,7 @@ export class MusicProjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.artistService.selectedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.subscribe((data: Artist) => {
       this.artist = data;
       if (data && data.artistAbouts) {
         for (let index = data.artistAbouts.length - 1; index >= 0; index--) {
