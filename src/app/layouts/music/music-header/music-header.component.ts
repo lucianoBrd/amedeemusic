@@ -56,8 +56,8 @@ export class MusicHeaderComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  sideBar(idProject: number) {
-    this.sidebarService.sendClickEvent(idProject);
+  sideBar(project: Project) {
+    this.sidebarService.setProject(project);
   }
 
 }

@@ -45,7 +45,6 @@ export class MusicVideoComponent implements OnInit {
       this.artist = data;
     });
     this.dataService.sendGetRequest('/api/videos/last').pipe(takeUntil(this.destroy$)).subscribe((data: Video) => {
-      this.video = data;
       if (data) {
         this.videoId = this.youtubeParser(data.link);
         if (this.videoId) {
@@ -53,15 +52,20 @@ export class MusicVideoComponent implements OnInit {
         }
         
         if (data.videoDescriptions) {
-          for (let index = data.videoDescriptions.length - 1; index >= 0; index--) {
-            const videoDescription: VideoDescription = data.videoDescriptions[index];
+          let videoDescriptions: VideoDescription[] = data.videoDescriptions;
+          videoDescriptions.sort((a, b) => a.id - b.id);
+
+          for (let index = videoDescriptions.length - 1; index >= 0; index--) {
+            const videoDescription: VideoDescription = videoDescriptions[index];
             if (videoDescription.local.local == LanguageService.getLanguageCodeOnly()) {
               this.videoDescription = videoDescription;
               break;
             }
           }
+          data.videoDescriptions = videoDescriptions;
         }
       }
+      this.video = data;
     });
   }
 

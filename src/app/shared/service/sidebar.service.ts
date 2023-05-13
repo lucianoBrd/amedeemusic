@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { Project } from '../models/project.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
+  private sidebar$ = new BehaviorSubject<any>(undefined);
+  project$ = this.sidebar$.asObservable();
+  constructor() {}
 
-  private sidebar = new Subject<any>();
-
-  sendClickEvent(idProject: number) {
-    this.sidebar.next(idProject);
-  }
-
-  getClickEvent(): Observable<any>{ 
-    return this.sidebar.asObservable();
+  setProject(project: Project) {
+    this.sidebar$.next(project);
   }
 
 }

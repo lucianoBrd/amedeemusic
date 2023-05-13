@@ -93,4 +93,5 @@ export interface Language {
     video: string,
     watchNow: string,
     seeAllVideo: string,
+    lyrics: string,
 }

@@ -13173,6 +13173,33 @@ error css end
         }
       }
     }
+    .jp-no-solution, .jp-playlist, .jp-time-holder {
+      color: $gray10;
+    }
+    .socials-lists {
+      ul {
+        li {
+          a {
+            i {
+              height: 30px;
+              width: 30px;
+              font-size: 10px;
+              &.li-lyrics {
+                background-color: $music-dark-bg;
+              }
+            }
+            &:hover {
+              i {
+                &.li-lyrics {
+                  color: $music-dark-bg;
+                  border: 1px solid $music-dark-bg
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     .jp-playlist {
       margin-top: 30px;
     }

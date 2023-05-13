@@ -134,6 +134,7 @@ export class TextService {
       video: 'Vidéo',
       watchNow: 'Visionner',
       seeAllVideo: 'Voir toutes les vidéos',
+      lyrics: 'Paroles',
     };
   }
 
@@ -238,6 +239,7 @@ export class TextService {
       video: 'Video',
       watchNow: 'Watch Now',
       seeAllVideo: 'See All Video',
+      lyrics: 'Lyrics',
     };
   }
 

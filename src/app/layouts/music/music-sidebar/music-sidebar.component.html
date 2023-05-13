@@ -1,5 +1,5 @@
 <!-- sidebar Start-->
-<div id="side-section" class="music side-section" [style.display]="sideBarDispaly">
+<div *ngIf="project" id="side-section" class="music side-section" [style.display]="sideBarDispaly">
     <div class="jp-jplayer"></div>
     <div class="jp-audio" role="application" aria-label="media player">
         <div class="jp-type-playlist">
@@ -12,50 +12,96 @@
                                 <i></i>
                                 <i></i>
                             </div>
-                            <h6 class="now-play">now playing</h6>
+                            <h6 class="now-play">{{project.date | date:'d MMMM y'}}</h6>
                         </div>
-                        <img src="assets/images/music/icons/girl-side.jpg" alt="" class="img-fluid girls">
+                        <img src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">
                         <div class="author-text">
-                            <h5 class="m-b-10 song-text">Latest Song</h5>
-                            <h6 class="song-sub-text">Zrial doj</h6>
+                            <h5 class="m-b-10 song-text">{{project.name}}</h5>
+                            <h6 class="song-sub-text" *ngIf="project.type">{{project.type.name}}</h6>
+                            <h6 class="song-sub-text" *ngIf="!artist">Amédée</h6>
+                            <h6 class="song-sub-text" *ngIf="artist">{{artist.name}}</h6>
                         </div>
                     </div>
                     <div class="container">
-                        <div class="jp-progress">
-                            <div class="jp-seek-bar">
-                                <div class="jp-play-bar"></div>
-                            </div>
-                        </div>
-                        <div class="jp-time-holder">
-                            <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
-                            <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
-                        </div>
                         <div class="jp-controls">
-                            <div class="button-container">
-                                <button class="jp-previous" role="button" tabindex="0">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                </button>
-                                <button class="jp-play" role="button" tabindex="0">
-                                    <i class="fa fa-play" aria-hidden="true"></i>
-                                </button>
-                                <button class="jp-next" role="button" tabindex="0">
-                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                </button>
+                            <div class="button-container" *ngIf="project.projectPlatforms">
+                                <a *ngFor="let projectPlatform of project.projectPlatforms" target="_blank" href="{{projectPlatform.link}}">
+                                    <button type="button" class="jp-play" tabindex="0">
+                                        <i class="{{projectPlatform.fa}}" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="button-container" *ngIf="!project.projectPlatforms">
+                                <app-loader-bis></app-loader-bis>
                             </div>
                             <button class="btn-sidebar" (click)="sideBar()"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
 
-                        <div class="jp-playlist">
-                            <ul>
-                                <li>&nbsp;</li>
+                        <div class="jp-playlist" *ngIf="project.titles">
+                            <ul class="pt-2">
+                                <li *ngFor="let title of project.titles">
+                                    <div class="row align-items-center ">
+                                        <div class="col">
+                                            {{title.name}}
+                                        </div>
+                                        <div class="col" *ngIf="title.titlePlatforms">
+                                            <div class="socials-lists">
+                                                <ul class="socials-horizontal justify-content-center">
+                                                    <li *ngIf="title.lyrics">
+                                                        <a href="javascript:void(0)" (click)="openVerticallyCentered(content, title)">
+                                                            <i aria-hidden="true" class="fa-solid fa-file-lines center-content li-lyrics"></i>
+                                                        </a>
+                                                        <ng-template #content let-modal>
+                                                            <div class="login-modal">
+                                                                <div class="modal-header">
+                                                                    <h1 class="m-b-20 mt-4 ml-2">{{language.lyrics}}</h1>
+                                                                    <button aria-label="Close" (click)="modal.dismiss('Cross click')" class="close" data-dismiss="modal" type="button">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <h3>
+                                                                        {{selectedTitle.name}}
+                                                                    </h3>
+                                                                    <div [innerHTML]="selectedTitle.lyrics"></div>
+                                            
+                                                                    <div class="text-center">
+                                                                        <a aria-label="Close" class="btn btn-default primary-btn m-t-20" (click)="modal.dismiss('Cross click')" data-dismiss="modal">
+                                                                            {{language.close}}
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ng-template>
+                                                    </li>
+                                                    <li *ngFor="let titlePlatform of title.titlePlatforms">
+                                                        <a target="_blank" href="{{titlePlatform.link}}">
+                                                            <i aria-hidden="true" class="{{titlePlatform.fa}} center-content"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="jp-playlist" *ngIf="!project.titles">
+                            <ul class="pt-2">
+                                <app-loader-bis></app-loader-bis>
                             </ul>
                         </div>
                     </div>
-                    <div class="jp-no-solution">
-                        <span>Update Required</span> To play the media you will need to either update your browser to a recent version or update your
-                        <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
-                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="project === undefined" id="side-section" class="music side-section" [style.display]="sideBarDispaly">
+    <div class="container full-height">
+        <div class="row full-height">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
             </div>
         </div>
     </div>

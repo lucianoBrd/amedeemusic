@@ -38,16 +38,20 @@ export class MusicProjectComponent implements OnInit {
 
   ngOnInit() {
     this.artistService.loadedArtist$.subscribe((data: Artist) => {
-      this.artist = data;
       if (data && data.artistAbouts) {
-        for (let index = data.artistAbouts.length - 1; index >= 0; index--) {
-          const artistAbout: ArtistAbout = data.artistAbouts[index];
+        let artistAbouts: ArtistAbout[] = data.artistAbouts;
+        artistAbouts.sort((a, b) => a.id - b.id);
+
+        for (let index = artistAbouts.length - 1; index >= 0; index--) {
+          const artistAbout: ArtistAbout = artistAbouts[index];
           if (artistAbout.local.local == LanguageService.getLanguageCodeOnly()) {
             this.artistAbout = artistAbout;
             break;
           }
         }
+        data.artistAbouts = artistAbouts;
       }
+      this.artist = data;
     });
     this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe((data: List<Project>) => {
       let projects: Project[] = data['hydra:member'];
@@ -77,8 +81,8 @@ export class MusicProjectComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  sideBar(idProject: number) {
-    this.sidebarService.sendClickEvent(idProject);
+  sideBar(project: Project) {
+    this.sidebarService.setProject(project);
   }
   
   projectscarouselOptions= {
