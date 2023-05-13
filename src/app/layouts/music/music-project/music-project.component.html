@@ -8,7 +8,7 @@
                         <h2>{{language.myProjects}}</h2>
                     </div>
                     <div class="sub-title" *ngIf="lastProject">
-                        <p>{{language.latestNovelty}}: {{lastProject.type.name}} {{lastProject.name}} {{lastProject.date | date:'d MMMM y'}}</p>
+                        <a href="#sponsor"><p>{{language.listenToMe}}</p></a>
                     </div>
                 </div>
             </div>
@@ -25,9 +25,9 @@
                                     <div class="singers">
                                         <div class="m-b-10">
                                             <h5 class="name">{{project.name}}</h5>
+                                            <h6 class="musician">{{project.type.name}} • {{project.date | date:'y'}}</h6>
                                             <h6 class="musician" *ngIf="!artist">Amédée</h6>
                                             <h6 class="musician" *ngIf="artist">{{artist.name}}</h6>
-                                            <h6 class="musician">{{project.type.name}}</h6>
                                         </div>
                                         <div class="text-center">
                                             <a (click)="sideBar(project.id)" class="btn btn-default btn-gradient m-0-auto">

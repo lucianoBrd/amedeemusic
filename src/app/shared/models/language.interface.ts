@@ -88,4 +88,6 @@ export interface Language {
     gallery: string,
     access: string,
     download: string,
+    listOfEvents: string,
+    recentOrUpcomingEvents: string,
 }

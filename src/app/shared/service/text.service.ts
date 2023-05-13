@@ -129,6 +129,8 @@ export class TextService {
       gallery: 'Galerie',
       access: 'Accéder',
       download: 'Télécharger',
+      listOfEvents: 'Liste des évènements',
+      recentOrUpcomingEvents: 'Évènements récent ou à venir',
     };
   }
 
@@ -228,6 +230,8 @@ export class TextService {
       gallery: 'Gallery',
       access: 'Access',
       download: 'Download',
+      listOfEvents: 'List of events',
+      recentOrUpcomingEvents: 'Recent or upcoming events',
     };
   }
 

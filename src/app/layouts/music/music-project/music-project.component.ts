@@ -4,6 +4,7 @@ import { ConfigDB } from 'src/app/shared/data/config';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { ArtistAbout } from 'src/app/shared/models/artistAbout.interface';
 import { Language } from 'src/app/shared/models/language.interface';
+import { List } from 'src/app/shared/models/list.interface';
 import { Project } from 'src/app/shared/models/project.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { DataService } from 'src/app/shared/service/data.service';
@@ -49,8 +50,8 @@ export class MusicProjectComponent implements OnInit {
         }
       }
     });
-    this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe((data: Project[]) => {
-      let projects: Project[] = data;
+    this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe((data: List<Project>) => {
+      let projects: Project[] = data['hydra:member'];
       if (projects && projects.length > 0) {
         this.lastProject = projects.slice(-1)[0];
 

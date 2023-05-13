@@ -1,4 +1,4 @@
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -44,7 +44,7 @@ export class DataService {
         { 
           headers: new HttpHeaders(
             {
-              'Accept':  'application/json'
+              'Accept':  'application/ld+json'
             }
           )
         }

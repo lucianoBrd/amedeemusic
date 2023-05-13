@@ -1,109 +1,93 @@
 <!-- album section Start-->
-<section class="music album">
+<section *ngIf="events?.length > 0" class="music album">
     <div class="container">
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <div class="title title4">
                     <div class="main-title">
-                        <h2>Liste des évènements</h2>
+                        <h2>{{language.listOfEvents}}</h2>
                     </div>
                     <div class="sub-title">
-                        <p>Evènements récent ou à venir</p>
+                        <p>{{language.recentOrUpcomingEvents}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let event of events">
                 <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
+                    <h5 class="text-uppercase list-head">{{event.name}}</h5>
                     <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                        <div class="item-sublist">
-                            <a href="#"><h6 class="watch">Accéder <i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i></h6></a>
+                        <h6 class="item-sublist">{{event.place}}</h6>
+                        <h6 class="item-sublist"><hr></h6>
+                        <h6 class="item-sublist">{{event.date | date:'EEEE d MMMM'}}</h6>
+                        <h6 class="item-sublist">{{event.date | date:'HH:mm'}}</h6>
+                        <h6 class="item-sublist">{{event.date | date:'y'}}</h6>
+                        <h6 class="item-sublist" *ngIf="event.link"><hr></h6>
+                        <div class="item-sublist" *ngIf="event.link">
+                            <a target="_blank" href="{{event.link}}">
+                                <h6>{{language.access}} <i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i></h6>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
+            <div class="col-12" *ngIf="listEvents['hydra:view'] && totalPage && (totalPage > 1)">
+                <!-- pagination Start -->
+                <div class="pagination_sec">
+                    <div class="content_detail__pagination cdp">
+                        <ul>
+                            <li>
+                                <button *ngIf="listEvents['hydra:view']['hydra:first']" (click)="getEvents(listEvents['hydra:view']['hydra:first'])" class="prev btn" type="button">
+                                    <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
+                                </button>
+                                <button *ngIf="!listEvents['hydra:view']['hydra:first']" class="prev btn" type="button" disabled>
+                                    <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button *ngIf="listEvents['hydra:view']['hydra:previous']" (click)="getEvents(listEvents['hydra:view']['hydra:previous'])" class="prev btn" type="button">
+                                    <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+                                </button>
+                                <button *ngIf="!listEvents['hydra:view']['hydra:previous']" class="prev btn" type="button" disabled>
+                                    <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <input type="number" class="form-control" value="{{currentPage}}" min="1" max="{{totalPage}}" (focusout)="onFocusOutEvent($event)">
+                            </li>
+                            <li>
+                                <p>
+                                    {{totalPage}}
+                                </p>
+                            </li>
+                            <li>
+                                <button *ngIf="listEvents['hydra:view']['hydra:next']" (click)="getEvents(listEvents['hydra:view']['hydra:next'])" class="next btn" type="button">
+                                    <i class="fa-solid fa-angle-right"aria-hidden="true"></i>
+                                </button>
+                                <button *ngIf="!listEvents['hydra:view']['hydra:next']" class="next btn" type="button" disabled>
+                                    <i class="fa-solid fa-angle-right"aria-hidden="true"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button *ngIf="listEvents['hydra:view']['hydra:last']" (click)="getEvents(listEvents['hydra:view']['hydra:last'])" class="next btn" type="button">
+                                    <i class="fa-solid fa-angles-right"aria-hidden="true"></i>
+                                </button>
+                                <button *ngIf="!listEvents['hydra:view']['hydra:last']" class="next btn" type="button" disabled>
+                                    <i class="fa-solid fa-angles-right"aria-hidden="true"></i>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+                <!-- pagination End -->
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 d-none d-md-block d-lg-none">
-                <div class="album-list overlay-box text-center">
-                    <h5 class="text-uppercase list-head">decorner</h5>
-                    <div>
-                        <h6 class="item-sublist">20 December</h6>
-                        <h6 class="item-sublist">Sunday</h6>
-                        <h6 class="item-sublist">23:00-0:00</h6>
-                    </div>
-                </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="!events" class="music album">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis-white></app-loader-bis-white>
             </div>
         </div>
     </div>

@@ -9457,18 +9457,23 @@ error css end
       height: 50px;
       width: 50px;
       margin: 0 10px;
-      background: $white11;
+      //background: $white11;
       display: inline-block;
       .prev, .next {
-        background: $light-white;
+        //background: $light-white;
       }
-      a {
-        color: $primary;
+      button, p, input {
+        //color: $primary;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
         transition: 0.5s;
+      }
+      button, p {
+        color: $white;
+      }
+      button {
         &.active, &:hover {
           transition: 0.5s;
           background: $primary;

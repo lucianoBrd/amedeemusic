@@ -7,6 +7,7 @@ import { DataService } from 'src/app/shared/service/data.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { Artist } from 'src/app/shared/models/artist.interface';
+import { List } from 'src/app/shared/models/list.interface';
 
 @Component({
   selector: 'app-music-gallery',
@@ -34,8 +35,8 @@ export class MusicGalleryComponent implements OnInit {
     this.artistService.loadedArtist$.subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/galleries').pipe(takeUntil(this.destroy$)).subscribe((data: Gallery[]) => {
-      let galleries: Gallery[] = data;
+    this.dataService.sendGetRequest('/api/galleries').pipe(takeUntil(this.destroy$)).subscribe((data: List<Gallery>) => {
+      let galleries: Gallery[] = data['hydra:member'];
 
       if (galleries && galleries.length > 0) {
         let emptyGallery: Gallery = {
