@@ -45,7 +45,7 @@ export class MusicCopyrightComponent implements OnInit {
     this.socialService.loadedSocials$.subscribe((data: Social[]) => {
       this.socials = data;
     });
-    this.dataService.sendGetRequest('/api/politics?local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: List<Politic>) => {
+    this.dataService.sendGetRequest('/api/politics?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: List<Politic>) => {
       let politics: Politic[] = data['hydra:member'];
 
       if (politics) {
