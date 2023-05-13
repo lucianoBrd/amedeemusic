@@ -131,6 +131,9 @@ export class TextService {
       download: 'Télécharger',
       listOfEvents: 'Liste des évènements',
       recentOrUpcomingEvents: 'Évènements récent ou à venir',
+      video: 'Vidéo',
+      watchNow: 'Visionner',
+      seeAllVideo: 'Voir toutes les vidéos',
     };
   }
 
@@ -232,6 +235,9 @@ export class TextService {
       download: 'Download',
       listOfEvents: 'List of events',
       recentOrUpcomingEvents: 'Recent or upcoming events',
+      video: 'Video',
+      watchNow: 'Watch Now',
+      seeAllVideo: 'See All Video',
     };
   }
 

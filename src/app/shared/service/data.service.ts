@@ -14,8 +14,6 @@ export class DataService {
     
   }
 
-  public PARAMS = null;
-
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
     if (error.error instanceof ErrorEvent) {
@@ -30,17 +28,37 @@ export class DataService {
 
   public sendGetRequest(page: string){
     if (page){
-      if(this.PARAMS){
-        return this.httpClient.post(
-          this.REST_API_SERVER + page, 
-          JSON.stringify(this.PARAMS)
-        ).pipe(
-          retry(3), 
-          catchError(this.handleError)
-        );
-      }
       return this.httpClient.get(
         this.REST_API_SERVER + page, 
+        { 
+          headers: new HttpHeaders(
+            {
+              'Accept':  'application/ld+json'
+            }
+          )
+        }
+      ).pipe(
+        retry(3), 
+        catchError(this.handleError),
+      );
+    }
+  }
+
+  /**
+   * 
+   * @param page 
+   * @param body 
+   * const body = new HttpParams()
+   *  .set('username', 'test@test.com')
+   *  .set('password', 'Password1')
+   *  .set('rolename', 'Admin');
+   * @returns 
+   */
+  public sendPostRequest(page: string, body: HttpParams){
+    if (page){
+      return this.httpClient.post(
+        this.REST_API_SERVER + page,
+        body,
         { 
           headers: new HttpHeaders(
             {

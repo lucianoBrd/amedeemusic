@@ -89,12 +89,12 @@ export class DownloadComponent implements OnInit, OnDestroy {
         this.sending = true;
 
         /* Sent to api */
-        this.dataService.PARAMS = {
+        /*this.dataService.PARAMS = {
           captcha: this.captcha, 
           name: this.name, 
           mail: this.email, 
           file: this.file,
-        };
+        };*/
         this.dataService.sendGetRequest('/download/' + LanguageService.getLanguageCodeOnly()).subscribe((data: any[]) => {
           if (data['error'] == true) {
             this.hasSentError = true;

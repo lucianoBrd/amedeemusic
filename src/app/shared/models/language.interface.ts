@@ -90,4 +90,7 @@ export interface Language {
     download: string,
     listOfEvents: string,
     recentOrUpcomingEvents: string,
+    video: string,
+    watchNow: string,
+    seeAllVideo: string,
 }

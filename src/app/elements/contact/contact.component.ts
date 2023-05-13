@@ -70,12 +70,12 @@ export class ContactComponent implements OnInit {
         this.sending = true;
 
         /* Sent to api */
-        this.dataService.PARAMS = {
+        /*this.dataService.PARAMS = {
           captcha: this.captcha, 
           name: this.name, 
           mail: this.email, 
           message: this.message
-        };
+        };*/
         this.dataService.sendGetRequest('/contact/' + LanguageService.getLanguageCodeOnly()).subscribe((data: any[]) => {
           if (data['error'] == true) {
             this.hasSentError = true;

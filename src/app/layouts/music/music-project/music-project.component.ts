@@ -21,7 +21,6 @@ export class MusicProjectComponent implements OnInit {
   public artist: Artist;
   public artistAbout: ArtistAbout;
   public projects: Project[];
-  public lastProject: Project;
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
@@ -53,8 +52,6 @@ export class MusicProjectComponent implements OnInit {
     this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe((data: List<Project>) => {
       let projects: Project[] = data['hydra:member'];
       if (projects && projects.length > 0) {
-        this.lastProject = projects.slice(-1)[0];
-
         let emptyProject: Project = {
           id: -1,
           name: undefined,
