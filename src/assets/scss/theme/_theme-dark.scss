@@ -16,6 +16,71 @@ $dark-color: #1c2440;
 body{
   &.dark{
     background-color:$light-color;
+    ngb-modal-window {
+      .modal-content {
+        background-color: $light-color;
+      }
+      .close {
+        color: $white-5;
+      }
+      .product-right {
+        .size-box {
+          ul {
+            li {
+              border-color: $border-color;
+            }
+          }
+        }
+      }
+      .qty-box {
+        .input-group {
+          span {
+            button {
+              background-color: $dark-color !important;
+              border-color: $border-color;
+              color: $white-5;
+            }
+          }
+         button {
+          i {
+            color: $white-5;
+          }
+         }
+        }
+      }
+      .login-modal {
+        .modal-header {
+          border: none;
+        }
+        .modal-body {
+          h1, h2, h3, h4, h5, h6 {
+            color: $white-2;
+          }
+          ul li::before {
+            color: $white-5;
+          }
+          ul {
+            color: $white-5;
+          }
+        }
+        .nav-pills {
+          .nav-link {
+            &.active {
+              color: $white-2;
+            }
+          }
+        }
+        .close {
+          background: $dark-color;
+          border: none;
+        }
+      }
+    }
+
+    .loader-wrapper-bis .loader > div {
+      background: white;
+    }
+
     .saas1{
       &.testimonial{
        .testimonial-box{

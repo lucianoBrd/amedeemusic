@@ -24,11 +24,11 @@
                 {{menuItem.title}}
             </a>
             <!-- External Link -->
-            <a href="{{ !menuItem.type ? null : menuItem.path }}" class="dropdown" *ngIf="menuItem.type === 'extLink'">
+            <a href="{{ !menuItem.type ? null : menuItem.path }}" *ngIf="menuItem.type === 'extLink'">
                 {{menuItem.title}}
             </a>
             <!-- External Tab Link -->
-            <a href="{{ !menuItem.type ? null : menuItem.path }}" *ngIf="menuItem.type === 'extTabLink'">
+            <a href="{{ !menuItem.type ? null : menuItem.path }}" target="_blank" *ngIf="menuItem.type === 'extTabLink'">
                 {{menuItem.title}}
             </a>
 

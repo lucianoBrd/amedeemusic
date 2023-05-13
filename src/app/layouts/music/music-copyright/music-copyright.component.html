@@ -5,46 +5,56 @@
             <div class="col-md-5 col-sm-12">
                 <div class="link-horizontal">
                     <ul>
-                        <li>
-                            <a href="javascript:void(0)" class="copyright-text op-text">home</a>
+                        <li *ngFor="let menuItem of menuItems">
+                            <!-- Link -->
+                            <a [routerLink]="!menuItem.type ? null : [menuItem.path]" routerLinkActive="active" *ngIf="menuItem.type === 'link'" class="copyright-text op-text">
+                                {{menuItem.title}}
+                            </a>
+                            <!-- External Link -->
+                            <a href="{{ !menuItem.type ? null : menuItem.path }}" *ngIf="menuItem.type === 'extLink'" class="copyright-text op-text">
+                                {{menuItem.title}}
+                            </a>
+                            <!-- External Tab Link -->
+                            <a href="{{ !menuItem.type ? null : menuItem.path }}" target="_blank" *ngIf="menuItem.type === 'extTabLink'" class="copyright-text op-text">
+                                {{menuItem.title}}
+                            </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" class="copyright-text op-text">timeline</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="copyright-text op-text">artist</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="copyright-text op-text">sponsors </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="copyright-text op-text">contact</a>
+                            <a class="copyright-text op-text" href="javascript:void(0)" (click)="openVerticallyCentered(content)">{{language.privacyPolicy}}</a>
                         </li>
                     </ul>
                 </div>
             </div>
+            <ng-template #content let-modal>
+                <div class="login-modal">
+                    <div class="modal-header">
+                        <h1 *ngIf="politic" class="m-b-20 mt-4 ml-2">{{politic.title}}</h1>
+                        <button aria-label="Close" (click)="modal.dismiss('Cross click')" class="close" data-dismiss="modal" type="button">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div *ngIf="politic" class="modal-body">
+                        
+                        <div [innerHTML]="politic.document"></div>
+
+                        <div class="text-center">
+                            <a aria-label="Close" class="btn btn-default primary-btn m-t-20" (click)="modal.dismiss('Cross click')" data-dismiss="modal">
+                                {{language.close}}
+                            </a>
+                        </div>
+                    </div>
+                    <div *ngIf="!politic" class="modal-body text-center">
+                        <app-loader-bis></app-loader-bis>
+                    </div>
+                </div>
+            </ng-template>
             <div class="col-md-2 col-sm-12">
                 <div class="text-center">
                     <div class="link-horizontal">
                         <ul class="justify-content-center">
-                            <li>
-                                <a href="javascript:void(0)" class="copyright-text op-text">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="copyright-text op-text">
-                                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="copyright-text op-text">
-                                    <i class="fa fa-google" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="copyright-text op-text">
-                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                            <li *ngFor="let social of socials">
+                                <a target="_blank" href="{{social.link}}" class="copyright-text op-text">
+                                    <i class="{{social.fa}}" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>
@@ -53,7 +63,12 @@
             </div>
             <div class="col-md-5 col-sm-12">
                 <div class="m-l-auto center-para">
-                    <p class="copyright-text text-white text-right op-text">© 2019 unice powered by Pixelstrap</p>
+                    <p class="copyright-text text-white text-right op-text">
+                        Copyright ©{{year}} {{appName}} powered by 
+                        <a href="https://github.com/lucianoBrd" target="_blank">
+                            LucianoBrd
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
