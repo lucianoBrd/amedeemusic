@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { ConfigDB } from 'src/app/shared/data/config';
+import { Artist } from 'src/app/shared/models/artist.interface';
+import { Language } from 'src/app/shared/models/language.interface';
+import { List } from 'src/app/shared/models/list.interface';
+import { Testimonial } from 'src/app/shared/models/testimonial.interface';
+import { ArtistService } from 'src/app/shared/service/artist.service';
+import { DataService } from 'src/app/shared/service/data.service';
+import { LanguageService } from 'src/app/shared/service/language.service';
+import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
   selector: 'app-music-testimonial',
@@ -6,33 +16,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./music-testimonial.component.scss']
 })
 export class MusicTestimonialComponent implements OnInit {
+  public testimonials: Testimonial[];
+  public artist: Artist;
+  public language: Language;
+  public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
 
-  constructor() { }
+  public quoteImage: string = 'assets/images/music/testimonial/quote.png';
 
-  ngOnInit() {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(
+    private dataService: DataService, 
+    private textService: TextService, 
+    private artistService: ArtistService,
+  ) {
+    this.language = this.textService.getTextByLocal();
   }
 
-  testimoials=[
-    {
-      img:" assets/images/music/testimonial/quote.png",
-      review:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-      name:"Alan Licker",
-      designation:"CEO OF SC."
-    },
-    {
-      img:" assets/images/music/testimonial/quote.png",
-      review:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-      name:"Alan Licker",
-      designation:"CEO OF SC."
-    }
-  ]
+  ngOnInit() {
+    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+      this.artist = data;
+    });
+    this.dataService.sendGetRequest('/api/testimonials?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: List<Testimonial>) => {
+      this.testimonials = data['hydra:member'];
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 
   testimoialCarouselOptions={
     items: 1,
     margin: 0,
     dots: false,
     nav: true,
-    navText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
+    navText: ['<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>', '<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>'],
     autoplay: false,
     slideSpeed: 300,
     paginationSpeed: 400,

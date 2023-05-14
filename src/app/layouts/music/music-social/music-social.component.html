@@ -12,9 +12,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12" *ngIf="!socials">
-                <app-loader-bis-white></app-loader-bis-white>
-            </div>
             <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let social of socials">
                 <a target="_blank" href="{{social.link}}">
                     <div class="album-list overlay-box text-center">

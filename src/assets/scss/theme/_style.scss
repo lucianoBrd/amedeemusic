@@ -2737,6 +2737,14 @@ body {
     }
   }
 }
+.navbar{
+  .responsive-btn{
+    border-color: $border-color;
+    h5{
+      color:$primary;
+    }
+  }
+}
 /*************************
  header section end
 *************************/
@@ -15066,7 +15074,7 @@ footer{
 }
 
 .pace .pace-progress {
-  background: $primary;
+  background: $red3;
   position: fixed;
   z-index: 2000;
   top: 0;

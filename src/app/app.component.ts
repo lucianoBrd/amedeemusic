@@ -32,8 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  public mdLoad: Boolean;
-
   constructor(
     public customize: CustomizerService,
     private router: Router,
@@ -64,7 +62,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this._renderer2.appendChild(this._document.body, script);
     
     this.language = this.textService.getTextByLocal();
-    this.mdLoad = true;
     /*this.dataService.sendGetRequest('/politic/' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
       this.politic = data['politic'] as Politic;
       this.documentPath = data['documentPath'];
@@ -74,10 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-  }
-
-  onReady() {
-    this.mdLoad = false;
   }
 
   customizeLayoutVersion(val) {
@@ -96,9 +89,5 @@ export class AppComponent implements OnInit, OnDestroy {
       /* Refresh page */
       window.location.reload();
     }
-  }
-
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true, size: 'lg' });
   }
 }
