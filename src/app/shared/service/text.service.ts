@@ -119,8 +119,6 @@ export class TextService {
       commentMessage: 'Votre commentaire',
       commentSuccess: 'Merci pour votre commentaire',
       search: 'Rechercher',
-      subscribe: 'S\'abonner',
-      subscribeSuccess: 'Merci de vous être abonné.',
 
       listenToMe: 'Écoutez-moi',
       latestNovelty: 'Dernière nouveauté',
@@ -135,6 +133,12 @@ export class TextService {
       watchNow: 'Visionner',
       seeAllVideo: 'Voir toutes les vidéos',
       lyrics: 'Paroles',
+      referringToMe: 'On parle de moi',
+      subscribe: 'S\'abonner',
+      subscribeSuccess: 'Merci de vous être abonné.',
+      subscribeEmail: 'Veuillez saisir votre adresse e-mail',
+      subscribeError: 'Une erreur est survenue, merci de réessayer.',
+      subscribeInfo: 'Obtenez de l\'information de première main au sujet de',
     };
   }
 
@@ -224,8 +228,6 @@ export class TextService {
       commentMessage: 'Your comment',
       commentSuccess: 'Thank you for your comment',
       search: 'Search',
-      subscribe: 'Subscribe',
-      subscribeSuccess: 'Thank you for subscribing.',
 
       listenToMe: 'Listen to me',
       latestNovelty: 'Latest novelty',
@@ -240,6 +242,12 @@ export class TextService {
       watchNow: 'Watch Now',
       seeAllVideo: 'See All Video',
       lyrics: 'Lyrics',
+      referringToMe: 'They\'re referring to me.',
+      subscribe: 'Subscribe',
+      subscribeSuccess: 'Thank you for subscribing.',
+      subscribeEmail: 'Please enter your email address',
+      subscribeError: 'An error has occurred, please try again.',
+      subscribeInfo: 'Get first-hand information about',
     };
   }
 

@@ -5,10 +5,10 @@
             <div class="col-md-10 offset-md-1">
                 <div class="title title4">
                     <div class="main-title">
-                        <h2>On parle de moi</h2>
+                        <h2>{{language.referringToMe}}</h2>
                     </div>
                     <div class="sub-title">
-                        <p>Citation</p>
+                        <p></p>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                     <ng-container *ngFor="let testimonial of testimonials">
                         <ng-template carouselSlide class="item">
                             <div class="">
-                                <img [src]="quoteImage" alt="" class="img-fluid">
+                                <img [src]="quoteImage" alt="quote" class="img-fluid">
                                 <div class="text-center testimonial-info">
                                     <p class="testimonial-para">{{testimonial.citation}}</p>
                                     <h6 class="gradient-text text-uppercase m-b-5 font-large">{{testimonial.name}}</h6>

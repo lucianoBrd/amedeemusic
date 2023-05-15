@@ -78,8 +78,6 @@ export interface Language {
     commentMessage: string,
     commentSuccess: string,
     search: string,
-    subscribe: string,
-    subscribeSuccess: string,
 
     listenToMe: string,
     latestNovelty: string,
@@ -94,4 +92,10 @@ export interface Language {
     watchNow: string,
     seeAllVideo: string,
     lyrics: string,
+    referringToMe: string,
+    subscribe: string,
+    subscribeSuccess: string,
+    subscribeEmail: string,
+    subscribeError: string,
+    subscribeInfo: string,
 }
