@@ -2,7 +2,7 @@
 <section class="music header" id="header">
     <div class="music-content">
         <div class="music-bg bg bg-shadow-top" [ngStyle]="{'background-image': (artist?.header ? 'url(' + artistImagePath + artist.header + ')' : 'url(assets/images/music/artist/header.jpg)')}">
-            <div class="text-center w-100 h-100" aTilt data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="400">
+            <div class="text-center w-100 h-100 tilt-artist">
                 <div class="img-height h-100">
                     <img *ngIf="artist?.man" src="{{artistImagePath}}{{artist.man}}" alt="artist" class="img-fluid">
                     <img *ngIf="artist && !artist.man" src="assets/images/music/artist/man.png" alt="artist" class="img-fluid">

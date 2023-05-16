@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CustomizerService } from './shared/service/customizer.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { MetaService } from './shared/service/meta.service';
@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
     public customize: CustomizerService,
     private router: Router,
     private metaService: MetaService,
-    private _renderer2: Renderer2,
     @Inject(DOCUMENT) private _document: Document,
     private cookieService: NgcCookieConsentService,
   ) {
@@ -49,9 +48,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    let script = this._renderer2.createElement('script');
-    script.src  = `/assets/tilt.js`;   
-    this._renderer2.appendChild(this._document.body, script);
     
   }
 

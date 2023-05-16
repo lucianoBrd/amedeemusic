@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Social } from 'src/app/shared/models/social.interface';
@@ -10,6 +10,7 @@ import { ArtistService } from 'src/app/shared/service/artist.service';
 import { SocialService } from 'src/app/shared/service/social.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
+import VanillaTilt from 'vanilla-tilt';
 
 @Component({
   selector: 'app-music-header',
@@ -31,6 +32,7 @@ export class MusicHeaderComponent implements OnInit, OnDestroy {
     private sidebarService: SidebarService,
     private artistService: ArtistService,
     private socialService: SocialService,
+    private el: ElementRef,
   ) {
     this.language = TextService.getTextByLocal();
   }
@@ -44,6 +46,11 @@ export class MusicHeaderComponent implements OnInit, OnDestroy {
     });
     this.dataService.sendGetRequest('/api/projects/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {
       this.project = data;
+    });
+    VanillaTilt.init(this.el.nativeElement.querySelectorAll('.tilt-artist'), {
+      max: 3,
+      speed: 400,
+      perspective: 400
     });
   }
 

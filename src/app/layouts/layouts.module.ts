@@ -58,7 +58,7 @@ import { MusicFooterComponent } from './music/music-footer/music-footer.componen
     ReactiveFormsModule,
     Ng5SliderModule,
     LightboxModule,
-    NgxMasonryModule
+    NgxMasonryModule,
   ],
 })
 
