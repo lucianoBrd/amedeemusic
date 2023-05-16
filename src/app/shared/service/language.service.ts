@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Cookie } from '../data/cookie';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class LanguageService {
 
   static getLanguageCodeOnly() {
     /* Check local storage */
-    var lc = localStorage.getItem("languageCode");
+    var lc = localStorage.getItem(Cookie.languageCode);
     if (lc) {
       return lc;
     }
@@ -27,7 +28,7 @@ export class LanguageService {
 
   static getLanguage() {
     /* Check local storage */
-    var lc = localStorage.getItem("languageCode");
+    var lc = localStorage.getItem(Cookie.languageCode);
     if (lc) {
       if (lc != 'fr'){
         return 'en-EN';

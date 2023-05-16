@@ -31,6 +31,7 @@ import { SocialService } from './shared/service/social.service';
 import { TextService } from './shared/service/text.service';
 import { ArtistService } from './shared/service/artist.service';
 import { Language } from './shared/models/language.interface';
+import { Cookie } from './shared/data/cookie';
 registerLocaleData(localeFr);
 
 const language: Language = TextService.getTextByLocal();
@@ -62,7 +63,8 @@ const cookieConfig:NgcCookieConsentConfig = {
     policy: language.cookiePolicy,
     header: language.cookieHeader,
     allow: language.cookieAllow,
-  }
+  },
+  autoOpen: !(localStorage.getItem(Cookie.coockieDismiss) === Cookie.coockieDismissed)
 };
 
 RecaptchaComponent.prototype.ngOnDestroy = function() {
@@ -107,6 +109,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     SocialService,
     TextService,
     ConfigDB,
+    Cookie,
     { provide: LOCALE_ID, useValue: LanguageService.getLanguage() },
     { provide: HTTP_INTERCEPTORS, useClass: JsonDateInterceptorService, multi: true }
   ],

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ConfigDB } from '../data/config';
+import { Cookie } from '../data/cookie';
 import { LanguageService } from './language.service';
 
 @Injectable({
@@ -13,9 +14,9 @@ export class CustomizerService {
     this.languageCode = LanguageService.getLanguageCodeOnly();
     this.data.settings.languageCode = this.languageCode;
 
-    var layoutVersion = localStorage.getItem("layoutVersion") || this.data.settings.layout_version;
-    var layoutType = localStorage.getItem("layoutType") || this.data.settings.layout_type;
-    var lc = localStorage.getItem("languageCode") || this.data.settings.languageCode;
+    var layoutVersion = localStorage.getItem(Cookie.layoutVersion) || this.data.settings.layout_version;
+    var layoutType = localStorage.getItem(Cookie.layoutType) || this.data.settings.layout_type;
+    var lc = localStorage.getItem(Cookie.languageCode) || this.data.settings.languageCode;
     if (layoutVersion) {
       document.body.classList.add(layoutVersion);
       this.data.settings.layout_version = layoutVersion;
@@ -38,19 +39,19 @@ export class CustomizerService {
     document.body.classList.remove(this.data.settings.layout_version);
     this.data.settings.layout_version = layout;
     document.body.classList.add(layout);
-    localStorage.setItem('layoutVersion', layout);
+    localStorage.setItem(Cookie.layoutVersion, layout);
   }
 
   setLayoutType(layout: string) {
     document.body.classList.remove(this.data.settings.layout_type);
     this.data.settings.layout_type = layout;
     document.body.classList.add(layout);
-    localStorage.setItem('layoutType', layout);
+    localStorage.setItem(Cookie.layoutType, layout);
   }
 
   setLanguage(language: string) {
     this.data.settings.languageCode = language;
-    localStorage.setItem('languageCode', language);
+    localStorage.setItem(Cookie.languageCode, language);
   }
 
 }

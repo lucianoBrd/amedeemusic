@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { CustomizerService } from './shared/service/customizer.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { MetaService } from './shared/service/meta.service';
@@ -8,20 +8,20 @@ import { Language } from './shared/models/language.interface';
 import { ConfigDB } from './shared/data/config';
 import { DOCUMENT } from '@angular/common';
 import { NgcCookieConsentService } from 'ngx-cookieconsent';
+import { Subject, takeUntil } from 'rxjs';
+import { Cookie } from './shared/data/cookie';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   public url: any;
-  title = ConfigDB.data.appName;
   public layoutType: string = 'light';
   public language: Language;
 
-  public politic: Politic;
-  public documentPath: String;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     public customize: CustomizerService,
@@ -45,10 +45,19 @@ export class AppComponent implements OnInit {
         this.url = event.url;
       }
     });
+
+    this.cookieService.popupClose$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      localStorage.setItem(Cookie.coockieDismiss, Cookie.coockieDismissed);
+    });
   }
 
   ngOnInit() {
     
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   customizeLayoutVersion(val) {
