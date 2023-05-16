@@ -8,8 +8,10 @@ export class ConfigDB {
 			languageCode: 'en',
 		},
 		appName : 'AmédéeMusic',
+		appContact : 'amedee.management@gmail.com',
 		apiServer : isDevMode() ? 'http://127.0.0.1:8000' : 'https://api.amedeemusic.com',
-		apiServerImages : '/uploads/images/'
+		apiServerImages : '/uploads/images/',
+		siteKey : '6LfWON0ZAAAAABVgPLWN-KFJXz2byUnwPzp2Z8oC',
 	}
 }
 

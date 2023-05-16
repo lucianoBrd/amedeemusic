@@ -12,6 +12,7 @@ export interface Artist {
     blog: string,
     subscribe: string,
     testimonial: string,
+    footer: string,
     contact: string,
     name: string,
     artistAbouts: ArtistAbout[];

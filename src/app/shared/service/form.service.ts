@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { ConfigDB } from '../data/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormService {
-  private siteKey: String = '6LfWON0ZAAAAABVgPLWN-KFJXz2byUnwPzp2Z8oC';
+  private siteKey: String = ConfigDB.data.siteKey;
 
   constructor() {
   }

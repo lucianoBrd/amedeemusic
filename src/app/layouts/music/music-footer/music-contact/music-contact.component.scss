@@ -1,0 +1,18 @@
+@import 'src/assets/scss/theme/variable' ;
+
+.music-contact-mail-to {
+    text-transform: initial;
+}
+
+.error-form {
+    background-color: $alert-danger !important;
+    border: 1px solid $music-dark-bg !important;
+}
+
+.error-text {
+    color: $alert-danger !important;
+}
+
+.success-text {
+    color: $alert-success !important;
+}

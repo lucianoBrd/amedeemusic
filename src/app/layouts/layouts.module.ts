@@ -28,13 +28,35 @@ import { MusicBlogComponent } from './music/music-blog/music-blog.component';
 import { MusicSubscribeComponent } from './music/music-subscribe/music-subscribe.component';
 import { MusicTestimonialComponent } from './music/music-testimonial/music-testimonial.component';
 import { MusicFooterComponent } from './music/music-footer/music-footer.component';
+import { MusicContactComponent } from './music/music-footer/music-contact/music-contact.component';
 import { MusicCopyrightComponent } from './music/music-copyright/music-copyright.component';
+import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
-
+RecaptchaComponent.prototype.ngOnDestroy = function() {
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
+}
 
 @NgModule({
   declarations: [
-    MusicComponent, MusicNavComponent, MusicHeaderComponent, MusicEventComponent, MusicProjectComponent, MusicSidebarComponent, MusicSocialComponent, MusicGalleryComponent, MusicVideoComponent, MusicBookingComponent, MusicBlogComponent, MusicSubscribeComponent, MusicTestimonialComponent, MusicFooterComponent, MusicCopyrightComponent],
+    MusicComponent, 
+    MusicNavComponent, 
+    MusicHeaderComponent, 
+    MusicEventComponent, 
+    MusicProjectComponent, 
+    MusicSidebarComponent, 
+    MusicSocialComponent, 
+    MusicGalleryComponent, 
+    MusicVideoComponent, 
+    MusicBookingComponent, 
+    MusicBlogComponent, 
+    MusicSubscribeComponent, 
+    MusicTestimonialComponent, 
+    MusicFooterComponent, 
+    MusicContactComponent, 
+    MusicCopyrightComponent
+  ],
 
   imports: [
     CommonModule,
@@ -47,7 +69,8 @@ import { MusicCopyrightComponent } from './music/music-copyright/music-copyright
     CountToModule,
     FormsModule,
     ReactiveFormsModule,
-    // NgxPayPalModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     Ng5SliderModule,
     LightboxModule,
     NgxMasonryModule
@@ -55,6 +78,7 @@ import { MusicCopyrightComponent } from './music/music-copyright/music-copyright
   exports: [
     MusicNavComponent,
     MusicFooterComponent,
+    MusicContactComponent,
     MusicCopyrightComponent
   ],
 })

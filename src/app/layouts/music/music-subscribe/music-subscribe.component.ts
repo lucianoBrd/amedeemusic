@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { Language } from 'src/app/shared/models/language.interface';
@@ -62,7 +62,7 @@ export class MusicSubscribeComponent implements OnInit {
         /* Sent to api */
         const body: HttpParams = new HttpParams();
         const page: string = '/subscribe/' + LanguageService.getLanguageCodeOnly() + '/' + this.email;
-        this.dataService.sendPostRequest(page, body).subscribe((data: User) => {
+        this.dataService.sendPostRequest(page, body).pipe(takeUntil(this.destroy$)).subscribe((data: User) => {
           if (!data || (data && (data.id == -1 || data.id == undefined))) {
             this.alertService.showError(this.language.subscribeError);
           } else {
