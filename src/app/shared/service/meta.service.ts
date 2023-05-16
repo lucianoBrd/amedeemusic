@@ -31,7 +31,7 @@ export class MetaService {
     this.metaService.updateTag(
       {
         name: 'keywords',
-        content: this.language.keywords + newKw
+        content: ConfigDB.data.keywords + newKw
       }
     );
   }

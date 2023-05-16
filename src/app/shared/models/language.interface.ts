@@ -9,7 +9,6 @@ export interface Language {
     home: string,
     homeDesc: string,
     back: string,
-    keywords: string,
     projects: string,
     blog: string,
     contact: string,

@@ -27,7 +27,7 @@ export class PageContactComponent implements OnInit {
   ngOnInit() {
     /* Set title + meta */
     this.metaService.setTitle(this.language.contact);
-    this.metaService.setKeywords(this.language.contact + ', ' + this.language.contactDesc);
+    this.metaService.setKeywords(this.language.contact + ',' + this.language.contactDesc);
     this.metaService.setDescription(this.language.contactDesc);
 
     this.artistService.loadedArtist$.subscribe((data: Artist) => {

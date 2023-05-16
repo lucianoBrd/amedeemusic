@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     /* Set title + meta */
     this.metaService.setTitle(this.language.home);
-    this.metaService.setKeywords(this.language.homeDesc);
+    this.metaService.setKeywords(this.language.home + ',' + this.language.homeDesc);
     this.metaService.setDescription(this.language.homeDesc);
 
     this.router.events.subscribe((event) => {

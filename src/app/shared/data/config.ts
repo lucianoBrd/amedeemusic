@@ -12,6 +12,7 @@ export class ConfigDB {
 		apiServer : isDevMode() ? 'http://127.0.0.1:8000' : 'https://api.amedeemusic.com',
 		apiServerImages : '/uploads/images/',
 		siteKey : '6LfWON0ZAAAAABVgPLWN-KFJXz2byUnwPzp2Z8oC',
+		keywords: 'amédée,amedee,amédéemusic,amedeemusic,amedeemusique,amédéemusique,amédée musique,amedee musique,amedee music,amédée music,artiste amédée,artiste amedee,chanteur amédée,chanteur amedee',
 	}
 }
 
