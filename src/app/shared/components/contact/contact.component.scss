@@ -2,6 +2,10 @@
 
 .music-contact-mail-to {
     text-transform: initial;
+    color: $red3;
+    &:hover {
+        color: $copyright-app2;
+    }
 }
 
 .error-form {

@@ -7905,7 +7905,10 @@ popup css start
       color: $gray9;
     }
     a {
-      color: $primary;
+      color: $gray17;
+      &:hover {
+        color: $primary;
+    }
     }
   }
   .form-group {
@@ -9588,7 +9591,10 @@ error css end
         color: $gray9;
       }
       a {
-        color: $primary;
+        color: $gray17;
+        &:hover {
+            color: $primary;
+        }
       }
     }
   }

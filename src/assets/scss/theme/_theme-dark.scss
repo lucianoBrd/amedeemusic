@@ -64,6 +64,9 @@ body{
           }
           a {
             color: $red3;
+            &:hover {
+                color: $copyright-app2;
+            }
           }
         }
         .nav-pills {
@@ -700,6 +703,9 @@ h6 {
       }
       a {
         color: $red3;
+        &:hover {
+            color: $copyright-app2;
+        }
       }
     }
     h6{
