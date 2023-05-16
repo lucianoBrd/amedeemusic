@@ -33,7 +33,8 @@ export class MusicComponent implements OnInit, OnDestroy {
     this.metaService.setDescription(this.language.homeDesc);
 
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
-      let artistAbouts: ArtistAbout[] = data.artistAbouts;
+      if (data && data.artistAbouts) {
+        let artistAbouts: ArtistAbout[] = data.artistAbouts;
         artistAbouts.sort((a, b) => a.id - b.id);
 
         for (let index = artistAbouts.length - 1; index >= 0; index--) {
@@ -44,6 +45,7 @@ export class MusicComponent implements OnInit, OnDestroy {
             break;
           }
         }
+      }
     });
   }
 
