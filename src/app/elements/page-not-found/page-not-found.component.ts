@@ -11,8 +11,8 @@ import { TextService } from 'src/app/shared/service/text.service';
 export class PageNotFoundComponent implements OnInit {
   public language: Language;
 
-  constructor(private metaService: MetaService, private textService: TextService) {
-    this.language = this.textService.getTextByLocal();
+  constructor(private metaService: MetaService) {
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {

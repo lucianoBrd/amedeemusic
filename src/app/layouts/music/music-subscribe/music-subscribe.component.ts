@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -18,7 +18,7 @@ import { TextService } from 'src/app/shared/service/text.service';
   templateUrl: './music-subscribe.component.html',
   styleUrls: ['./music-subscribe.component.scss']
 })
-export class MusicSubscribeComponent implements OnInit {
+export class MusicSubscribeComponent implements OnInit, OnDestroy {
   public artist: Artist;
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
@@ -28,20 +28,19 @@ export class MusicSubscribeComponent implements OnInit {
   public error: Boolean;
   public sending: Boolean;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
     private artistService: ArtistService,
     private formService: FormService,
     private alertService: AlertService,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
 

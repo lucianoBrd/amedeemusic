@@ -63,7 +63,7 @@ body{
             color: $white-5;
           }
           a {
-            color: $white-1;
+            color: $red3;
           }
         }
         .nav-pills {
@@ -688,6 +688,18 @@ h6 {
             color:$white-4;
           }
         }
+      }
+      h1, h2, h3, h4, h5, h6 {
+        color: $white-2;
+      }
+      ul li::before {
+        color: $white-5;
+      }
+      ul {
+        color: $white-5;
+      }
+      a {
+        color: $red3;
       }
     }
     h6{

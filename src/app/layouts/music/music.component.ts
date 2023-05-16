@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { ArtistAbout } from 'src/app/shared/models/artistAbout.interface';
 import { Language } from 'src/app/shared/models/language.interface';
@@ -12,16 +13,17 @@ import { TextService } from 'src/app/shared/service/text.service';
   templateUrl: './music.component.html',
   styleUrls: ['./music.component.scss']
 })
-export class MusicComponent implements OnInit {
+export class MusicComponent implements OnInit, OnDestroy {
 
   public language: Language;
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   
   constructor(
     private metaService: MetaService, 
-    private textService: TextService,
     private artistService: ArtistService,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class MusicComponent implements OnInit {
     this.metaService.setKeywords(this.language.home + ',' + this.language.homeDesc);
     this.metaService.setDescription(this.language.homeDesc);
 
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       let artistAbouts: ArtistAbout[] = data.artistAbouts;
         artistAbouts.sort((a, b) => a.id - b.id);
 
@@ -43,6 +45,11 @@ export class MusicComponent implements OnInit {
           }
         }
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

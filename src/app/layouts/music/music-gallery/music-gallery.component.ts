@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Gallery } from 'src/app/shared/models/gallery.interface';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -14,25 +14,24 @@ import { List } from 'src/app/shared/models/list.interface';
   templateUrl: './music-gallery.component.html',
   styleUrls: ['./music-gallery.component.scss']
 })
-export class MusicGalleryComponent implements OnInit {
+export class MusicGalleryComponent implements OnInit, OnDestroy {
   public artist: Artist;
   public galleries: Gallery[];
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public galleryImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'gallery/';
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
     private artistService: ArtistService,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
     this.dataService.sendGetRequest('/api/galleries').pipe(takeUntil(this.destroy$)).subscribe((data: List<Gallery>) => {

@@ -6,7 +6,7 @@ import { Project } from '../models/project.interface';
   providedIn: 'root'
 })
 export class SidebarService {
-  private sidebar$ = new BehaviorSubject<any>(undefined);
+  private sidebar$ = new BehaviorSubject<Project|undefined>(undefined);
   project$ = this.sidebar$.asObservable();
   constructor() {}
 

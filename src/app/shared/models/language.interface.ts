@@ -96,4 +96,10 @@ export interface Language {
     contactMessage: string,
     contactTitle: string,
     contactDesc: string,
+    cookieMessage: string,
+    cookieDismiss: string,
+    cookieDeny: string,
+    cookiePolicy: string,
+    cookieHeader: string,
+    cookieAllow: string,
 }

@@ -10,14 +10,8 @@ import { LoaderBisComponent } from './components/loader-bis/loader-bis.component
 import { ContactComponent } from './components/contact/contact.component';
 import { CopyrightComponent } from './components/copyright/copyright.component';
 import { NavComponent } from './components/nav/nav.component';
-import { RecaptchaComponent, RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { FormsModule } from '@angular/forms';
-
-RecaptchaComponent.prototype.ngOnDestroy = function() {
-  if (this.subscription) {
-    this.subscription.unsubscribe();
-  }
-}
 
 @NgModule({
   declarations: [

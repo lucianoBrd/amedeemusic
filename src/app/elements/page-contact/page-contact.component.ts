@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { Language } from 'src/app/shared/models/language.interface';
@@ -11,17 +12,18 @@ import { TextService } from 'src/app/shared/service/text.service';
   templateUrl: './page-contact.component.html',
   styleUrls: ['./page-contact.component.scss'],
 })
-export class PageContactComponent implements OnInit {
+export class PageContactComponent implements OnInit, OnDestroy {
   public language: Language;
   public artist: Artist;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   
   constructor(
     private metaService: MetaService, 
-    private textService: TextService,
     private artistService: ArtistService,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
@@ -30,9 +32,14 @@ export class PageContactComponent implements OnInit {
     this.metaService.setKeywords(this.language.contact + ',' + this.language.contactDesc);
     this.metaService.setDescription(this.language.contactDesc);
 
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

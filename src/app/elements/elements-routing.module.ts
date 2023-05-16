@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageContactComponent } from './page-contact/page-contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PagePrivacyPolicyComponent } from './page-privacy-policy/page-privacy-policy.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,13 @@ const routes: Routes = [
       {
         path: 'contact',
         component: PageContactComponent,
+         data: {
+          
+        }
+      },
+      {
+        path: 'privacy-policy',
+        component: PagePrivacyPolicyComponent,
          data: {
           
         }

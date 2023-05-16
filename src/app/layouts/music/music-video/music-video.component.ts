@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -17,7 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './music-video.component.html',
   styleUrls: ['./music-video.component.scss']
 })
-export class MusicVideoComponent implements OnInit {
+export class MusicVideoComponent implements OnInit, OnDestroy {
   public artist: Artist;
   public video: Video;
   public videoDescription: VideoDescription;
@@ -28,20 +28,19 @@ export class MusicVideoComponent implements OnInit {
   public videoId;
   public safeVideoLink: SafeResourceUrl;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
     private artistService: ArtistService,
     private modalService: NgbModal,
     private _sanitizer: DomSanitizer,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
     this.dataService.sendGetRequest('/api/videos/last').pipe(takeUntil(this.destroy$)).subscribe((data: Video) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -12,13 +12,14 @@ import { LanguageService } from 'src/app/shared/service/language.service';
 import { NavService } from 'src/app/shared/service/nav.service';
 import { SocialService } from 'src/app/shared/service/social.service';
 import { TextService } from 'src/app/shared/service/text.service';
+import { PoliticService } from '../../service/politic.service';
 
 @Component({
   selector: 'app-copyright',
   templateUrl: './copyright.component.html',
   styleUrls: ['./copyright.component.scss']
 })
-export class CopyrightComponent implements OnInit {
+export class CopyrightComponent implements OnInit, OnDestroy {
   public menuItems: Menu[];
   public socials: Social[];
   public politic: Politic;
@@ -26,20 +27,20 @@ export class CopyrightComponent implements OnInit {
   public appName: string = ConfigDB.data.appName;
   public year: number = new Date().getFullYear();
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   
   constructor(
     public navServices: NavService,
     private socialService: SocialService,
+    private politicService: PoliticService,
     private dataService: DataService, 
     private modalService: NgbModal, 
-    private textService: TextService,
   ) { 
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.navServices.items.subscribe(menuItems => {
+    this.navServices.items.pipe(takeUntil(this.destroy$)).subscribe(menuItems => {
       this.menuItems = menuItems
     });
     this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe((data: List<Social>) => {
@@ -51,8 +52,10 @@ export class CopyrightComponent implements OnInit {
 
       if (politics) {
         this.politic = politics[politics.length - 1];
+        this.politicService.setPolitic(this.politic);
       } else {
         this.politic = null;
+        this.politicService.setPolitic(null);
       }
       
     });

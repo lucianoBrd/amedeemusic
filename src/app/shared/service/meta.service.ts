@@ -10,8 +10,8 @@ import { ConfigDB } from '../data/config';
 export class MetaService {
   public language: Language;
 
-  constructor(private titleService: Title, private metaService: Meta, private textService: TextService) {
-    this.language = this.textService.getTextByLocal();
+  constructor(private titleService: Title, private metaService: Meta) {
+    this.language = TextService.getTextByLocal();
   }
 
   public setTitle(newTitle: string) {

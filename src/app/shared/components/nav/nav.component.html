@@ -5,7 +5,7 @@
             <div class="col">
                 <nav>
                     <a [routerLink]="['/']" class="d-inline-block m-r-auto">
-                        <img src="assets/images/logo/logo.png" alt="logo" class="img-fluid img-logo">
+                        <img src="{{logoImagePath}}logo.png" (error)="changeSource($event)" alt="logo" class="img-fluid img-logo">
                     </a>
                     <app-menu></app-menu>
                 </nav>

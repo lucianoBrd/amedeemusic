@@ -27,13 +27,6 @@ import { MusicBlogComponent } from './music/music-blog/music-blog.component';
 import { MusicSubscribeComponent } from './music/music-subscribe/music-subscribe.component';
 import { MusicTestimonialComponent } from './music/music-testimonial/music-testimonial.component';
 import { MusicFooterComponent } from './music/music-footer/music-footer.component';
-import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-
-RecaptchaComponent.prototype.ngOnDestroy = function() {
-  if (this.subscription) {
-    this.subscription.unsubscribe();
-  }
-}
 
 @NgModule({
   declarations: [
@@ -63,8 +56,6 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     CountToModule,
     FormsModule,
     ReactiveFormsModule,
-    RecaptchaModule,
-    RecaptchaFormsModule,
     Ng5SliderModule,
     LightboxModule,
     NgxMasonryModule

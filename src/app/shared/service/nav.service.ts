@@ -12,8 +12,8 @@ export class NavService {
    public MENUITEMS: Menu[];
    public items: BehaviorSubject<Menu[]>;
 
-   constructor(private textService: TextService) {
-      this.language = this.textService.getTextByLocal();
+   constructor() {
+      this.language = TextService.getTextByLocal();
       this.MENUITEMS = [
          { path: '/', title: this.language.home, type: 'link' },
          { path: '/contact', title: this.language.contact, type: 'link' },

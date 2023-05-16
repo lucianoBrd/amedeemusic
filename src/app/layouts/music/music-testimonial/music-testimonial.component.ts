@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
 import { Artist } from 'src/app/shared/models/artist.interface';
@@ -15,7 +15,7 @@ import { TextService } from 'src/app/shared/service/text.service';
   templateUrl: './music-testimonial.component.html',
   styleUrls: ['./music-testimonial.component.scss']
 })
-export class MusicTestimonialComponent implements OnInit {
+export class MusicTestimonialComponent implements OnInit, OnDestroy {
   public testimonials: Testimonial[];
   public artist: Artist;
   public language: Language;
@@ -23,18 +23,17 @@ export class MusicTestimonialComponent implements OnInit {
 
   public quoteImage: string = 'assets/images/music/testimonial/quote.png';
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
     private artistService: ArtistService,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
     this.dataService.sendGetRequest('/api/testimonials?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: List<Testimonial>) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Social } from 'src/app/shared/models/social.interface';
@@ -16,7 +16,7 @@ import { ConfigDB } from 'src/app/shared/data/config';
   templateUrl: './music-header.component.html',
   styleUrls: ['./music-header.component.scss']
 })
-export class MusicHeaderComponent implements OnInit {
+export class MusicHeaderComponent implements OnInit, OnDestroy {
   public socials: Social[];
   public artist: Artist;
   public project: Project;
@@ -24,23 +24,22 @@ export class MusicHeaderComponent implements OnInit {
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
     private sidebarService: SidebarService,
     private artistService: ArtistService,
     private socialService: SocialService,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.socialService.loadedSocials$.subscribe((data: Social[]) => {
+    this.socialService.loadedSocials$.pipe(takeUntil(this.destroy$)).subscribe((data: Social[]) => {
       this.socials = data;
     });
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
     this.dataService.sendGetRequest('/api/projects/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {

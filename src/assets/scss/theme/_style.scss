@@ -9571,6 +9571,25 @@ error css end
           }
         }
       }
+      h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        color: $primary;
+      }
+      ul li::before {
+        content: "\2022";
+        color: $dark;
+        font-weight: bold;
+        display: inline-block; 
+        width: 1em;
+        margin-left: -1em;
+      }
+      ul {
+        color: $gray9;
+      }
+      a {
+        color: $primary;
+      }
     }
   }
 }

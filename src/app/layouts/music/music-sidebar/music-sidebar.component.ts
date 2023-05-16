@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { Project } from 'src/app/shared/models/project.interface';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -18,7 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './music-sidebar.component.html',
   styleUrls: ['./music-sidebar.component.scss']
 })
-export class MusicSidebarComponent implements OnInit {
+export class MusicSidebarComponent implements OnInit, OnDestroy {
   public artist: Artist;
   public project: Project;
   public language: Language;
@@ -26,23 +26,22 @@ export class MusicSidebarComponent implements OnInit {
   public sideBarDispaly: string = "none";
   public selectedTitle: Title;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
     private sidebarService: SidebarService,
     private artistService: ArtistService,
     private modalService: NgbModal,
   ) { 
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.sidebarService.project$.subscribe((data: Project) => {
+    this.sidebarService.project$.pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {
       this.sideBar(data);
     });
   }

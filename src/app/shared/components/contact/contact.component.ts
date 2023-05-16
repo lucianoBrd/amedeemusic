@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -18,7 +18,7 @@ import { TextService } from 'src/app/shared/service/text.service';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
   public artist: Artist;
   public language: Language;
   
@@ -37,16 +37,15 @@ export class ContactComponent implements OnInit {
   
   public appContact: string = ConfigDB.data.appContact;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService,
     private formService: FormService,
     private alertService: AlertService,
     private artistService: ArtistService,
   ) {
-    this.language = this.textService.getTextByLocal(); 
+    this.language = TextService.getTextByLocal(); 
   }
 
   ngOnInit() {
@@ -56,7 +55,7 @@ export class ContactComponent implements OnInit {
     this.hasSent = false;
     this.hasSentError = false;
 
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
 
       if (data && data.contact) {

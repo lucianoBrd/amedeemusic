@@ -6,7 +6,7 @@ import { Artist } from '../models/artist.interface';
   providedIn: 'root'
 })
 export class ArtistService {
-  private artist$ = new BehaviorSubject<any>(undefined);
+  private artist$ = new BehaviorSubject<Artist|undefined>(undefined);
   loadedArtist$ = this.artist$.asObservable();
   constructor() {}
 

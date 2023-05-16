@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
 import { Artist } from 'src/app/shared/models/artist.interface';
@@ -17,7 +17,7 @@ import { TextService } from 'src/app/shared/service/text.service';
   templateUrl: './music-project.component.html',
   styleUrls: ['./music-project.component.scss']
 })
-export class MusicProjectComponent implements OnInit {
+export class MusicProjectComponent implements OnInit, OnDestroy {
   public artist: Artist;
   public artistAbout: ArtistAbout;
   public projects: Project[];
@@ -25,19 +25,18 @@ export class MusicProjectComponent implements OnInit {
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
     private sidebarService: SidebarService,
     private artistService: ArtistService,
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       if (data && data.artistAbouts) {
         let artistAbouts: ArtistAbout[] = data.artistAbouts;
         artistAbouts.sort((a, b) => a.id - b.id);

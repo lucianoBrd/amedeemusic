@@ -6,7 +6,7 @@ import { Social } from '../models/social.interface';
   providedIn: 'root'
 })
 export class SocialService {
-  private socials$ = new BehaviorSubject<any>(undefined);
+  private socials$ = new BehaviorSubject<Social[]|undefined>(undefined);
   loadedSocials$ = this.socials$.asObservable();
   constructor() {}
 

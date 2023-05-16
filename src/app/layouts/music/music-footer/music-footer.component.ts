@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { ConfigDB } from 'src/app/shared/data/config';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
@@ -8,9 +9,11 @@ import { ArtistService } from 'src/app/shared/service/artist.service';
   templateUrl: './music-footer.component.html',
   styleUrls: ['./music-footer.component.scss']
 })
-export class MusicFooterComponent implements OnInit {
+export class MusicFooterComponent implements OnInit, OnDestroy {
   public artist: Artist;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private artistService: ArtistService,
@@ -18,9 +21,14 @@ export class MusicFooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.artistService.loadedArtist$.subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

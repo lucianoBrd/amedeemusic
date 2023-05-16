@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Event } from 'src/app/shared/models/event.interface';
 import { List } from 'src/app/shared/models/list.interface';
@@ -12,7 +12,7 @@ import { ConfigDB } from 'src/app/shared/data/config';
   templateUrl: './music-event.component.html',
   styleUrls: ['./music-event.component.scss']
 })
-export class MusicEventComponent implements OnInit {
+export class MusicEventComponent implements OnInit, OnDestroy {
   public events: Event[];
   public listEvents: List<Event>;
   public language: Language;
@@ -20,13 +20,12 @@ export class MusicEventComponent implements OnInit {
   public currentPage: number;
   public totalPage: number;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
-    private textService: TextService, 
   ) {
-    this.language = this.textService.getTextByLocal();
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {

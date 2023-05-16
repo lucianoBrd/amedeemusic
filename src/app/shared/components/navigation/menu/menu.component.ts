@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavService } from '../../../service/nav.service';
 import { Router } from '@angular/router';
 import { TextService } from 'src/app/shared/service/text.service';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Menu } from '../../../models/menu.interface';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   public menuItems: Menu[];
   public openSide: boolean = false;
   public activeItem: string = 'home';
@@ -21,16 +22,23 @@ export class MenuComponent implements OnInit {
   public mobile: boolean = false;
   public language: Language;
 
-  constructor(public navServices: NavService, private router: Router, private textService: TextService) {
-    this.language = this.textService.getTextByLocal();
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(public navServices: NavService, private router: Router) {
+    this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
     this.url = this.router.url;
     this.mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    this.navServices.items.subscribe(menuItems => {
+    this.navServices.items.pipe(takeUntil(this.destroy$)).subscribe(menuItems => {
       this.menuItems = menuItems
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   toggleSidebar() {
