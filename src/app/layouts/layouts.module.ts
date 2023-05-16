@@ -15,7 +15,6 @@ import { LightboxModule } from 'ng-gallery/lightbox';
 
 // Music Layout
 import { MusicComponent } from './music/music.component';
-import { MusicNavComponent } from './music/music-nav/music-nav.component';
 import { MusicHeaderComponent } from './music/music-header/music-header.component';
 import { MusicEventComponent } from './music/music-event/music-event.component';
 import { MusicProjectComponent } from './music/music-project/music-project.component';
@@ -28,8 +27,6 @@ import { MusicBlogComponent } from './music/music-blog/music-blog.component';
 import { MusicSubscribeComponent } from './music/music-subscribe/music-subscribe.component';
 import { MusicTestimonialComponent } from './music/music-testimonial/music-testimonial.component';
 import { MusicFooterComponent } from './music/music-footer/music-footer.component';
-import { MusicContactComponent } from './music/music-footer/music-contact/music-contact.component';
-import { MusicCopyrightComponent } from './music/music-copyright/music-copyright.component';
 import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 RecaptchaComponent.prototype.ngOnDestroy = function() {
@@ -41,7 +38,6 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
 @NgModule({
   declarations: [
     MusicComponent, 
-    MusicNavComponent, 
     MusicHeaderComponent, 
     MusicEventComponent, 
     MusicProjectComponent, 
@@ -54,8 +50,6 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     MusicSubscribeComponent, 
     MusicTestimonialComponent, 
     MusicFooterComponent, 
-    MusicContactComponent, 
-    MusicCopyrightComponent
   ],
 
   imports: [
@@ -74,12 +68,6 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     Ng5SliderModule,
     LightboxModule,
     NgxMasonryModule
-  ],
-  exports: [
-    MusicNavComponent,
-    MusicFooterComponent,
-    MusicContactComponent,
-    MusicCopyrightComponent
   ],
 })
 

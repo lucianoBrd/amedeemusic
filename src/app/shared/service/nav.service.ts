@@ -17,7 +17,6 @@ export class NavService {
       this.MENUITEMS = [
          { path: '/', title: this.language.home, type: 'link' },
          { path: '/contact', title: this.language.contact, type: 'link' },
-         { path: '/about-me', title: this.language.about, type: 'link' },
       ];
 
       // Array

@@ -93,7 +93,6 @@ export class TextService {
       postDesc: 'Découvrez cet article très intéressant.',
       postShortContent: 'En espérant que l\'article vous ait plu',
       categories: 'Catégories',
-      contactDesc: 'Je peux vous établir gratuitement un devis sur simple demande. La satisfaction du client étant ma priorité, je mettrai tout en œuvre pour répondre à vos attentes et exigences.',
       cvDesc: 'Mon parcours et les compétences que j\'ai pu acquérir sont détaillées sur mon CV.',
       educationDesc: 'Les principales formations que j\'ai suivies durant ma vie sont résumée dans cette page.',
       notFound: '404',
@@ -138,6 +137,7 @@ export class TextService {
       contactEmail: 'Votre email',
       contactMessage: 'Votre message',
       contactTitle: 'Contactez-moi',
+      contactDesc: 'Contactez-moi.',
     };
   }
 
@@ -201,7 +201,6 @@ export class TextService {
       postDesc: 'Check out this very interesting post.',
       postShortContent: 'Hoping you enjoyed the post',
       categories: 'Categories',
-      contactDesc: 'I can provide you with a free quote on request. As customer satisfaction is my priority, I will make every effort to meet your expectations and requirements.',
       cvDesc: 'My background and the skills I was able to acquire are detailed on my CV.',
       educationDesc: 'The main trainings I have taken during my life are summarized in this page.',
       notFound: '404',
@@ -246,6 +245,7 @@ export class TextService {
       contactEmail: 'Your email',
       contactMessage: 'Your message',
       contactTitle: 'Contact me',
+      contactDesc: 'Contact me.',
     };
   }
 

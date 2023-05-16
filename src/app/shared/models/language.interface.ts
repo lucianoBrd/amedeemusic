@@ -52,7 +52,6 @@ export interface Language {
     postDesc: string,
     postShortContent: string,
     categories: string,
-    contactDesc: string,
     cvDesc: string,
     educationDesc: string,
     notFound: string,
@@ -97,4 +96,5 @@ export interface Language {
     contactEmail: string,
     contactMessage: string,
     contactTitle: string,
+    contactDesc: string,
 }

@@ -14,11 +14,11 @@ import { LanguageService } from 'src/app/shared/service/language.service';
 import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
-  selector: 'app-music-contact',
-  templateUrl: './music-contact.component.html',
-  styleUrls: ['./music-contact.component.scss']
+  selector: 'app-contact',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.scss']
 })
-export class MusicContactComponent implements OnInit {
+export class ContactComponent implements OnInit {
   public artist: Artist;
   public language: Language;
   

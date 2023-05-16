@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
-import { DownloadComponent } from './download/download.component';
+import { PageContactComponent } from './page-contact/page-contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -10,22 +8,8 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'about-me',
-        component: AboutComponent,
-         data: {
-          
-        }
-      },
-      {
-        path: 'download/:file',
-        component: DownloadComponent,
-         data: {
-          
-        }
-      },
-      {
         path: 'contact',
-        component: ContactComponent,
+        component: PageContactComponent,
          data: {
           
         }

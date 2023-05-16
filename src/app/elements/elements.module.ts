@@ -8,16 +8,12 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CountToModule } from 'angular-count-to';
 
 import { ElementsComponent } from './elements.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
+import { PageContactComponent } from './page-contact/page-contact.component';
 import { LayoutsModule } from '../layouts/layouts.module'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMasonryModule } from 'ngx-masonry';
-import { DownloadComponent } from './download/download.component';
-import { JsonDateInterceptorService } from '../shared/service/jsonDateInterceptor.service';
 
 RecaptchaComponent.prototype.ngOnDestroy = function() {
   if (this.subscription) {
@@ -28,10 +24,8 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
 @NgModule({
   declarations: [
     ElementsComponent, 
-    AboutComponent, 
-    ContactComponent, 
+    PageContactComponent, 
     PageNotFoundComponent, 
-    DownloadComponent,
   ],
   imports: [
     CommonModule,
@@ -46,9 +40,6 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     RecaptchaModule,
     RecaptchaFormsModule,
     NgxMasonryModule,
-  ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JsonDateInterceptorService, multi: true}
   ],
 })
 export class ElementsModule { }

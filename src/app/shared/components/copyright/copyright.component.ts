@@ -14,11 +14,11 @@ import { SocialService } from 'src/app/shared/service/social.service';
 import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
-  selector: 'app-music-copyright',
-  templateUrl: './music-copyright.component.html',
-  styleUrls: ['./music-copyright.component.scss']
+  selector: 'app-copyright',
+  templateUrl: './copyright.component.html',
+  styleUrls: ['./copyright.component.scss']
 })
-export class MusicCopyrightComponent implements OnInit {
+export class CopyrightComponent implements OnInit {
   public menuItems: Menu[];
   public socials: Social[];
   public politic: Politic;
@@ -42,8 +42,9 @@ export class MusicCopyrightComponent implements OnInit {
     this.navServices.items.subscribe(menuItems => {
       this.menuItems = menuItems
     });
-    this.socialService.loadedSocials$.subscribe((data: Social[]) => {
-      this.socials = data;
+    this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe((data: List<Social>) => {
+      this.socials = data['hydra:member'];
+      this.socialService.setSocials(this.socials);
     });
     this.dataService.sendGetRequest('/api/politics?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: List<Politic>) => {
       let politics: Politic[] = data['hydra:member'];

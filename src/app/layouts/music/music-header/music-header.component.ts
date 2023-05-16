@@ -10,7 +10,6 @@ import { ArtistService } from 'src/app/shared/service/artist.service';
 import { SocialService } from 'src/app/shared/service/social.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
-import { List } from 'src/app/shared/models/list.interface';
 
 @Component({
   selector: 'app-music-header',
@@ -38,13 +37,11 @@ export class MusicHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe((data: List<Social>) => {
-      this.socials = data['hydra:member'];
-      this.socialService.setSocials(this.socials);
+    this.socialService.loadedSocials$.subscribe((data: Social[]) => {
+      this.socials = data;
     });
-    this.dataService.sendGetRequest('/api/artists/last').pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
+    this.artistService.loadedArtist$.subscribe((data: Artist) => {
       this.artist = data;
-      this.artistService.setArtist(data);
     });
     this.dataService.sendGetRequest('/api/projects/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {
       this.project = data;

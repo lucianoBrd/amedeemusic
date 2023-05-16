@@ -6,13 +6,14 @@ import { Component, OnInit,  HostListener } from '@angular/core';
   styleUrls: ['./tap-to-top.component.scss']
 })
 export class TapToTopComponent implements OnInit {
-  public showScroll: boolean;
+  public showScroll: boolean = false;
   public showScrollHeight = 500;
   public hideScrollHeight = 10;
 
   constructor() { }
 
   ngOnInit() {
+    this.showScroll = false;
   }
   
   onActivate() {
