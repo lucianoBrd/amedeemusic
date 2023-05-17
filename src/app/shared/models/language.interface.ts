@@ -102,4 +102,5 @@ export interface Language {
     cookiePolicy: string,
     cookieHeader: string,
     cookieAllow: string,
+    listen: string,
 }

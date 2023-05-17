@@ -116,6 +116,7 @@ export class TextService {
     cookiePolicy: 'Cookie Policy',
     cookieHeader: 'Cookies sur le site!',
     cookieAllow: 'Autoriser les cookies',
+    listen: 'Écouter',
   };
   static textEn: Language = {
     dark: 'Dark',
@@ -226,6 +227,7 @@ export class TextService {
     cookiePolicy: "Cookie Policy",
     cookieHeader: "Cookies used on the website!",
     cookieAllow: "Allow cookies",
+    listen: 'Listen',
   };
 
 

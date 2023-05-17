@@ -65,6 +65,10 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
     );
   }
 
+  plainText(content: string) {
+    return content.replace(/<[^>]*>/g, '').slice(0, 30);
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
