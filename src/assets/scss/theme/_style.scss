@@ -7902,6 +7902,7 @@ popup css start
       margin-left: -1em;
     }
     ul {
+      padding: revert;
       color: $gray9;
     }
     a {
@@ -9588,6 +9589,7 @@ error css end
         margin-left: -1em;
       }
       ul {
+        padding: revert;
         color: $gray9;
       }
       a {
