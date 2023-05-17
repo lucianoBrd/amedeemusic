@@ -43,29 +43,34 @@ export class MusicVideoComponent implements OnInit, OnDestroy {
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/videos/last').pipe(takeUntil(this.destroy$)).subscribe((data: Video) => {
-      if (data) {
-        this.videoId = this.youtubeParser(data.link);
-        if (this.videoId) {
-          this.safeVideoLink = this._sanitizer.bypassSecurityTrustResourceUrl('//www.youtube.com/embed/' + this.videoId + '?autoplay=1');
-        }
-        
-        if (data.videoDescriptions) {
-          let videoDescriptions: VideoDescription[] = data.videoDescriptions;
-          videoDescriptions.sort((a, b) => a.id - b.id);
-
-          for (let index = videoDescriptions.length - 1; index >= 0; index--) {
-            const videoDescription: VideoDescription = videoDescriptions[index];
-            if (videoDescription.local.local == LanguageService.getLanguageCodeOnly()) {
-              this.videoDescription = videoDescription;
-              break;
-            }
+    this.dataService.sendGetRequest('/api/videos/last').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: Video) => {
+        if (data) {
+          this.videoId = this.youtubeParser(data.link);
+          if (this.videoId) {
+            this.safeVideoLink = this._sanitizer.bypassSecurityTrustResourceUrl('//www.youtube.com/embed/' + this.videoId + '?autoplay=1');
           }
-          data.videoDescriptions = videoDescriptions;
+          
+          if (data.videoDescriptions) {
+            let videoDescriptions: VideoDescription[] = data.videoDescriptions;
+            videoDescriptions.sort((a, b) => a.id - b.id);
+
+            for (let index = videoDescriptions.length - 1; index >= 0; index--) {
+              const videoDescription: VideoDescription = videoDescriptions[index];
+              if (videoDescription.local.local == LanguageService.getLanguageCodeOnly()) {
+                this.videoDescription = videoDescription;
+                break;
+              }
+            }
+            data.videoDescriptions = videoDescriptions;
+          }
         }
+        this.video = data;
+      },
+      (error) => {
+        this.video = null;
       }
-      this.video = data;
-    });
+    );
   }
 
   ngOnDestroy() {

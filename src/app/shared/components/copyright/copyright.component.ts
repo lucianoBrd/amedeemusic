@@ -43,22 +43,34 @@ export class CopyrightComponent implements OnInit, OnDestroy {
     this.navServices.items.pipe(takeUntil(this.destroy$)).subscribe(menuItems => {
       this.menuItems = menuItems
     });
-    this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe((data: List<Social>) => {
-      this.socials = data['hydra:member'];
-      this.socialService.setSocials(this.socials);
-    });
-    this.dataService.sendGetRequest('/api/politics?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: List<Politic>) => {
-      let politics: Politic[] = data['hydra:member'];
+    this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Social>) => {
+        this.socials = data['hydra:member'];
+        this.socialService.setSocials(this.socials);
+      },
+      (error) => {
+        this.socials = [];
+        this.socialService.setSocials(this.socials);
+      }
+    );
+    this.dataService.sendGetRequest('/api/politics?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Politic>) => {
+        let politics: Politic[] = data['hydra:member'];
 
-      if (politics) {
-        this.politic = politics[politics.length - 1];
-        this.politicService.setPolitic(this.politic);
-      } else {
+        if (politics) {
+          this.politic = politics[politics.length - 1];
+          this.politicService.setPolitic(this.politic);
+        } else {
+          this.politic = null;
+          this.politicService.setPolitic(null);
+        }
+        
+      },
+      (error) => {
         this.politic = null;
         this.politicService.setPolitic(null);
       }
-      
-    });
+    );
   }
 
   ngOnDestroy() {

@@ -42,17 +42,23 @@ export class MusicEventComponent implements OnInit, OnDestroy {
     this.events = undefined;
     this.currentPage = undefined;
     this.totalPage = undefined;
-    this.dataService.sendGetRequest(route).pipe(takeUntil(this.destroy$)).subscribe((data: List<Event>) => {
-      this.listEvents = data;
-      this.events = this.listEvents['hydra:member'];
+    this.dataService.sendGetRequest(route).pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Event>) => {
+        this.listEvents = data;
+        this.events = this.listEvents['hydra:member'];
 
-      this.currentPage = this.getPageNumber(route);
-      if (this.listEvents['hydra:view']) {
-        if (this.listEvents['hydra:view']['hydra:last']) {
-          this.totalPage = this.getPageNumber(this.listEvents['hydra:view']['hydra:last']);
+        this.currentPage = this.getPageNumber(route);
+        if (this.listEvents['hydra:view']) {
+          if (this.listEvents['hydra:view']['hydra:last']) {
+            this.totalPage = this.getPageNumber(this.listEvents['hydra:view']['hydra:last']);
+          }
         }
+      },
+      (error) => {
+        this.listEvents = null;
+        this.events = [];
       }
-    });
+    );
   }
 
   onFocusOutEvent(event: any){

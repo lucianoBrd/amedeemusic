@@ -54,33 +54,38 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
         this.project.projectPlatforms = undefined;
         this.project.titles = undefined;
       }
-      this.dataService.sendGetRequest('/api/projects/' + project.id).pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {
-        if (data) {
-          if (data.projectPlatforms) {
-            let projectPlatforms: ProjectPlatform[] = data.projectPlatforms;
-            projectPlatforms.sort((a, b) => a.fa.localeCompare(b.fa));
+      this.dataService.sendGetRequest('/api/projects/' + project.id).pipe(takeUntil(this.destroy$)).subscribe(
+        (data: Project) => {
+          if (data) {
+            if (data.projectPlatforms) {
+              let projectPlatforms: ProjectPlatform[] = data.projectPlatforms;
+              projectPlatforms.sort((a, b) => a.fa.localeCompare(b.fa));
 
-            data.projectPlatforms = projectPlatforms;
-          }
-          if (data.titles) {
-            let titles: Title[] = data.titles;
-            titles.sort((a, b) => a.name.localeCompare(b.name));
+              data.projectPlatforms = projectPlatforms;
+            }
+            if (data.titles) {
+              let titles: Title[] = data.titles;
+              titles.sort((a, b) => a.name.localeCompare(b.name));
 
-            data.titles = titles;
+              data.titles = titles;
 
-            for (let index = 0; index < titles.length; index++) {
-              const title: Title = titles[index];
-              if (title.titlePlatforms) {
-                let titlePlatforms: TitlePlatform[] = title.titlePlatforms;
-                titlePlatforms.sort((a, b) => a.fa.localeCompare(b.fa));
+              for (let index = 0; index < titles.length; index++) {
+                const title: Title = titles[index];
+                if (title.titlePlatforms) {
+                  let titlePlatforms: TitlePlatform[] = title.titlePlatforms;
+                  titlePlatforms.sort((a, b) => a.fa.localeCompare(b.fa));
 
-                data.titles[index].titlePlatforms = titlePlatforms;
+                  data.titles[index].titlePlatforms = titlePlatforms;
+                }
               }
             }
           }
+          this.project = data;
+        },
+        (error) => {
+          this.project = null;
         }
-        this.project = data;
-      });
+      );
     }
   }
 
@@ -92,7 +97,7 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
   sideBar(project: Project = undefined){
     if (this.sideBarDispaly=='none' && project) {
       this.sideBarDispaly='block';
-    } else if (project == undefined) {
+    } else if (project === undefined) {
       this.sideBarDispaly='none';
     }
     this.getProject(project);

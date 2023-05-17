@@ -5,11 +5,11 @@
             <div class="text-center w-100 h-100 tilt-artist">
                 <div class="img-height h-100">
                     <img *ngIf="artist?.man" src="{{artistImagePath}}{{artist.man}}" alt="artist" class="img-fluid">
-                    <img *ngIf="artist && !artist.man" src="assets/images/music/artist/man.png" alt="artist" class="img-fluid">
-                    <div class="container h-100" *ngIf="!artist">
+                    <img *ngIf="artist !== undefined && ((artist && !artist.man) || !artist)" src="assets/images/music/artist/man.png" alt="artist" class="img-fluid">
+                    <div class="container h-100" *ngIf="artist === undefined">
                         <div class="row h-100">
                             <div class="col-12">
-                                <app-loader-bis-white></app-loader-bis-white>
+                                <app-loader-bis-red></app-loader-bis-red>
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
         </ul>
     </div>
     <div class="left-side pt-5" *ngIf="!socials">
-        <app-loader-bis-white></app-loader-bis-white>
+        <app-loader-bis-red></app-loader-bis-red>
     </div>
     <div class="container music-container" *ngIf="project">
         <div class="row">

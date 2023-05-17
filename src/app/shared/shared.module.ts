@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderBisWhiteComponent } from './components/loader-bis-white/loader-bis-white.component';
+import { LoaderBisRedComponent } from './components/loader-bis-red/loader-bis-red.component';
 import { LoaderBisComponent } from './components/loader-bis/loader-bis.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CopyrightComponent } from './components/copyright/copyright.component';
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     LoaderComponent, 
     LoaderBisComponent, 
     LoaderBisWhiteComponent,
+    LoaderBisRedComponent,
     ContactComponent,
     CopyrightComponent,
     NavComponent,
@@ -29,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     LoaderComponent,
     LoaderBisComponent,
     LoaderBisWhiteComponent,
+    LoaderBisRedComponent,
     TapToTopComponent,
     ContactComponent,
     CopyrightComponent,

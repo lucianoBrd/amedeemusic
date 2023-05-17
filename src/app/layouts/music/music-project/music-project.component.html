@@ -49,10 +49,10 @@
                     </ng-container>
                 </owl-carousel-o>
                 <div class="mb-5" *ngIf="!projects">
-                    <app-loader-bis-white></app-loader-bis-white>
+                    <app-loader-bis-red></app-loader-bis-red>
                 </div>
-                <div *ngIf="!artist">
-                    <app-loader-bis-white></app-loader-bis-white>
+                <div *ngIf="artist === undefined">
+                    <app-loader-bis-red></app-loader-bis-red>
                 </div>
                 <div class="artist-text text-center" *ngIf="artistAbout">
                     <h4 class="text-uppercase dummy-text mb-2">{{language.biography}}</h4>

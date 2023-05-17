@@ -52,27 +52,32 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
       }
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe((data: List<Project>) => {
-      let projects: Project[] = data['hydra:member'];
-      if (projects && projects.length > 0) {
-        let emptyProject: Project = {
-          id: -1,
-          name: undefined,
-          date: undefined,
-          image: undefined,
-          titles: [],
-          projectPlatforms: [],
-          type: undefined
-        };
-        if (projects.length == 1) {
-          projects.unshift(emptyProject);
-          projects.push(emptyProject);
-        } else if (projects.length == 2) {
-          projects.push(emptyProject);
+    this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Project>) => {
+        let projects: Project[] = data['hydra:member'];
+        if (projects && projects.length > 0) {
+          let emptyProject: Project = {
+            id: -1,
+            name: undefined,
+            date: undefined,
+            image: undefined,
+            titles: [],
+            projectPlatforms: [],
+            type: undefined
+          };
+          if (projects.length == 1) {
+            projects.unshift(emptyProject);
+            projects.push(emptyProject);
+          } else if (projects.length == 2) {
+            projects.push(emptyProject);
+          }
         }
         this.projects = projects;
+      },
+      (error) => {
+        this.projects = [];
       }
-    });
+    );
   }
 
   ngOnDestroy() {

@@ -36,9 +36,14 @@ export class MusicTestimonialComponent implements OnInit, OnDestroy {
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/testimonials?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe((data: List<Testimonial>) => {
-      this.testimonials = data['hydra:member'];
-    });
+    this.dataService.sendGetRequest('/api/testimonials?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Testimonial>) => {
+        this.testimonials = data['hydra:member'];
+      },
+      (error) => {
+        this.testimonials = [];
+      }
+    );
   }
 
   ngOnDestroy() {

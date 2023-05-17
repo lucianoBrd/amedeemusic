@@ -61,16 +61,22 @@ export class MusicSubscribeComponent implements OnInit, OnDestroy {
         /* Sent to api */
         const body: HttpParams = new HttpParams();
         const page: string = '/subscribe/' + LanguageService.getLanguageCodeOnly() + '/' + this.email;
-        this.dataService.sendPostRequest(page, body).pipe(takeUntil(this.destroy$)).subscribe((data: User) => {
-          if (!data || (data && (data.id == -1 || data.id == undefined))) {
-            this.alertService.showError(this.language.subscribeError);
-          } else {
-            this.alertService.showSuccess(this.language.subscribeSuccess);
-            subscribeForm.resetForm();
-          }
-          this.sending = false;
+        this.dataService.sendPostRequest(page, body).pipe(takeUntil(this.destroy$)).subscribe(
+          (data: User) => {
+            if (!data || (data && (data.id == -1 || data.id == undefined))) {
+              this.alertService.showError(this.language.subscribeError);
+            } else {
+              this.alertService.showSuccess(this.language.subscribeSuccess);
+              subscribeForm.resetForm();
+            }
+            this.sending = false;
 
-        });
+          },
+          (error) => {
+            this.alertService.showError(this.language.subscribeError);
+            this.sending = false;
+          }
+        );
 
       } else {
         this.error = true;

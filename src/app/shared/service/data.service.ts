@@ -23,7 +23,7 @@ export class DataService {
       // Server-side errors
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    return throwError(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 
   public sendGetRequest(page: string){
@@ -38,7 +38,7 @@ export class DataService {
           )
         }
       ).pipe(
-        retry(3), 
+        //retry(3), 
         catchError(this.handleError),
       );
     }

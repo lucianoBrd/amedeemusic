@@ -44,9 +44,14 @@ export class MusicHeaderComponent implements OnInit, OnDestroy {
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/projects/last/light').pipe(takeUntil(this.destroy$)).subscribe((data: Project) => {
-      this.project = data;
-    });
+    this.dataService.sendGetRequest('/api/projects/last/light').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: Project) => {
+        this.project = data;
+      },
+      (error) => {
+        this.project = null;
+      }
+    );
     VanillaTilt.init(this.el.nativeElement.querySelectorAll('.tilt-artist'), {
       max: 3,
       speed: 400,

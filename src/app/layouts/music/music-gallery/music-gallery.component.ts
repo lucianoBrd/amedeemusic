@@ -34,23 +34,28 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/galleries').pipe(takeUntil(this.destroy$)).subscribe((data: List<Gallery>) => {
-      let galleries: Gallery[] = data['hydra:member'];
+    this.dataService.sendGetRequest('/api/galleries').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Gallery>) => {
+        let galleries: Gallery[] = data['hydra:member'];
 
-      if (galleries && galleries.length > 0) {
-        let emptyGallery: Gallery = {
-          id: -1,
-          image: undefined,
-        };
-        if (galleries.length == 1) {
-          galleries.unshift(emptyGallery);
-          galleries.push(emptyGallery);
-        } else if (galleries.length == 2) {
-          galleries.unshift(emptyGallery);
+        if (galleries && galleries.length > 0) {
+          let emptyGallery: Gallery = {
+            id: -1,
+            image: undefined,
+          };
+          if (galleries.length == 1) {
+            galleries.unshift(emptyGallery);
+            galleries.push(emptyGallery);
+          } else if (galleries.length == 2) {
+            galleries.unshift(emptyGallery);
+          }
         }
         this.galleries = galleries;
+      },
+      (error) => {
+        this.galleries = [];
       }
-    });
+    );
   }
 
   ngOnDestroy() {

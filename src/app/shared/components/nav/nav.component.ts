@@ -24,10 +24,16 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.dataService.sendGetRequest('/api/artists/last').pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
-      this.artist = data;
-      this.artistService.setArtist(data);
-    });
+    this.dataService.sendGetRequest('/api/artists/last').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: Artist) => {
+        this.artist = data;
+        this.artistService.setArtist(data);
+      },
+      (error) => {
+        this.artist = null;
+        this.artistService.setArtist(null);
+      }
+    );
   }
 
   ngOnDestroy() {

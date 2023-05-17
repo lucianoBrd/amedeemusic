@@ -87,18 +87,25 @@ export class ContactComponent implements OnInit, OnDestroy {
           .set('message', this.message)
         ;
         const page: string = '/contact/' + LanguageService.getLanguageCodeOnly();
-        this.dataService.sendPostRequest(page, body).pipe(takeUntil(this.destroy$)).subscribe((data: User) => {
-          if (!data || (data && (data.id == -1 || data.id == undefined))) {
+        this.dataService.sendPostRequest(page, body).pipe(takeUntil(this.destroy$)).subscribe(
+          (data: User) => {
+            if (!data || (data && (data.id == -1 || data.id == undefined))) {
+              this.hasSentError = true;
+              this.alertService.showError(this.language.contactError);
+            } else {
+              this.hasSent = true;
+              this.alertService.showSuccess(this.language.contactSuccess);
+              contactForm.resetForm();
+            }
+            this.sending = false;
+
+          },
+          (error) => {
             this.hasSentError = true;
             this.alertService.showError(this.language.contactError);
-          } else {
-            this.hasSent = true;
-            this.alertService.showSuccess(this.language.contactSuccess);
-            contactForm.resetForm();
+            this.sending = false;
           }
-          this.sending = false;
-
-        });
+        );
 
       } else {
         this.errorMail = true;

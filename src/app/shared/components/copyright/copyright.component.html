@@ -29,6 +29,7 @@
                 <div class="login-modal">
                     <div class="modal-header">
                         <h1 *ngIf="politic" class="m-b-20 mt-4 ml-2">{{politic.title}}</h1>
+                        <h1 *ngIf="!politic" class="m-b-20 mt-4 ml-2">{{language.privacyPolicy}}</h1>
                         <button aria-label="Close" (click)="modal.dismiss('Cross click')" class="close" data-dismiss="modal" type="button">
                             <span aria-hidden="true">&times;</span>
                         </button>
