@@ -1,4 +1,7 @@
 <?php
+
+use Exception;
+
 /* Commands */
 $commands = array(
     'git pull',
@@ -8,7 +11,11 @@ $commands = array(
 $output = '';
 foreach ($commands as $command) {
     /* Run it */
-    $tmp = shell_exec($command);
+    try {
+        $tmp = shell_exec($command);
+    } catch (Exception $e) {
+        $tmp = $e->getMessage();
+    }
     /* Output */
     $output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
     $output .= htmlentities(trim($tmp)) . "\n";
