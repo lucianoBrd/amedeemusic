@@ -8,13 +8,19 @@
                         <a href="javascript:void(0)" itemprop="contentUrl">
                           <img alt="gallery-{{gallery.id}}" src="{{galleryImagePath}}{{gallery.image}}" class="img-fluid" />
                         </a>
-                      </figure>
+                        <a target="_blank" href="{{galleryImagePath}}{{gallery.image}}">
+                            <h5 class="mt-2 text-center">
+                                {{language.download}}
+                                <span><i class="fa-solid fa-download" aria-hidden="true"></i></span>
+                            </h5>
+                        </a>
+                    </figure>
                 </ng-container>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listGalleries" [get]="getGalleries"></app-pagination>
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listGalleries" [get]="getGalleries" [route]="route"></app-pagination>
             </div>
         </div>
     </div>

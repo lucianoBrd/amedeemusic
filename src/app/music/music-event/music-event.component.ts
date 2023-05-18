@@ -21,6 +21,8 @@ export class MusicEventComponent implements OnInit, OnDestroy {
   public currentPage: number;
   public totalPage: number;
 
+  public route: string = '/api/events';
+
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -31,7 +33,7 @@ export class MusicEventComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getEvents('/api/events');
+    this.getEvents(this.route);
   }
 
   ngOnDestroy() {
@@ -58,12 +60,4 @@ export class MusicEventComponent implements OnInit, OnDestroy {
       }
     );
   }
-
-  onFocusOutEvent(event: any){
-    let number: number = event.target.value;
-    if (this.paginationService.checkPageNumber(number, this.totalPage)) {
-      this.getEvents('/api/events?page=' + number);
-    }
-  }
-
 }

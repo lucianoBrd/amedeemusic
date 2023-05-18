@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { List } from '../../models/list.interface';
+import { PaginationService } from '../../service/pagination.service';
 
 @Component({
   selector: 'app-pagination',
@@ -16,11 +17,22 @@ export class PaginationComponent<T> implements OnInit {
   public list: List<T>;
   @Input()
   public get: (route: string) => void;
+  @Input()
+  public route: number;
 
-  constructor() {
+  constructor(
+    private paginationService: PaginationService,
+  ) {
     
   }
 
   ngOnInit() { }
+
+  onFocusOutEvent(event: any){
+    let number: number = event.target.value;
+    if (this.paginationService.checkPageNumber(number, this.totalPage)) {
+      this.get(this.route + '?page=' + number);
+    }
+  }
 
 }

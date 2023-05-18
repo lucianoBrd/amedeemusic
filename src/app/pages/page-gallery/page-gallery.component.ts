@@ -26,6 +26,8 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
   public currentPage: number;
   public totalPage: number;
 
+  public route: string = '/api/galleries';
+
   private destroy$: Subject<boolean> = new Subject<boolean>();
   
   constructor(
@@ -44,7 +46,7 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     this.metaService.setKeywords(this.language.gallery);
     this.metaService.setDescription(this.language.gallery);
 
-    this.getGalleries('/api/galleries');
+    this.getGalleries(this.route);
   }
 
   ngOnDestroy() {
@@ -86,16 +88,9 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     const lightboxRef = this.ngGallery.ref('lightbox');
     lightboxRef.setConfig({
       imageSize: ImageSize.Cover,
-      thumbPosition: ThumbnailsPosition.Top
+      thumbPosition: ThumbnailsPosition.Top,
     });
     lightboxRef.load(this.items);
-  }
-
-  onFocusOutEvent(event: any){
-    let number: number = event.target.value;
-    if (this.paginationService.checkPageNumber(number, this.totalPage)) {
-      this.getGalleries('/api/galleries?page=' + number);
-    }
   }
 
 }
