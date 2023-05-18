@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageContactComponent } from './page-contact/page-contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PagePrivacyPolicyComponent } from './page-privacy-policy/page-privacy-policy.component';
+import { PageGalleryComponent } from './page-gallery/page-gallery.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,13 @@ const routes: Routes = [
       {
         path: 'privacy-policy',
         component: PagePrivacyPolicyComponent,
+         data: {
+          
+        }
+      },
+      {
+        path: 'gallery',
+        component: PageGalleryComponent,
          data: {
           
         }

@@ -9488,13 +9488,13 @@ error css end
       height: 50px;
       width: 50px;
       margin: 0 10px;
-      //background: $white11;
+      background: $white11;
       display: inline-block;
       .prev, .next {
-        //background: $light-white;
+        background: $light-white;
       }
-      button, p, input {
-        //color: $primary;
+      button, p, input, a {
+        color: $primary;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -9502,9 +9502,9 @@ error css end
         transition: 0.5s;
       }
       button, p {
-        color: $white;
+        //color: $white;
       }
-      button {
+      button, a {
         &.active, &:hover {
           transition: 0.5s;
           background: $primary;
@@ -14463,6 +14463,20 @@ footer{
     img{
       filter: brightness(25%);
     }
+  }
+}
+.cdk-overlay-container .cdk-global-overlay-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  lightbox {
+    width: 100%;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
   }
 }
 

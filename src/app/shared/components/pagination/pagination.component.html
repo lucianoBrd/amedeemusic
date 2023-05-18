@@ -1,0 +1,48 @@
+<!-- pagination Start -->
+<div class="pagination_sec" *ngIf="list && list['hydra:view'] && totalPage && (totalPage > 1)">
+  <div class="content_detail__pagination cdp">
+      <ul>
+          <li>
+              <a href="javascript:void(0)" *ngIf="list['hydra:view']['hydra:first']" (click)="get(list['hydra:view']['hydra:first'])" class="prev">
+                  <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0)" *ngIf="!list['hydra:view']['hydra:first']" class="prev">
+                  <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
+              </a>
+          </li>
+          <li>
+              <a href="javascript:void(0)" *ngIf="list['hydra:view']['hydra:previous']" (click)="get(list['hydra:view']['hydra:previous'])" class="prev">
+                  <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0)" *ngIf="!list['hydra:view']['hydra:previous']" class="prev">
+                  <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+              </a>
+          </li>
+          <li>
+              <input type="number" class="form-control" value="{{currentPage}}" min="1" max="{{totalPage}}" (focusout)="onFocusOutEvent($event)">
+          </li>
+          <li>
+              <p class="pagination-sec-{{fontColor}}">
+                  {{totalPage}}
+              </p>
+          </li>
+          <li>
+              <a href="javascript:void(0)" *ngIf="list['hydra:view']['hydra:next']" (click)="get(list['hydra:view']['hydra:next'])" class="next">
+                  <i class="fa-solid fa-angle-right"aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0)" *ngIf="!list['hydra:view']['hydra:next']" class="next">
+                  <i class="fa-solid fa-angle-right"aria-hidden="true"></i>
+              </a>
+          </li>
+          <li>
+              <a href="javascript:void(0)" *ngIf="list['hydra:view']['hydra:last']" (click)="get(list['hydra:view']['hydra:last'])" class="next">
+                  <i class="fa-solid fa-angles-right"aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0)" *ngIf="!list['hydra:view']['hydra:last']" class="next">
+                  <i class="fa-solid fa-angles-right"aria-hidden="true"></i>
+              </a>
+          </li>
+      </ul>
+  </div>
+</div>
+<!-- pagination End -->

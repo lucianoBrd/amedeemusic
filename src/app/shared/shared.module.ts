@@ -11,6 +11,7 @@ import { LoaderBisComponent } from './components/loader-bis/loader-bis.component
 import { ContactComponent } from './components/contact/contact.component';
 import { CopyrightComponent } from './components/copyright/copyright.component';
 import { NavComponent } from './components/nav/nav.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { FormsModule } from '@angular/forms';
 
@@ -25,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     ContactComponent,
     CopyrightComponent,
     NavComponent,
+    PaginationComponent,
   ],
   exports: [
     MenuComponent,
@@ -36,6 +38,7 @@ import { FormsModule } from '@angular/forms';
     ContactComponent,
     CopyrightComponent,
     NavComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,

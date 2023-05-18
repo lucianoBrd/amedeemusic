@@ -1,0 +1,22 @@
+<!-- section start -->
+<section class="resume portfolio-section zoom-gallery filter-section">
+    <div class="container">
+        <div class="p-4col-width">
+            <div class="isotopeContainer row" gallerize>
+                <ng-container>
+                    <figure class="p-width" itemprop="associatedMedia" *ngFor="let gallery of galleries">
+                        <a href="javascript:void(0)" itemprop="contentUrl">
+                          <img alt="gallery-{{gallery.id}}" src="{{galleryImagePath}}{{gallery.image}}" class="img-fluid" />
+                        </a>
+                      </figure>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listGalleries" [get]="getGalleries"></app-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

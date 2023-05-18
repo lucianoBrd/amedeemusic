@@ -30,55 +30,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12" *ngIf="listEvents['hydra:view'] && totalPage && (totalPage > 1)">
-                <!-- pagination Start -->
-                <div class="pagination_sec">
-                    <div class="content_detail__pagination cdp">
-                        <ul>
-                            <li>
-                                <button *ngIf="listEvents['hydra:view']['hydra:first']" (click)="getEvents(listEvents['hydra:view']['hydra:first'])" class="prev btn" type="button">
-                                    <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
-                                </button>
-                                <button *ngIf="!listEvents['hydra:view']['hydra:first']" class="prev btn" type="button" disabled>
-                                    <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button *ngIf="listEvents['hydra:view']['hydra:previous']" (click)="getEvents(listEvents['hydra:view']['hydra:previous'])" class="prev btn" type="button">
-                                    <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
-                                </button>
-                                <button *ngIf="!listEvents['hydra:view']['hydra:previous']" class="prev btn" type="button" disabled>
-                                    <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <input type="number" class="form-control" value="{{currentPage}}" min="1" max="{{totalPage}}" (focusout)="onFocusOutEvent($event)">
-                            </li>
-                            <li>
-                                <p>
-                                    {{totalPage}}
-                                </p>
-                            </li>
-                            <li>
-                                <button *ngIf="listEvents['hydra:view']['hydra:next']" (click)="getEvents(listEvents['hydra:view']['hydra:next'])" class="next btn" type="button">
-                                    <i class="fa-solid fa-angle-right"aria-hidden="true"></i>
-                                </button>
-                                <button *ngIf="!listEvents['hydra:view']['hydra:next']" class="next btn" type="button" disabled>
-                                    <i class="fa-solid fa-angle-right"aria-hidden="true"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button *ngIf="listEvents['hydra:view']['hydra:last']" (click)="getEvents(listEvents['hydra:view']['hydra:last'])" class="next btn" type="button">
-                                    <i class="fa-solid fa-angles-right"aria-hidden="true"></i>
-                                </button>
-                                <button *ngIf="!listEvents['hydra:view']['hydra:last']" class="next btn" type="button" disabled>
-                                    <i class="fa-solid fa-angles-right"aria-hidden="true"></i>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- pagination End -->
+            <div class="col-12">
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listEvents" [get]="getEvents"></app-pagination>
             </div>
         </div>
     </div>
