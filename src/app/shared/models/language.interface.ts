@@ -80,7 +80,7 @@ export interface Language {
     recentOrUpcomingEvents: string,
     video: string,
     watchNow: string,
-    seeAllVideo: string,
+    seeAll: string,
     lyrics: string,
     referringToMe: string,
     subscribe: string,
