@@ -12806,7 +12806,7 @@ error css end
   display: none;
   z-index: 608;
   box-shadow: 0 3px 15px 3px rgba(46, 97, 220, 0.35);
-  overflow-Y: scroll;
+  overflow-y: scroll;
 }
 .parallex-section {
   .parallex-container {
@@ -15255,7 +15255,7 @@ $ease--out-quad: cubic-bezier(.25,.46,.450,.94);
     background-size: contain;
 
     & + .snow--alt {
-      animation-delay: ($s--near / 2);
+      animation-delay: calc($s--near / 2);
     }
   }
 
@@ -15266,7 +15266,7 @@ $ease--out-quad: cubic-bezier(.25,.46,.450,.94);
     background-size: contain;
 
     & + .snow--alt {
-      animation-delay: ($s--mid / 2);
+      animation-delay: calc($s--mid / 2);
     }
   }
 
@@ -15276,7 +15276,7 @@ $ease--out-quad: cubic-bezier(.25,.46,.450,.94);
     background-size: contain;
 
     & + .snow--alt {
-      animation-delay: ($s--far / 2);
+      animation-delay: calc($s--far / 2);
     }
   }
 }
