@@ -17,7 +17,7 @@ export class ConfigDB {
 		appServer : isDevMode() ? ('http://' + ConfigDB.domain) : ('https://' + ConfigDB.domain),
 		apiServerImages : '/uploads/images/',
 		apiServerLogoImages : '/assets/logo/',
-		siteKey : '6LfWON0ZAAAAABVgPLWN-KFJXz2byUnwPzp2Z8oC',
+		siteKey : '6Ldg6RsmAAAAANsjwaOlhb_fimeaaCWvz8rLyBDN',
 		keywords: 'amédée,amedee,amédéemusic,amedeemusic,amedeemusique,amédéemusique,amédée musique,amedee musique,amedee music,amédée music,artiste amédée,artiste amedee,chanteur amédée,chanteur amedee',
 	}
 }
