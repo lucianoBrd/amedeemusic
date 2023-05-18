@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageContactComponent } from './page-contact/page-contact.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PagePrivacyPolicyComponent } from './page-privacy-policy/page-privacy-policy.component';
 import { PageGalleryComponent } from './page-gallery/page-gallery.component';
+import { Language } from '../shared/models/language.interface';
+import { TextService } from '../shared/service/text.service';
 
+const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
   {
     path: '',
@@ -13,28 +15,24 @@ const routes: Routes = [
         path: 'contact',
         component: PageContactComponent,
          data: {
-          
+          title: language.contact,
+          breadcrumb: language.contact,         
         }
       },
       {
         path: 'privacy-policy',
         component: PagePrivacyPolicyComponent,
          data: {
-          
+          title: language.privacyPolicy,
+          breadcrumb: language.privacyPolicy, 
         }
       },
       {
         path: 'gallery',
         component: PageGalleryComponent,
          data: {
-          
-        }
-      },
-      {
-        path: '404',
-        component: PageNotFoundComponent,
-         data: {
-          
+          title: language.gallery,
+          breadcrumb: language.gallery, 
         }
       },
     ]
@@ -45,4 +43,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ElementsRoutingModule { }
+export class PagesRoutingModule { }

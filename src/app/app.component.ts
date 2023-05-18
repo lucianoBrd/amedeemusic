@@ -6,7 +6,6 @@ import { Politic } from './shared/models/politic.interface';
 import { TextService } from './shared/service/text.service';
 import { Language } from './shared/models/language.interface';
 import { ConfigDB } from './shared/data/config';
-import { DOCUMENT } from '@angular/common';
 import { NgcCookieConsentService } from 'ngx-cookieconsent';
 import { Subject, takeUntil } from 'rxjs';
 import { Cookie } from './shared/data/cookie';
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
     public customize: CustomizerService,
     private router: Router,
     private metaService: MetaService,
-    @Inject(DOCUMENT) private _document: Document,
     private cookieService: NgcCookieConsentService,
   ) {
     this.language = TextService.getTextByLocal();

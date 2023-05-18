@@ -17,9 +17,9 @@ export class NavService {
       this.MENUITEMS = [
          { path: '/', title: this.language.home, type: 'link' },
          {
-            title: 'Pages', type: 'sub', children: [
-               { path: '/contact', title: this.language.contact, type: 'link' },
-               { path: '/gallery', title: this.language.gallery, type: 'link' },
+            title: this.language.pages, type: 'sub', children: [
+               { path: '/page/contact', title: this.language.contact, type: 'link' },
+               { path: '/page/gallery', title: this.language.gallery, type: 'link' },
             ],
        },
       ];
