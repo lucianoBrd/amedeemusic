@@ -1,5 +1,5 @@
 <!-- section start -->
-<section class="resume portfolio-section zoom-gallery filter-section">
+<section class="resume portfolio-section zoom-gallery filter-section" *ngIf="galleries?.length > 0">
     <div class="container">
         <div class="p-4col-width">
             <div class="isotopeContainer row" gallerize>
@@ -15,6 +15,26 @@
         <div class="row">
             <div class="col-12">
                 <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listGalleries" [get]="getGalleries"></app-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="shadow-section" *ngIf="galleries?.length == 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="shadow-lg p-5 shadow-showcase text-center ">
+                    <h3 class="m-0 f-18 text-center shadow-font">{{language.emptyItems}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="resume portfolio-section zoom-gallery filter-section" *ngIf="galleries === undefined">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
             </div>
         </div>
     </div>
