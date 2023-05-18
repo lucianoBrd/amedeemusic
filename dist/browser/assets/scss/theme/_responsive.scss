@@ -2005,7 +2005,7 @@
     .p-width {
       max-width: 33.33%;
       flex: 33.33%;
-      margin-bottom: 0;
+      margin-bottom: 12px;
     }
   }
   .m-layout {
@@ -4513,14 +4513,13 @@
     .p-width {
       flex: 0 0 50%;
       max-width: 50%;
-      margin-bottom: 0;
+      margin-bottom: 12px;
     }
   }
   .p-4col-width {
     .p-width {
       max-width: 50%;
       flex: 50%;
-      margin-bottom: 0;
     }
   }
   .m-layout {
@@ -5366,7 +5365,7 @@
       position: relative;
       &.active {
         .according-menu {
-          font: normal normal normal 15px/1 FontAwesome;
+          font: normal normal normal 15px/1 $font-awesome;
           &:before {
             content: "\f106";
             position: absolute;
@@ -5376,7 +5375,7 @@
         }
       }
       .according-menu {
-        font: normal normal normal 15px/1 FontAwesome;
+        font: normal normal normal 15px/1 $font-awesome;
         &:before {
           content: "\f107";
           position: absolute;
@@ -8375,7 +8374,7 @@
     .p-width {
       flex: 0 0 100%;
       max-width: 100%;
-      margin-bottom: 0;
+      margin-bottom: 12px;
     }
   }
   .p-3col-width {
@@ -8388,7 +8387,6 @@
     .p-width {
       max-width: 100%;
       flex: 100%;
-      margin-bottom: 0;
     }
   }
   .m-layout {
@@ -9137,7 +9135,7 @@
         position: relative;
         &.active {
           .according-menu {
-            font: normal normal normal 15px/1 FontAwesome;
+            font: normal normal normal 15px/1 $font-awesome;
             &:before {
               content: "\f106";
               position: absolute;
@@ -9148,7 +9146,7 @@
         }
 
         .according-menu {
-          font: normal normal normal 15px/1 FontAwesome;
+          font: normal normal normal 15px/1 $font-awesome;
           &:before {
             content: "\f107";
             position: absolute;

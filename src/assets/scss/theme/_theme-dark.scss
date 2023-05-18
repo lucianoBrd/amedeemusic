@@ -420,6 +420,21 @@ body{
   &.inner-3,&.inner-2, &.inner-1{
     background: $dark-color;
   }
+  .breadcrumb-contain {
+    >div {
+      ul {
+        li{
+          color: $white-5;
+          a {
+            color: $white-5;
+            &:hover {
+              color: $white-5;
+            }
+          }
+        }
+      }
+    }
+  }
   .breadcrumb{
     li{
       color:$white-5;
@@ -1190,7 +1205,7 @@ label {
 .pagination_sec{
   ul{
     li{
-      a{
+      p, a{
         color:$white-5;
         background: $dark-color;
       }

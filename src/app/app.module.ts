@@ -5,8 +5,9 @@ import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { routes } from './app-routing.module';
 import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { AppComponent } from './app.component';
-import { ElementsModule } from './elements/elements.module';
-import { LayoutsModule } from './layouts/layouts.module'
+import { PagesModule } from './pages/pages.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MusicModule } from './music/music.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -25,6 +26,7 @@ import { DataService } from './shared/service/data.service';
 import { FormService } from './shared/service/form.service';
 import { MetaService } from './shared/service/meta.service';
 import { NavService } from './shared/service/nav.service';
+import { PaginationService } from './shared/service/pagination.service';
 import { PoliticService } from './shared/service/politic.service';
 import { SidebarService } from './shared/service/sidebar.service';
 import { SocialService } from './shared/service/social.service';
@@ -59,7 +61,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     dismiss: language.cookieDismiss,
     deny: language.cookieDeny,
     link: language.learnMore,
-    href: ConfigDB.data.appServer + '/privacy-policy',
+    href: ConfigDB.data.appServer + '/page/privacy-policy',
     policy: language.cookiePolicy,
     header: language.cookieHeader,
     allow: language.cookieAllow,
@@ -75,18 +77,19 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
-    LayoutsModule,
+    MusicModule,
     HttpClientModule,
     CarouselModule,
     FormsModule,
     SharedModule,
-    ElementsModule,
+    PagesModule,
     RecaptchaModule,
     RecaptchaFormsModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -104,6 +107,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     LanguageService,
     MetaService,
     NavService,
+    PaginationService,
     PoliticService,
     SidebarService,
     SocialService,

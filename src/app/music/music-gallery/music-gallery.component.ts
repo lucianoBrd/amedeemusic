@@ -34,7 +34,7 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/galleries').pipe(takeUntil(this.destroy$)).subscribe(
+    this.dataService.sendGetRequest('/api/galleries/lasts').pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Gallery>) => {
         let galleries: Gallery[] = data['hydra:member'];
 

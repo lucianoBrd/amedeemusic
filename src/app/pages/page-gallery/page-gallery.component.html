@@ -1,0 +1,48 @@
+<!-- section start -->
+<section class="resume portfolio-section zoom-gallery filter-section" *ngIf="galleries?.length > 0">
+    <div class="container">
+        <div class="p-4col-width">
+            <div class="isotopeContainer row" gallerize>
+                <ng-container>
+                    <figure class="p-width" itemprop="associatedMedia" *ngFor="let gallery of galleries">
+                        <a href="javascript:void(0)" itemprop="contentUrl">
+                          <img alt="gallery-{{gallery.id}}" src="{{galleryImagePath}}{{gallery.image}}" class="img-fluid" />
+                        </a>
+                        <a target="_blank" href="{{galleryImagePath}}{{gallery.image}}">
+                            <h5 class="mt-2 text-center">
+                                {{language.download}}
+                                <span><i class="fa-solid fa-download" aria-hidden="true"></i></span>
+                            </h5>
+                        </a>
+                    </figure>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listGalleries" [get]="getGalleries" [route]="route"></app-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="shadow-section" *ngIf="galleries?.length == 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="shadow-lg p-5 shadow-showcase text-center ">
+                    <h3 class="m-0 f-18 text-center shadow-font">{{language.emptyItems}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="resume portfolio-section zoom-gallery filter-section" *ngIf="galleries === undefined">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

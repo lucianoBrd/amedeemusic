@@ -1,0 +1,48 @@
+<!-- album section Start-->
+<section *ngIf="events?.length > 0" class="music album">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="title title4">
+                    <div class="main-title">
+                        <h2>{{language.listOfEvents}}</h2>
+                    </div>
+                    <div class="sub-title">
+                        <p>{{language.recentOrUpcomingEvents}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let event of events">
+                <div class="album-list overlay-box text-center">
+                    <h5 class="text-uppercase list-head">{{event.name}}</h5>
+                    <div>
+                        <h6 class="item-sublist">{{event.place}}</h6>
+                        <h6 class="item-sublist"><hr></h6>
+                        <h6 class="item-sublist">{{event.date | date:'EEEE d MMMM'}}</h6>
+                        <h6 class="item-sublist">{{event.date | date:'HH:mm'}}</h6>
+                        <h6 class="item-sublist">{{event.date | date:'y'}}</h6>
+                        <h6 class="item-sublist" *ngIf="event.link"><hr></h6>
+                        <div class="item-sublist" *ngIf="event.link">
+                            <a target="_blank" href="{{event.link}}">
+                                <h6>{{language.access}} <i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i></h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listEvents" [get]="getEvents" [route]="route"></app-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="!events" class="music album">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis-red></app-loader-bis-red>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- album section end-->

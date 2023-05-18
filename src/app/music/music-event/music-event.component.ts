@@ -6,6 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DataService } from 'src/app/shared/service/data.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
+import { PaginationService } from 'src/app/shared/service/pagination.service';
 
 @Component({
   selector: 'app-music-event',
@@ -20,16 +21,19 @@ export class MusicEventComponent implements OnInit, OnDestroy {
   public currentPage: number;
   public totalPage: number;
 
+  public route: string = '/api/events';
+
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private dataService: DataService, 
+    private dataService: DataService,
+    private paginationService: PaginationService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.getEvents('/api/events');
+    this.getEvents(this.route);
   }
 
   ngOnDestroy() {
@@ -37,7 +41,7 @@ export class MusicEventComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  getEvents(route: string) {
+  public getEvents = (route: string) => {
     this.listEvents = undefined;
     this.events = undefined;
     this.currentPage = undefined;
@@ -47,12 +51,8 @@ export class MusicEventComponent implements OnInit, OnDestroy {
         this.listEvents = data;
         this.events = this.listEvents['hydra:member'];
 
-        this.currentPage = this.getPageNumber(route);
-        if (this.listEvents['hydra:view']) {
-          if (this.listEvents['hydra:view']['hydra:last']) {
-            this.totalPage = this.getPageNumber(this.listEvents['hydra:view']['hydra:last']);
-          }
-        }
+        this.currentPage = this.paginationService.getPageNumber(route);
+        this.totalPage = this.paginationService.getTotalPageNumber<Event>(this.listEvents);
       },
       (error) => {
         this.listEvents = null;
@@ -60,22 +60,4 @@ export class MusicEventComponent implements OnInit, OnDestroy {
       }
     );
   }
-
-  onFocusOutEvent(event: any){
-    let number: number = event.target.value;
-    if (number > 0 && number <= this.totalPage) {
-      this.getEvents('/api/events?page=' + number);
-    }
-  }
-
-  getPageNumber(route: string): number {
-    if (!route.includes('?')) {
-      return 1;
-    }
-    let url: URL = new URL(ConfigDB.data.apiServer + route);
-    let page = url.searchParams.get('page');
-
-    return Number(page);
-  }
-
 }

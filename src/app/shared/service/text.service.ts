@@ -34,7 +34,7 @@ export class TextService {
     aboutTitle2: 'mettre en place vos idées',
     aboutShortContent: 'Etant passionné par l’informatique, j’ai lancé ma propre entreprise. Ma soif de connaissance m’a permis de développer mes compétences et de m’enrichir d’expérience. Les travaux que je peux effectuer sont des solutions pour le web : E-Commerce, site vitrine…',
     privacyPolicy: 'Politique de confidentialité',
-    pages: 'pages',
+    pages: 'Pages',
     sitemap: 'Sitemap',
     requestQuote: 'demander un devis',
     headerTitle1: 'Solutions',
@@ -94,7 +94,7 @@ export class TextService {
     recentOrUpcomingEvents: 'Évènements récent ou à venir',
     video: 'Vidéo',
     watchNow: 'Visionner',
-    seeAllVideo: 'Voir toutes les vidéos',
+    seeAll: 'Voir tout',
     lyrics: 'Paroles',
     referringToMe: 'On parle de moi',
     subscribe: 'S\'abonner',
@@ -117,6 +117,7 @@ export class TextService {
     cookieHeader: 'Cookies sur le site!',
     cookieAllow: 'Autoriser les cookies',
     listen: 'Écouter',
+    emptyItems: 'Aucun élément à afficher pour le moment',
   };
   static textEn: Language = {
     dark: 'Dark',
@@ -145,7 +146,7 @@ export class TextService {
     aboutTitle2: 'for made your idea',
     aboutShortContent: 'Being passionate about IT, I started my own business. My thirst for knowledge has allowed me to develop my skills and gain experience. The work I can do are solutions for the web: E-Commerce, website showcase…',
     privacyPolicy: 'Privacy policy',
-    pages: 'pages',
+    pages: 'Pages',
     sitemap: 'Sitemap',
     requestQuote: 'request a quote',
     headerTitle1: 'Web',
@@ -205,7 +206,7 @@ export class TextService {
     recentOrUpcomingEvents: 'Recent or upcoming events',
     video: 'Video',
     watchNow: 'Watch Now',
-    seeAllVideo: 'See All Video',
+    seeAll: 'See all',
     lyrics: 'Lyrics',
     referringToMe: 'They\'re referring to me.',
     subscribe: 'Subscribe',
@@ -228,6 +229,7 @@ export class TextService {
     cookieHeader: "Cookies used on the website!",
     cookieAllow: "Allow cookies",
     listen: 'Listen',
+    emptyItems: 'No items to display at this time',
   };
 
 

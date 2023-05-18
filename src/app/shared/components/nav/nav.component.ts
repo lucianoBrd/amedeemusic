@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Artist } from '../../models/artist.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { DataService } from '../../service/data.service';
@@ -12,6 +12,9 @@ import { ConfigDB } from '../../data/config';
 })
 export class NavComponent implements OnInit, OnDestroy {
   public artist: Artist;
+
+  @Input()
+  public headerClass: string = 'music';
 
   public logoImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerLogoImages;
 
