@@ -1,0 +1,28 @@
+<section class="breadcrumb-section-main inner-2 breadcrumb-section-sm" >
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-contain ">
+                    <div>
+                        <h2 class="breadcrumb-txt">{{title}}</h2>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <a [routerLink]="['/']">
+                                    <i class="fa-solid fa-house-chimney"></i> {{language.home}}
+                                </a>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-angle-double-right"></i> {{breadcrumbs?.parentBreadcrumb}}
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-angle-double-right"></i> {{breadcrumbs?.childBreadcrumb}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

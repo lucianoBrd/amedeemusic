@@ -16,7 +16,12 @@ export class NavService {
       this.language = TextService.getTextByLocal();
       this.MENUITEMS = [
          { path: '/', title: this.language.home, type: 'link' },
-         { path: '/contact', title: this.language.contact, type: 'link' },
+         {
+            title: 'Pages', type: 'sub', children: [
+               { path: '/contact', title: this.language.contact, type: 'link' },
+               { path: '/gallery', title: this.language.gallery, type: 'link' },
+            ],
+       },
       ];
 
       // Array
