@@ -31,7 +31,7 @@ export class FilterComponent<T> implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.search$.pipe(debounceTime(900), takeUntil(this.destroy$)).subscribe((data: string) => {
+    this.search$.pipe(debounceTime(700), takeUntil(this.destroy$)).subscribe((data: string) => {
       this.get(this.route + '?' + this.filterName + '=' + data + '&' + this.filters);
     });
   }
