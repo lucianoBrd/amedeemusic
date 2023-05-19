@@ -1,5 +1,35 @@
-<!-- contact section start-->
-<section class="music bg-footer" [ngStyle]="{'background-image': (artist?.footer ? 'url(' + artistImagePath + artist.footer + ')' : '')}">
-    <app-contact></app-contact>
+<!-- about section start-->
+<section class="resume header" id="header">
+    <div class="header7-content">
+        <div class="resume bg-pink">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6">
+                        <img [src]="artistImage" alt="artist" class="img-fluid set-abs bottom-0 right-0">
+                    </div>
+                    <div class="col-lg-6 col-md-6 offset-lg-1">
+                        <div class="center-text">
+                            <div>
+                                <div class="header-sub-text">
+                                    <h5 class="text-hash text-uppercase">{{language.biography}}</h5>
+                                </div>
+                                <div *ngIf="artist === undefined"  class="header-sub-text">
+                                    <app-loader-bis></app-loader-bis>
+                                </div>
+                                <div class="header-sub-text">
+                                    <p class="font-large text-artist-about" *ngIf="artistAbout">
+                                        {{artistAbout.about}}
+                                    </p>
+                                    <p class="font-large text-artist-about" *ngIf="(artist || artist === null) && artistAbout === null">
+                                        {{language.emptyItems}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-<!-- contact section end-->
+<!-- about section end-->

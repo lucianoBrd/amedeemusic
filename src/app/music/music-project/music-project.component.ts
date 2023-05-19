@@ -37,19 +37,7 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
-      if (data && data.artistAbouts) {
-        let artistAbouts: ArtistAbout[] = data.artistAbouts;
-        artistAbouts.sort((a, b) => a.id - b.id);
-
-        for (let index = artistAbouts.length - 1; index >= 0; index--) {
-          const artistAbout: ArtistAbout = artistAbouts[index];
-          if (artistAbout.local.local == LanguageService.getLanguageCodeOnly()) {
-            this.artistAbout = artistAbout;
-            break;
-          }
-        }
-        data.artistAbouts = artistAbouts;
-      }
+      this.artistAbout = this.artistService.getArtistAbout(data);
       this.artist = data;
     });
     this.dataService.sendGetRequest('/api/projects/lasts').pipe(takeUntil(this.destroy$)).subscribe(
