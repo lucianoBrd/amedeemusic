@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject, debounceTime, takeUntil } from 'rxjs';
 import { TextService } from '../../service/text.service';
@@ -18,6 +18,8 @@ export class FilterComponent<T> implements OnInit, OnDestroy {
   public filterName: string;
   @Input()
   public filters: string = '';
+  @Output() 
+  public onSearch = new EventEmitter<string>();
   
   public search = new FormControl();
   private search$: Observable<string> = this.search.valueChanges;
@@ -33,6 +35,7 @@ export class FilterComponent<T> implements OnInit, OnDestroy {
   ngOnInit() {
     this.search$.pipe(debounceTime(700), takeUntil(this.destroy$)).subscribe((data: string) => {
       this.get(this.route + '?' + this.filterName + '=' + data + '&' + this.filters);
+      this.onSearch.emit(data);
     });
   }
 

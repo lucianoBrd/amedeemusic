@@ -31,8 +31,10 @@ export class BlogListComponent implements OnInit, OnDestroy {
   public totalPage: number;
 
   public route: string = '/api/blogs';
+  public paginationRoute: string = this.route;
   public filterRoute: string = this.route + '/filter';
-  public filters: string = 'local.local=' + LanguageService.getLanguageCodeOnly();
+  public filtersSearch: string = 'local.local=' + LanguageService.getLanguageCodeOnly();
+  public filtersPagination: string = 'local.local=' + LanguageService.getLanguageCodeOnly();
 
   public myOptions: NgxMasonryOptions = {
     originTop: true
@@ -60,12 +62,21 @@ export class BlogListComponent implements OnInit, OnDestroy {
       this.artist = data;
     });
 
-    this.getBlogs(this.route + '?' + this.filters);
+    this.getBlogs(this.route + '?' + this.filtersSearch);
   }
 
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
+
+  onSearch(search: string) {
+    if(!search?.length) {
+      this.paginationRoute = this.route;
+    } else {
+      this.paginationRoute = this.filterRoute;
+    }
+    this.filtersPagination = this.filtersSearch + '&search=' + search;
   }
 
   public getBlogs = (route: string) => {
