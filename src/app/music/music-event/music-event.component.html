@@ -18,11 +18,16 @@
                 <div class="album-list overlay-box text-center">
                     <h5 class="text-uppercase list-head">{{event.name}}</h5>
                     <div>
+                        <h6 class="item-sublist">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        </h6>
                         <h6 class="item-sublist">{{event.place}}</h6>
                         <h6 class="item-sublist"><hr></h6>
-                        <h6 class="item-sublist">{{event.date | date:'EEEE d MMMM'}}</h6>
+                        <h6 class="item-sublist">
+                            <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                        </h6>
+                        <h6 class="item-sublist">{{event.date | date:'EEEE d MMMM y'}}</h6>
                         <h6 class="item-sublist">{{event.date | date:'HH:mm'}}</h6>
-                        <h6 class="item-sublist">{{event.date | date:'y'}}</h6>
                         <h6 class="item-sublist" *ngIf="event.link"><hr></h6>
                         <div class="item-sublist" *ngIf="event.link">
                             <a target="_blank" href="{{event.link}}">

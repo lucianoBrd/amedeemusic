@@ -12367,7 +12367,9 @@ error css end
     }
     .typo-content {
       padding: 15px;
-
+      p {
+        text-transform: capitalize;
+      }
       h1{
         margin-top: 0;
       }
@@ -12396,9 +12398,9 @@ error css end
         }
       }
       .sub-title {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         padding-bottom: 5px;
-        margin-bottom: 15px;
+        //margin-bottom: 15px;
         font-size: 18px;
         color: $primary;
         text-transform: capitalize;
