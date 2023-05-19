@@ -1,0 +1,25 @@
+<!-- filter Start -->
+<section class="subscribe subscribe-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <div class="subscribe">
+                    <div class="center-content">
+                        <div class="form-group m-0">
+                            <div class="flex">
+                                <i aria-hidden="true" class="fa-solid fa-magnifying-glass icon"></i>
+                                <input class="form-control text-capitalize" name="search" placeholder="{{language.search}}" type="text" [formControl]="search">
+                                <div class="button-primary">
+                                    <button class=" btn btn-default btn-gradient text-white text-capitalize" type="button" (click)="filterProjects()">
+                                        {{language.search}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- filter End -->
