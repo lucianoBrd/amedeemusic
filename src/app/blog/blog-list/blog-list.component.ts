@@ -7,29 +7,38 @@ import { List } from 'src/app/shared/models/list.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { PaginationService } from 'src/app/shared/service/pagination.service';
 import { ConfigDB } from 'src/app/shared/data/config';
-import { Project } from 'src/app/shared/models/project.interface';
-import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
+import { Blog } from 'src/app/shared/models/blog.interface';
+import { NgxMasonryOptions } from 'ngx-masonry';
+import { BlogService } from 'src/app/shared/service/blog.service';
+import { LanguageService } from 'src/app/shared/service/language.service';
 
 @Component({
-  selector: 'app-page-project',
-  templateUrl: './page-project.component.html',
-  styleUrls: ['./page-project.component.scss'],
+  selector: 'app-blog-list',
+  templateUrl: './blog-list.component.html',
+  styleUrls: ['./blog-list.component.scss'],
 })
-export class PageProjectComponent implements OnInit, OnDestroy {
+export class BlogListComponent implements OnInit, OnDestroy {
   public artist: Artist;
-  public projects: Project[];
-  public listProjects: List<Project>;
+  public blogs: Blog[];
+  public listBlogs: List<Blog>;
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
-  public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
+  public blogImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'blog/';
 
   public currentPage: number;
   public totalPage: number;
 
-  public route: string = '/api/projects';
+  public route: string = '/api/blogs';
+  public paginationRoute: string = this.route;
   public filterRoute: string = this.route + '/filter';
+  public filtersSearch: string = 'local.local=' + LanguageService.getLanguageCodeOnly();
+  public filtersPagination: string = 'local.local=' + LanguageService.getLanguageCodeOnly();
+
+  public myOptions: NgxMasonryOptions = {
+    originTop: true
+  };
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
   
@@ -37,23 +46,23 @@ export class PageProjectComponent implements OnInit, OnDestroy {
     private dataService: DataService, 
     private metaService: MetaService,
     private paginationService: PaginationService,
-    private sidebarService: SidebarService,
     private artistService: ArtistService,
+    public blogService: BlogService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
     /* Set title + meta */
-    this.metaService.setTitle(this.language.myProjects);
-    this.metaService.setKeywords(this.language.myProjects);
-    this.metaService.setDescription(this.language.myProjects);
+    this.metaService.setTitle(this.language.articleList);
+    this.metaService.setKeywords(this.language.articleList);
+    this.metaService.setDescription(this.language.articleList);
 
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
 
-    this.getProjects(this.route);
+    this.getBlogs(this.route + '?' + this.filtersSearch);
   }
 
   ngOnDestroy() {
@@ -61,28 +70,32 @@ export class PageProjectComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  public getProjects = (route: string) => {
-    this.listProjects = undefined;
-    this.projects = undefined;
+  onSearch(search: string) {
+    if(!search?.length) {
+      this.paginationRoute = this.route;
+    } else {
+      this.paginationRoute = this.filterRoute;
+    }
+    this.filtersPagination = this.filtersSearch + '&search=' + search;
+  }
+
+  public getBlogs = (route: string) => {
+    this.listBlogs = undefined;
+    this.blogs = undefined;
     this.currentPage = undefined;
     this.totalPage = undefined;
     this.dataService.sendGetRequest(route).pipe(takeUntil(this.destroy$)).subscribe(
-      (data: List<Project>) => {
-        this.listProjects = data;
-        this.projects = this.listProjects['hydra:member'];
+      (data: List<Blog>) => {
+        this.listBlogs = data;
+        this.blogs = this.listBlogs['hydra:member'];
 
         this.currentPage = this.paginationService.getPageNumber(route);
-        this.totalPage = this.paginationService.getTotalPageNumber<Project>(this.listProjects);
+        this.totalPage = this.paginationService.getTotalPageNumber<Blog>(this.listBlogs);
       },
       (error) => {
-        this.listProjects = null;
-        this.projects = [];
+        this.listBlogs = null;
+        this.blogs = [];
       }
     );
   }
-
-  sideBar(project: Project) {
-    this.sidebarService.setProject(project);
-  }
-
 }

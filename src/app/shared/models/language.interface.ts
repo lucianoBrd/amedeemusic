@@ -104,4 +104,5 @@ export interface Language {
     cookieAllow: string,
     listen: string,
     emptyItems: string,
+    articleList: string,
 }

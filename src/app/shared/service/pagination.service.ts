@@ -25,7 +25,10 @@ export class PaginationService {
     }
     let url: URL = new URL(ConfigDB.data.apiServer + route);
     let page = url.searchParams.get('page');
-
+    
+    if (!page) {
+      return 1;
+    }
     return Number(page);
   }
 

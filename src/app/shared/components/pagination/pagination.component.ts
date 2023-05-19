@@ -19,6 +19,8 @@ export class PaginationComponent<T> implements OnInit {
   public get: (route: string) => void;
   @Input()
   public route: number;
+  @Input()
+  public filters: string = '';
 
   constructor(
     private paginationService: PaginationService,
@@ -31,7 +33,7 @@ export class PaginationComponent<T> implements OnInit {
   onFocusOutEvent(event: any){
     let number: number = event.target.value;
     if (this.paginationService.checkPageNumber(number, this.totalPage)) {
-      this.get(this.route + '?page=' + number);
+      this.get(this.route + '?page=' + number + '&' + this.filters);
     }
   }
 

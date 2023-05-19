@@ -14852,7 +14852,7 @@ footer{
             i{
               font-size: 16px;
               margin-right: 10px;
-              color: $gray6;;
+              color: $gray6;
             }
             .font-blog {
               color: $gray6;;
@@ -14873,6 +14873,9 @@ footer{
             }
             .btn-bottom{
               margin-bottom: -5px;
+              i{
+                color: $white;
+              }
             }
           }
         }

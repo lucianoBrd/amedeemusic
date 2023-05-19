@@ -613,7 +613,7 @@ h6 {
   &.subscribe-2{
     .form-group {
       .icon {
-        color:#f95a4e;
+        color:$red3;
 
       }
     }
@@ -795,6 +795,34 @@ label {
           color:$white-5 ;
         }
 
+      }
+    }
+  }
+}
+.m-layout{
+  .m-width{
+    .blog-agency{
+      .blog-contain{
+        background-color: $dark-color;
+        border-color: $border-color;
+        filter: drop-shadow(0 0 10px $border-color);
+        &:hover {
+          box-shadow: 1px 1px 10px 1px $border-color;
+        }
+        .img-container{
+          i{
+            color:$white-5;
+          }
+          .blog-info{
+            .font-blog{
+              color:$white-5 ;
+            }
+          }
+          .blog-head{
+            color:$white-5 ;
+          }
+
+        }
       }
     }
   }
