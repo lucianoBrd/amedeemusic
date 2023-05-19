@@ -25,6 +25,7 @@ import { ConfigDB } from './shared/data/config';
 import { AlertService } from './shared/service/alert.service';
 import { CustomizerService } from './shared/service/customizer.service';
 import { DataService } from './shared/service/data.service';
+import { PermissionsService } from './shared/service/permission.service';
 import { FormService } from './shared/service/form.service';
 import { MetaService } from './shared/service/meta.service';
 import { NavService } from './shared/service/nav.service';
@@ -103,6 +104,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
 
   ],
   providers: [
+    PermissionsService,
     DataService,
     AlertService,
     ArtistService,

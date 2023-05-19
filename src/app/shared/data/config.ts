@@ -4,7 +4,8 @@ import { Injectable, isDevMode } from "@angular/core";
 	providedIn: 'root'
   })
 export class ConfigDB {
-	static domain = isDevMode() ? 'localhost:4200' : 'amedeemusic.com'; 
+	static domain: string = isDevMode() ? 'localhost:4200' : 'amedeemusic.com';
+	static inMaintenance: boolean = false;
 	static data = {
 		settings: {
 			layout_type: 'ltr',

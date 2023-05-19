@@ -6,6 +6,7 @@ import { Social } from '../shared/models/social.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { List } from '../shared/models/list.interface';
 import { DataService } from '../shared/service/data.service';
+import { ConfigDB } from '../shared/data/config';
 
 @Component({
   selector: 'app-page-maintenance',
@@ -15,6 +16,7 @@ import { DataService } from '../shared/service/data.service';
 export class PageMaintenanceComponent implements OnInit, OnDestroy {
   public language: Language;
   public socials: Social[];
+  public appName: string = ConfigDB.data.appName;
 
   constructor(
     private metaService: MetaService,
