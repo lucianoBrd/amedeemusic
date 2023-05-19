@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { BlogModule } from './blog/blog.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageMaintenanceComponent } from './page-maintenance/page-maintenance.component';
 import { MusicModule } from './music/music.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -24,6 +25,7 @@ import { ConfigDB } from './shared/data/config';
 import { AlertService } from './shared/service/alert.service';
 import { CustomizerService } from './shared/service/customizer.service';
 import { DataService } from './shared/service/data.service';
+import { PermissionsService } from './shared/service/permission.service';
 import { FormService } from './shared/service/form.service';
 import { MetaService } from './shared/service/meta.service';
 import { NavService } from './shared/service/nav.service';
@@ -81,6 +83,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    PageMaintenanceComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -101,6 +104,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
 
   ],
   providers: [
+    PermissionsService,
     DataService,
     AlertService,
     ArtistService,

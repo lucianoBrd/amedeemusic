@@ -1,0 +1,47 @@
+<section class="maintenance-sec">
+    <div>
+        <div class="snow snow--near"></div>
+        <div class="snow snow--near snow--alt"></div>
+        
+        <div class="snow snow--mid"></div>
+        <div class="snow snow--mid snow--alt"></div>
+        
+        <div class="snow snow--far"></div>
+        <div class="snow snow--far snow--alt"></div>
+      
+        <div class="center-content">
+            <div class="maintenance-container">
+                <h1>{{appName}}</h1>
+                <h4>{{language.maintenanceInProcess}}</h4>
+                <h2>{{language.weWillbackSoon}}</h2>
+                <div class="social m-t-20">
+                    <ul *ngIf="!socials || socials?.length == 0">
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/people/Am%C3%A9d%C3%A9e/100067543488097/">
+                                <i class="fa-brands fa-facebook-f center-content" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.instagram.com/amedee.art/">
+                                <i class="fa-brands fa-instagram center-content" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.tiktok.com/@amedee.art">
+                                <i class="fa-brands fa-tiktok center-content" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul *ngIf="socials?.length > 0">
+                        <li *ngFor="let social of socials">
+                            <a target="_blank" href="{{social.link}}">
+                                <i class="{{social.fa}}" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

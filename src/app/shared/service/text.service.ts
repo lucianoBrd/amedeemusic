@@ -119,6 +119,9 @@ export class TextService {
     listen: 'Écouter',
     emptyItems: 'Aucun élément à afficher pour le moment',
     articleList: 'Liste des articles',
+    maintenance: 'Maintenance',
+    maintenanceInProcess: 'Maintenance en cours',
+    weWillbackSoon: 'Nous serons bientôt de retour',
   };
   static textEn: Language = {
     dark: 'Dark',
@@ -232,6 +235,9 @@ export class TextService {
     listen: 'Listen',
     emptyItems: 'No items to display at this time',
     articleList: 'Article list',
+    maintenance: 'Maintenance',
+    maintenanceInProcess: 'Maintenance in process',
+    weWillbackSoon: 'We will be back soon',
   };
 
 

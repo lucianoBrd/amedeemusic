@@ -8897,7 +8897,7 @@ error css end
   }
 }
 .bg-purple {
-  background: linear-gradient($light, $dark);
+  background: linear-gradient(#252525, #000);
   height: 100vh;
   overflow: hidden;
 }
@@ -12950,7 +12950,7 @@ error css end
   }
 }
 .maintenance-sec {
-  //background: url("../../images/inner-page/maintain-soon/bg-maintenance.jpg");
+  background: url("../../images/maintenance/bg-maintenance.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12999,7 +12999,7 @@ error css end
         display: inline-block;
         padding: 5px 8px;
         margin-left: 10px;
-        background-color: $primary;
+        //background-color: $primary;
         height: 40px;
         width: 40px;
         border-radius: 100%;
@@ -15276,7 +15276,7 @@ $ease--out-quad: cubic-bezier(.25,.46,.450,.94);
 
   &--near {
     animation-duration: $s--near;
-    //background-image: url('../../images/snow1.png');
+    background-image: url('../../images/maintenance/snow1.png');
     background-size: contain;
 
     & + .snow--alt {
@@ -15287,7 +15287,7 @@ $ease--out-quad: cubic-bezier(.25,.46,.450,.94);
 
   &--mid {
     animation-duration: $s--mid;
-    //background-image: url('../../images/snow2.png');
+    background-image: url('../../images/maintenance/snow2.png');
     background-size: contain;
 
     & + .snow--alt {
@@ -15297,7 +15297,7 @@ $ease--out-quad: cubic-bezier(.25,.46,.450,.94);
 
   &--far {
     animation-duration: $s--far;
-    //background-image: url('../../images/snow3.png');
+    background-image: url('../../images/maintenance/snow3.png');
     background-size: contain;
 
     & + .snow--alt {

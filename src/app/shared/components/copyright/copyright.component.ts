@@ -41,7 +41,13 @@ export class CopyrightComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.navServices.items.pipe(takeUntil(this.destroy$)).subscribe(menuItems => {
-      this.menuItems = menuItems
+      let mi: Menu[] = [];
+      menuItems.forEach(menuItem => {
+        if (menuItem && (menuItem.type == 'link' || menuItem.type == 'extLink' || menuItem.type == 'extTabLink')) {
+          mi.push(menuItem);
+        }
+      });
+      this.menuItems = mi;
     });
     this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Social>) => {

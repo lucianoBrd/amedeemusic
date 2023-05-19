@@ -6,16 +6,24 @@ import { TextService } from "./shared/service/text.service";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { MusicComponent } from "./music/music.component";
 import { BlogComponent } from "./blog/blog.component";
+import { PageMaintenanceComponent } from "./page-maintenance/page-maintenance.component";
+import { AuthGuardMaintenance } from "./shared/service/permission.service";
 
 const language: Language = TextService.getTextByLocal();
 export const routes: Routes = [
   {
     path: '',
     component: MusicComponent,
+    canActivate: [AuthGuardMaintenance],
   },
   {
     path: '404',
     component: PageNotFoundComponent,
+    canActivate: [AuthGuardMaintenance],
+  },
+  {
+    path: 'maintenance',
+    component: PageMaintenanceComponent,
   },
   {
     path: 'page',
@@ -23,7 +31,8 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
     data: {
       breadcrumb: language.pages,
-    }
+    },
+    canActivate: [AuthGuardMaintenance],
   },
   {
     path: 'blog',
@@ -31,7 +40,8 @@ export const routes: Routes = [
     loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
     data: {
       breadcrumb: language.blog,
-    }
+    },
+    canActivate: [AuthGuardMaintenance],
   },
   {
     path: '**',

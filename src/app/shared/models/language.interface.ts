@@ -105,4 +105,7 @@ export interface Language {
     listen: string,
     emptyItems: string,
     articleList: string,
+    maintenance: string,
+    maintenanceInProcess: string,
+    weWillbackSoon: string,
 }
