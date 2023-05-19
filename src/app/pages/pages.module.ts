@@ -9,9 +9,9 @@ import { CountToModule } from 'angular-count-to';
 
 import { PagesComponent } from './pages.component';
 import { PageContactComponent } from './page-contact/page-contact.component';
-import { MusicModule } from '../music/music.module'
 import { PagePrivacyPolicyComponent } from './page-privacy-policy/page-privacy-policy.component';
 import { PageGalleryComponent } from './page-gallery/page-gallery.component';
+import { PageProjectComponent } from './page-project/page-project.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { GalleryModule } from 'ng-gallery';
@@ -23,6 +23,7 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     PageContactComponent,
     PagePrivacyPolicyComponent,
     PageGalleryComponent,
+    PageProjectComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +34,6 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     ReactiveFormsModule,
     CarouselModule,
     CountToModule,
-    MusicModule,
     NgxMasonryModule,
     GalleryModule,
     LightboxModule,

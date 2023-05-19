@@ -5,6 +5,7 @@ import { PagePrivacyPolicyComponent } from './page-privacy-policy/page-privacy-p
 import { PageGalleryComponent } from './page-gallery/page-gallery.component';
 import { Language } from '../shared/models/language.interface';
 import { TextService } from '../shared/service/text.service';
+import { PageProjectComponent } from './page-project/page-project.component';
 
 const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
@@ -17,6 +18,14 @@ const routes: Routes = [
          data: {
           title: language.contact,
           breadcrumb: language.contact,         
+        }
+      },
+      {
+        path: 'project',
+        component: PageProjectComponent,
+         data: {
+          title: language.myProjects,
+          breadcrumb: language.myProjects,         
         }
       },
       {

@@ -18,7 +18,6 @@ import { MusicComponent } from './music.component';
 import { MusicHeaderComponent } from './music-header/music-header.component';
 import { MusicEventComponent } from './music-event/music-event.component';
 import { MusicProjectComponent } from './music-project/music-project.component';
-import { MusicSidebarComponent } from './music-sidebar/music-sidebar.component';
 import { MusicSocialComponent } from './music-social/music-social.component';
 import { MusicGalleryComponent } from './music-gallery/music-gallery.component';
 import { MusicVideoComponent } from './music-video/music-video.component';
@@ -34,7 +33,6 @@ import { MusicFooterComponent } from './music-footer/music-footer.component';
     MusicHeaderComponent, 
     MusicEventComponent, 
     MusicProjectComponent, 
-    MusicSidebarComponent, 
     MusicSocialComponent, 
     MusicGalleryComponent, 
     MusicVideoComponent, 

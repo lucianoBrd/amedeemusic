@@ -52,7 +52,7 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
       }
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/projects').pipe(takeUntil(this.destroy$)).subscribe(
+    this.dataService.sendGetRequest('/api/projects/lasts').pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Project>) => {
         let projects: Project[] = data['hydra:member'];
         if (projects && projects.length > 0) {

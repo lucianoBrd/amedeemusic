@@ -10,11 +10,14 @@ import { LoaderBisRedComponent } from './components/loader-bis-red/loader-bis-re
 import { LoaderBisComponent } from './components/loader-bis/loader-bis.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CopyrightComponent } from './components/copyright/copyright.component';
+import { EmptyComponent } from './components/empty/empty.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { MusicSidebarComponent } from './components/music-sidebar/music-sidebar.component';
+import { FilterComponent } from './components/filter/filter.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,12 @@ import { FormsModule } from '@angular/forms';
     LoaderBisRedComponent,
     ContactComponent,
     CopyrightComponent,
+    EmptyComponent,
     NavComponent,
     PaginationComponent,
     BreadcrumbComponent,
+    MusicSidebarComponent,
+    FilterComponent,
   ],
   exports: [
     MenuComponent,
@@ -39,9 +45,12 @@ import { FormsModule } from '@angular/forms';
     TapToTopComponent,
     ContactComponent,
     CopyrightComponent,
+    EmptyComponent,
     NavComponent,
     PaginationComponent,
     BreadcrumbComponent,
+    MusicSidebarComponent,
+    FilterComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +59,7 @@ import { FormsModule } from '@angular/forms';
     RecaptchaModule,
     RecaptchaFormsModule,
     FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule { }
