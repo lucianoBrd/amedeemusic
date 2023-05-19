@@ -6,6 +6,7 @@ import { TextService } from "./shared/service/text.service";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { MusicComponent } from "./music/music.component";
 import { BlogComponent } from "./blog/blog.component";
+import { PageMaintenanceComponent } from "./page-maintenance/page-maintenance.component";
 
 const language: Language = TextService.getTextByLocal();
 export const routes: Routes = [
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: '404',
     component: PageNotFoundComponent,
+  },
+  {
+    path: 'maintenance',
+    component: PageMaintenanceComponent,
   },
   {
     path: 'page',

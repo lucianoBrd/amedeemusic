@@ -12,6 +12,7 @@ import { PageContactComponent } from './page-contact/page-contact.component';
 import { PagePrivacyPolicyComponent } from './page-privacy-policy/page-privacy-policy.component';
 import { PageGalleryComponent } from './page-gallery/page-gallery.component';
 import { PageProjectComponent } from './page-project/page-project.component';
+import { PageAboutComponent } from './page-about/page-about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { GalleryModule } from 'ng-gallery';
@@ -24,6 +25,7 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     PagePrivacyPolicyComponent,
     PageGalleryComponent,
     PageProjectComponent,
+    PageAboutComponent,
   ],
   imports: [
     CommonModule,

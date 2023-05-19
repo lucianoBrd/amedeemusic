@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { BlogModule } from './blog/blog.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageMaintenanceComponent } from './page-maintenance/page-maintenance.component';
 import { MusicModule } from './music/music.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -81,6 +82,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    PageMaintenanceComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

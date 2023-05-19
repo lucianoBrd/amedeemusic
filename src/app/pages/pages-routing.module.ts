@@ -6,6 +6,7 @@ import { PageGalleryComponent } from './page-gallery/page-gallery.component';
 import { Language } from '../shared/models/language.interface';
 import { TextService } from '../shared/service/text.service';
 import { PageProjectComponent } from './page-project/page-project.component';
+import { PageAboutComponent } from './page-about/page-about.component';
 
 const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
@@ -26,6 +27,14 @@ const routes: Routes = [
          data: {
           title: language.myProjects,
           breadcrumb: language.myProjects,         
+        }
+      },
+      {
+        path: 'about',
+        component: PageAboutComponent,
+         data: {
+          title: language.about,
+          breadcrumb: language.about,         
         }
       },
       {
