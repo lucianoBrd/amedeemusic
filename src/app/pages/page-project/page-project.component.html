@@ -1,0 +1,50 @@
+<!-- section start -->
+<section class="music artist bg-artist" *ngIf="projects?.length > 0" [ngStyle]="{'background-image': (artist?.project ? 'url(' + artistImagePath + artist.project + ')' : '')}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" *ngFor="let project of projects">
+                <div class="album-artist text-center">
+                    <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid set-relative overlay-img img-project">
+                    <div>
+                        <div class="overlay-box2"></div>
+                    </div>
+                    <div class="set-abs bottom-0 w-100 text-left set-z-index">
+                        <div class="singers">
+                            <div class="m-b-10">
+                                <h5 class="name">{{project.name}}</h5>
+                                <h6 class="musician">{{project.type.name}} • {{project.date | date:'y'}}</h6>
+                                <h6 class="musician" *ngIf="!artist">Amédée</h6>
+                                <h6 class="musician" *ngIf="artist">{{artist.name}}</h6>
+                            </div>
+                            <div class="text-center">
+                                <a (click)="sideBar(project)" class="btn btn-default btn-gradient m-0-auto">
+                                    <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                    {{language.listen}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="set-abs cds">
+                        <img src="assets/images/music/project/cd.svg" alt="cd" class="cd-animation">
+                        <img src="assets/images/music/project/ellipse.svg" alt="elipse" class="elipse">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listProjects" [get]="getProjects" [route]="route"></app-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<app-music-sidebar></app-music-sidebar>
+<app-empty *ngIf="projects?.length == 0"></app-empty>
+<section class="music artist bg-artist" *ngIf="projects === undefined" [ngStyle]="{'background-image': (artist?.project ? 'url(' + artistImagePath + artist.project + ')' : '')}">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

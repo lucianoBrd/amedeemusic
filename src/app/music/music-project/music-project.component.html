@@ -8,7 +8,9 @@
                         <h2>{{language.myProjects}}</h2>
                     </div>
                     <div class="sub-title">
-                        <a href="#sponsor"><p>{{language.listenToMe}}</p></a>
+                        <a [routerLink]="['/page/project']">
+                            {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ import { EmptyComponent } from './components/empty/empty.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { MusicSidebarComponent } from './components/music-sidebar/music-sidebar.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { FormsModule } from '@angular/forms';
 
@@ -31,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     NavComponent,
     PaginationComponent,
     BreadcrumbComponent,
+    MusicSidebarComponent,
   ],
   exports: [
     MenuComponent,
@@ -45,6 +47,7 @@ import { FormsModule } from '@angular/forms';
     NavComponent,
     PaginationComponent,
     BreadcrumbComponent,
+    MusicSidebarComponent,
   ],
   imports: [
     CommonModule,
