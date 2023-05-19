@@ -118,6 +118,7 @@ export class TextService {
     cookieAllow: 'Autoriser les cookies',
     listen: 'Écouter',
     emptyItems: 'Aucun élément à afficher pour le moment',
+    articleList: 'Liste des articles',
   };
   static textEn: Language = {
     dark: 'Dark',
@@ -230,6 +231,7 @@ export class TextService {
     cookieAllow: "Allow cookies",
     listen: 'Listen',
     emptyItems: 'No items to display at this time',
+    articleList: 'Article list',
   };
 
 

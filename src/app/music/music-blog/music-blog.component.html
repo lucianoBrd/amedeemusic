@@ -8,7 +8,9 @@
                         <h2>{{language.blog}}</h2>
                     </div>
                     <div class="sub-title">
-                        <p></p>
+                        <a [routerLink]="['/blog/list']">
+                            {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -21,15 +23,15 @@
                                     <div class="overlay"></div>
                                     <div class="blog-info set-abs bottom-0">
                                         <div class="center-text flex m-b-25">
-                                            <i class="fa-regular fa-calendar m-r-5 " aria-hidden="true"></i>
+                                            <i class="fa-regular fa-calendar m-r-5" aria-hidden="true"></i>
                                             <h6 class="font-blog">{{blog.date | date:'d MMMM y'}}</h6>
                                         </div>
                                         <h4 class="blog-text">{{blog.title}}</h4>
-                                        <p class="small-font" >{{plainText(blog.content)}}...</p>
+                                        <p class="small-font" >{{blogService.plainText(blog.content)}}</p>
                                         <div class="social-list">
                                             <ul>
                                                 <li>
-                                                    <a target="_blank" href="https://www.linkedin.com/shareArticle?url={{blogPage + '/' + blog.slug}}&title={{blog.title}}&summary={{blog.content| slice:0:30}}">
+                                                    <a target="_blank" href="https://www.linkedin.com/shareArticle?url={{blogPage + '/' + blog.slug}}&title={{blog.title}}&summary={{blogService.plainText(blog.content)}}">
                                                         <div class="center-content">
                                                             <i class="fa-brands fa-linkedin-in center-content" aria-hidden="true"></i>
                                                         </div>

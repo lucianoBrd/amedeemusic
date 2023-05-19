@@ -22,7 +22,12 @@ export class NavService {
                { path: '/page/gallery', title: this.language.gallery, type: 'link' },
                { path: '/page/contact', title: this.language.contact, type: 'link' },
             ],
-       },
+         },
+         {
+            title: this.language.blog, type: 'sub', children: [
+               { path: '/blog/list', title: this.language.articleList, type: 'link' },
+            ],
+         },
       ];
 
       // Array

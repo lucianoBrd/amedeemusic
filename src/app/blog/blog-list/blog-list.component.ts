@@ -1,0 +1,87 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { Language } from 'src/app/shared/models/language.interface';
+import { MetaService } from 'src/app/shared/service/meta.service';
+import { TextService } from 'src/app/shared/service/text.service';
+import { List } from 'src/app/shared/models/list.interface';
+import { DataService } from 'src/app/shared/service/data.service';
+import { PaginationService } from 'src/app/shared/service/pagination.service';
+import { ConfigDB } from 'src/app/shared/data/config';
+import { Artist } from 'src/app/shared/models/artist.interface';
+import { ArtistService } from 'src/app/shared/service/artist.service';
+import { Blog } from 'src/app/shared/models/blog.interface';
+import { NgxMasonryOptions } from 'ngx-masonry';
+import { BlogService } from 'src/app/shared/service/blog.service';
+
+@Component({
+  selector: 'app-blog-list',
+  templateUrl: './blog-list.component.html',
+  styleUrls: ['./blog-list.component.scss'],
+})
+export class BlogListComponent implements OnInit, OnDestroy {
+  public artist: Artist;
+  public blogs: Blog[];
+  public listBlogs: List<Blog>;
+  public language: Language;
+  public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
+  public blogImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'blog/';
+
+  public currentPage: number;
+  public totalPage: number;
+
+  public route: string = '/api/blogs';
+
+  public myOptions: NgxMasonryOptions = {
+    originTop: true
+  };
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+  
+  constructor(
+    private dataService: DataService, 
+    private metaService: MetaService,
+    private paginationService: PaginationService,
+    private artistService: ArtistService,
+    public blogService: BlogService,
+  ) {
+    this.language = TextService.getTextByLocal();
+  }
+
+  ngOnInit() {
+    /* Set title + meta */
+    this.metaService.setTitle(this.language.blog);
+    this.metaService.setKeywords(this.language.blog);
+    this.metaService.setDescription(this.language.blog);
+
+    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
+      this.artist = data;
+    });
+
+    this.getBlogs(this.route);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  public getBlogs = (route: string) => {
+    this.listBlogs = undefined;
+    this.blogs = undefined;
+    this.currentPage = undefined;
+    this.totalPage = undefined;
+    this.dataService.sendGetRequest(route).pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Blog>) => {
+        this.listBlogs = data;
+        this.blogs = this.listBlogs['hydra:member'];
+
+        this.currentPage = this.paginationService.getPageNumber(route);
+        this.totalPage = this.paginationService.getTotalPageNumber<Blog>(this.listBlogs);
+      },
+      (error) => {
+        this.listBlogs = null;
+        this.blogs = [];
+      }
+    );
+  }
+}

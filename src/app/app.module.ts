@@ -6,6 +6,7 @@ import { routes } from './app-routing.module';
 import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { BlogModule } from './blog/blog.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MusicModule } from './music/music.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +33,7 @@ import { SidebarService } from './shared/service/sidebar.service';
 import { SocialService } from './shared/service/social.service';
 import { TextService } from './shared/service/text.service';
 import { ArtistService } from './shared/service/artist.service';
+import { BlogService } from './shared/service/blog.service';
 import { Language } from './shared/models/language.interface';
 import { Cookie } from './shared/data/cookie';
 registerLocaleData(localeFr);
@@ -90,6 +92,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     FormsModule,
     SharedModule,
     PagesModule,
+    BlogModule,
     RecaptchaModule,
     RecaptchaFormsModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -101,6 +104,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     DataService,
     AlertService,
     ArtistService,
+    BlogService,
     CustomizerService,
     FormService,
     JsonDateInterceptorService,

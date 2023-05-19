@@ -6,6 +6,7 @@ import { Blog } from 'src/app/shared/models/blog.interface';
 import { Language } from 'src/app/shared/models/language.interface';
 import { List } from 'src/app/shared/models/list.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
+import { BlogService } from 'src/app/shared/service/blog.service';
 import { DataService } from 'src/app/shared/service/data.service';
 import { LanguageService } from 'src/app/shared/service/language.service';
 import { TextService } from 'src/app/shared/service/text.service';
@@ -29,6 +30,7 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataService,
     private artistService: ArtistService,
+    public blogService: BlogService,
   ) {
     this.language = TextService.getTextByLocal();
   }
@@ -63,10 +65,6 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
         this.blogs = [];
       }
     );
-  }
-
-  plainText(content: string) {
-    return content.replace(/<[^>]*>/g, '').slice(0, 30);
   }
 
   ngOnDestroy() {
