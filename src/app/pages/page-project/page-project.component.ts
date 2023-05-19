@@ -29,6 +29,7 @@ export class PageProjectComponent implements OnInit, OnDestroy {
   public totalPage: number;
 
   public route: string = '/api/projects';
+  public filterRoute: string = this.route + '/filter';
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
   

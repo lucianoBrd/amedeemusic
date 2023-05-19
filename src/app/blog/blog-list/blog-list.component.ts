@@ -12,6 +12,7 @@ import { ArtistService } from 'src/app/shared/service/artist.service';
 import { Blog } from 'src/app/shared/models/blog.interface';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { BlogService } from 'src/app/shared/service/blog.service';
+import { LanguageService } from 'src/app/shared/service/language.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -30,6 +31,8 @@ export class BlogListComponent implements OnInit, OnDestroy {
   public totalPage: number;
 
   public route: string = '/api/blogs';
+  public filterRoute: string = this.route + '/filter';
+  public filters: string = 'local.local=' + LanguageService.getLanguageCodeOnly();
 
   public myOptions: NgxMasonryOptions = {
     originTop: true
@@ -49,15 +52,15 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /* Set title + meta */
-    this.metaService.setTitle(this.language.blog);
-    this.metaService.setKeywords(this.language.blog);
-    this.metaService.setDescription(this.language.blog);
+    this.metaService.setTitle(this.language.articleList);
+    this.metaService.setKeywords(this.language.articleList);
+    this.metaService.setDescription(this.language.articleList);
 
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
 
-    this.getBlogs(this.route);
+    this.getBlogs(this.route + '?' + this.filters);
   }
 
   ngOnDestroy() {

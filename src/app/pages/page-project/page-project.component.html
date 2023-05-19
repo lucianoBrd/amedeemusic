@@ -1,5 +1,5 @@
 <!-- section start -->
-<app-filter [get]="getProjects" route="{{route}}/filter" filterName="search"></app-filter>
+<app-filter [get]="getProjects" [route]="filterRoute" filterName="search"></app-filter>
 <section class="music artist bg-artist" *ngIf="projects?.length > 0" [ngStyle]="{'background-image': (artist?.project ? 'url(' + artistImagePath + artist.project + ')' : '')}">
     <div class="container">
         <div class="row">

@@ -1,5 +1,5 @@
 <!-- section start -->
-<app-filter [get]="getBlogs" route="{{route}}/filter" filterName="search"></app-filter>
+<app-filter [get]="getBlogs" [route]="filterRoute" filterName="search" [filters]="filters"></app-filter>
 <section class="music blog bg-album" *ngIf="blogs?.length > 0" [ngStyle]="{'background-image': (artist?.blog ? 'url(' + artistImagePath + artist.blog + ')' : '')}">
     <div class="container">
         <div class="row">
@@ -35,7 +35,7 @@
                 </ngx-masonry>
             </div>
             <div class="col-12 mt-5">
-                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listBlogs" [get]="getBlogs" [route]="route"></app-pagination>
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listBlogs" [get]="getBlogs" [route]="route" [filters]="filters"></app-pagination>
             </div>
         </div>
     </div>
