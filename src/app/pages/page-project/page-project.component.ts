@@ -29,7 +29,9 @@ export class PageProjectComponent implements OnInit, OnDestroy {
   public totalPage: number;
 
   public route: string = '/api/projects';
+  public paginationRoute: string = this.route;
   public filterRoute: string = this.route + '/filter';
+  public filtersPagination: string = '';
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
   
@@ -59,6 +61,15 @@ export class PageProjectComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
+
+  onSearch(search: string) {
+    if(!search?.length) {
+      this.paginationRoute = this.route;
+    } else {
+      this.paginationRoute = this.filterRoute;
+    }
+    this.filtersPagination = 'search=' + search;
   }
 
   public getProjects = (route: string) => {

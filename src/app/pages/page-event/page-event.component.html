@@ -1,19 +1,8 @@
-<!-- album section Start-->
-<section *ngIf="events?.length > 0" class="music album">
+<!-- section start -->
+<app-filter [get]="getEvents" [route]="filterRoute" filterName="search" (onSearch)="onSearch($event)"></app-filter>
+<section class="music album" *ngIf="events?.length > 0">
     <div class="container">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
-                <div class="title title4">
-                    <div class="main-title">
-                        <h2>{{language.listOfEvents}}</h2>
-                    </div>
-                    <div class="sub-title">
-                        <a [routerLink]="['/page/event']">
-                            {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let event of events">
                 <div class="album-list overlay-box text-center">
                     <h5 class="text-uppercase list-head">{{event.name}}</h5>
@@ -32,16 +21,20 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<section *ngIf="!events" class="music album">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <app-loader-bis-red></app-loader-bis-red>
+            <div class="col-12 mt-5">
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listEvents" [get]="getEvents" [route]="paginationRoute" [filters]="filtersPagination"></app-pagination>
             </div>
         </div>
     </div>
 </section>
-<!-- album section end-->
+<app-empty *ngIf="events?.length == 0"></app-empty>
+<section class="music album" *ngIf="events === undefined">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

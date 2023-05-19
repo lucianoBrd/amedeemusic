@@ -7,6 +7,7 @@ import { Language } from '../shared/models/language.interface';
 import { TextService } from '../shared/service/text.service';
 import { PageProjectComponent } from './page-project/page-project.component';
 import { PageAboutComponent } from './page-about/page-about.component';
+import { PageEventComponent } from './page-event/page-event.component';
 
 const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
@@ -35,6 +36,14 @@ const routes: Routes = [
          data: {
           title: language.about,
           breadcrumb: language.about,         
+        }
+      },
+      {
+        path: 'event',
+        component: PageEventComponent,
+         data: {
+          title: language.listOfEvents,
+          breadcrumb: language.listOfEvents,         
         }
       },
       {
