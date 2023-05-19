@@ -1,5 +1,5 @@
 <!-- section start -->
-<app-filter [get]="getProjects" [route]="route" filterName="name"></app-filter>
+<app-filter [get]="getProjects" route="{{route}}/filter" filterName="search"></app-filter>
 <section class="music artist bg-artist" *ngIf="projects?.length > 0" [ngStyle]="{'background-image': (artist?.project ? 'url(' + artistImagePath + artist.project + ')' : '')}">
     <div class="container">
         <div class="row">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-5">
                 <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listProjects" [get]="getProjects" [route]="route"></app-pagination>
             </div>
         </div>
