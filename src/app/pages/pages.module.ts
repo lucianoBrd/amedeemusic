@@ -33,7 +33,6 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     ReactiveFormsModule,
     CarouselModule,
     CountToModule,
-    MusicModule,
     NgxMasonryModule,
     GalleryModule,
     LightboxModule,

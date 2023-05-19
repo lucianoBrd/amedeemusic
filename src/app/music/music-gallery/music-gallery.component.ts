@@ -44,10 +44,10 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
             image: undefined,
           };
           if (galleries.length == 1) {
-            galleries.unshift(emptyGallery);
+            galleries.push(emptyGallery);
             galleries.push(emptyGallery);
           } else if (galleries.length == 2) {
-            galleries.unshift(emptyGallery);
+            galleries.push(emptyGallery);
           }
         }
         this.galleries = galleries;

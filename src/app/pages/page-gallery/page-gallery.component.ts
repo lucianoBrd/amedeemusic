@@ -42,7 +42,7 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /* Set title + meta */
-  this.metaService.setTitle(this.language.gallery);
+    this.metaService.setTitle(this.language.gallery);
     this.metaService.setKeywords(this.language.gallery);
     this.metaService.setDescription(this.language.gallery);
 
