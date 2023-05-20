@@ -72,9 +72,9 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.hasSentError = false;
 
     if (contactForm.valid && this.captcha) {
-      this.name = contactForm.controls['name'].value;
-      this.email = contactForm.controls['email'].value;
-      this.message = contactForm.controls['message'].value;
+      this.name = contactForm.controls['name'].value.substring(0, 255);
+      this.email = contactForm.controls['email'].value.substring(0, 255);
+      this.message = contactForm.controls['message'].value.substring(0, 10000);
 
       if (this.formService.ValidateEmail(this.email)) {
         this.sending = true;

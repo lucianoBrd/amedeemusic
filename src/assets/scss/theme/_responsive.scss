@@ -6652,6 +6652,13 @@
 }
 
 @media only screen and (max-width: 767px) and (min-width: 576px) {
+  .maintenance-sec {
+    .maintenance-container {
+      h1 {
+        font-size: 60px;
+      }
+    }
+  }
   .team-section {
     .center-container {
       height: 100%;
@@ -6698,6 +6705,13 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .maintenance-sec {
+    .maintenance-container {
+      h1 {
+        font-size: 50px;
+      }
+    }
+  }
   .header {
     .event-content {
       .link-horizontal {
@@ -6731,6 +6745,13 @@
 }
 
 @media only screen and (max-width: 575px) {
+  .maintenance-sec {
+    .maintenance-container {
+      h1 {
+        font-size: 50px;
+      }
+    }
+  }
   .modal1{
     .offer-content{
       > div{
@@ -8370,6 +8391,13 @@
 }
 
 @media only screen and (max-width: 480px) {
+  .maintenance-sec {
+    .maintenance-container {
+      h1 {
+        font-size: 40px;
+      }
+    }
+  }
   .p-2col-width {
     .p-width {
       flex: 0 0 100%;

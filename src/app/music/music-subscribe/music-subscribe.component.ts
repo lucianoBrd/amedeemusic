@@ -53,7 +53,7 @@ export class MusicSubscribeComponent implements OnInit, OnDestroy {
     this.sending = false;
 
     if (subscribeForm.valid) {
-      this.email = subscribeForm.controls['email'].value;
+      this.email = subscribeForm.controls['email'].value.substring(0, 255);
 
       if (this.formService.ValidateEmail(this.email)) {
         this.sending = true;

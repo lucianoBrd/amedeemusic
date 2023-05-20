@@ -10,12 +10,20 @@ export class PermissionsService {
     ) {
     }
 
-    canActivate(): boolean {
+    canActivateMaintenance(): boolean {
         if (ConfigDB.inMaintenance) {
             this.router.navigate(['/maintenance']);
             return false;
         } else {
             return true;
+        }
+    }
+    cannotActivateMaintenance(): boolean {
+        if (ConfigDB.inMaintenance) {
+            return true;
+        } else {
+            this.router.navigate(['/']);
+            return false;
         }
     }
 
@@ -25,5 +33,11 @@ export const AuthGuardMaintenance: CanActivateFn = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
 ): boolean => {
-    return inject(PermissionsService).canActivate();
+    return inject(PermissionsService).canActivateMaintenance();
+}
+export const AuthGuarNotdMaintenance: CanActivateFn = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+): boolean => {
+    return inject(PermissionsService).cannotActivateMaintenance();
 }
