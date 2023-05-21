@@ -19,6 +19,7 @@ export class NavService {
          {
             title: this.language.pages, type: 'sub', children: [
                { path: '/page/project', title: this.language.myProjects, type: 'link' },
+               { path: '/page/social', title: this.language.listenToMe, type: 'link' },
                { path: '/page/about', title: this.language.about, type: 'link' },
                { path: '/page/gallery', title: this.language.gallery, type: 'link' },
                { path: '/page/event', title: this.language.listOfEvents, type: 'link' },

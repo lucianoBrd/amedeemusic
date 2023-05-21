@@ -1431,6 +1431,11 @@ tbody{
 .team-section{
   .teams{
     .our-team{
+      .team {
+        i {
+          color: $white;
+        }
+      }
       .employee{
         .e-name{
           color: #e7eaec;

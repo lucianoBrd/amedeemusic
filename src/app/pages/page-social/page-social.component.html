@@ -1,0 +1,45 @@
+<!-- social section start-->
+<section class="app2 team-section" *ngIf="socials?.length > 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 text-center teams" *ngFor="let social of socials">
+                <div class="our-team" (click)="openLink(social.link)">
+                    <div class="set-relative">
+                        <div class="border-around overflow-hide m-auto">
+                            <div class="set-relative overflow-hide">
+                                <div class="img-fluid team d-flex align-items-center justify-content-center">
+                                    <i aria-hidden="true" class="{{social.fa}} fa-2xl"></i>
+                                </div>
+                                <div class="overlay-team set-abs">
+                                    <img src="assets/images/social/hover-wave-black.png" alt="" class="img-fluid wave">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="set-relative set-border">
+                        <div class="set-abs top-0 borders"></div>
+                    </div>
+                    <div class="employee">
+                        <h4 class="e-name text-center">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </h4>
+                        <h6 class="post text-center">
+                            {{language.access}}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-empty *ngIf="socials?.length == 0"></app-empty>
+<section class="app2 team-section" *ngIf="socials === undefined">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- social section end-->

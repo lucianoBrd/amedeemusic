@@ -883,6 +883,11 @@ section {
   }
   .teams {
     .our-team {
+      .team {
+        i {
+          color: $black;
+        }
+      }
       .overlay-team {
         position: absolute;
         bottom: 0;
@@ -913,15 +918,16 @@ section {
         h6 {
           line-height: 30px;
           transition: all 1s;
-          color: $secondary;
+          color: $black2;
         }
         .e-name {
-          color: $secondary;
+          color: $black2;
           text-transform: uppercase;
           margin-bottom: 5px;
         }
       }
       &:hover {
+        cursor: pointer;
         .overlay-team {
           transition: all 1s;
           bottom: 8px;
