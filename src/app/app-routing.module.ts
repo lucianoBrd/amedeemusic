@@ -7,7 +7,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { MusicComponent } from "./music/music.component";
 import { BlogComponent } from "./blog/blog.component";
 import { PageMaintenanceComponent } from "./page-maintenance/page-maintenance.component";
-import { AuthGuardMaintenance } from "./shared/service/permission.service";
+import { AuthGuarNotdMaintenance, AuthGuardMaintenance } from "./shared/service/permission.service";
 
 const language: Language = TextService.getTextByLocal();
 export const routes: Routes = [
@@ -24,6 +24,7 @@ export const routes: Routes = [
   {
     path: 'maintenance',
     component: PageMaintenanceComponent,
+    canActivate: [AuthGuarNotdMaintenance],
   },
   {
     path: 'page',
@@ -40,6 +41,7 @@ export const routes: Routes = [
     loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
     data: {
       breadcrumb: language.blog,
+      path: '/blog/list',
     },
     canActivate: [AuthGuardMaintenance],
   },

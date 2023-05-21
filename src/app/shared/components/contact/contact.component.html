@@ -21,17 +21,17 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-6">
                     <div class="form-group">
-                        <input [ngClass]="{'error-form' : error}" required ngModel name="name" type="text" placeholder="{{language.contactName}}">
+                        <input [ngClass]="{'error-form' : error}" required ngModel name="name" type="text" placeholder="{{language.contactName}}" maxlength="255">
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">
                     <div class="form-group">
-                        <input [ngClass]="{'error-form' : errorMail || error}" required ngModel name="email" type="email" placeholder="{{language.contactEmail}}">
+                        <input [ngClass]="{'error-form' : errorMail || error}" required ngModel name="email" type="email" placeholder="{{language.contactEmail}}" maxlength="255">
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <textarea [ngClass]="{'error-form' : error}" required ngModel name="message" class="form-control" rows="6" placeholder="{{language.contactMessage}}"></textarea>
+                        <textarea [ngClass]="{'error-form' : error}" required ngModel name="message" class="form-control" rows="6" placeholder="{{language.contactMessage}}" maxlength="10000"></textarea>
                     </div>
                 </div>
                 <div class="col-12">

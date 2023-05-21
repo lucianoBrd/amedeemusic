@@ -14,6 +14,7 @@ import { PageGalleryComponent } from './page-gallery/page-gallery.component';
 import { PageProjectComponent } from './page-project/page-project.component';
 import { PageAboutComponent } from './page-about/page-about.component';
 import { PageEventComponent } from './page-event/page-event.component';
+import { PageSocialComponent } from './page-social/page-social.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { GalleryModule } from 'ng-gallery';
@@ -28,6 +29,7 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     PageProjectComponent,
     PageAboutComponent,
     PageEventComponent,
+    PageSocialComponent,
   ],
   imports: [
     CommonModule,

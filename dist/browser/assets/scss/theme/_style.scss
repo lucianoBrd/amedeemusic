@@ -837,6 +837,9 @@ section {
   color: $hash-color;
   letter-spacing: 5px;
 }
+.empty-text {
+  color: $primary !important;
+}
 /**************************
  2. brand css start
 *************************/
@@ -880,6 +883,11 @@ section {
   }
   .teams {
     .our-team {
+      .team {
+        i {
+          color: $black;
+        }
+      }
       .overlay-team {
         position: absolute;
         bottom: 0;
@@ -910,15 +918,16 @@ section {
         h6 {
           line-height: 30px;
           transition: all 1s;
-          color: $secondary;
+          color: $black2;
         }
         .e-name {
-          color: $secondary;
+          color: $black2;
           text-transform: uppercase;
           margin-bottom: 5px;
         }
       }
       &:hover {
+        cursor: pointer;
         .overlay-team {
           transition: all 1s;
           bottom: 8px;
@@ -8738,6 +8747,7 @@ blog-section css start
         padding: 10px;
         border-bottom: 1px solid $white4;
         position: relative;
+        color: $black;
         a {
           color: $black;
           margin-left: 15px;
@@ -8772,6 +8782,7 @@ blog-section css start
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 10px;
+      color: $black2;
     }
     .date {
       color: $black;
@@ -8806,7 +8817,7 @@ blog-section css start
     }
   }
   input {
-    padding: 16px 36px 16px 16px;
+    //padding: 16px 36px 16px 16px;
   }
   .blog-insta {
     display: flex;
@@ -14871,12 +14882,15 @@ footer{
             .para2{
               padding: 0;
               letter-spacing: 0;
-              color: $gray7;
+              color: $gray6;
             }
             .btn-bottom{
               margin-bottom: -5px;
               i{
                 color: $white;
+                &.no-btn {
+                  color: $gray6;
+                }
               }
             }
           }

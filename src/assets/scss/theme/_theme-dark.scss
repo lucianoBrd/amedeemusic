@@ -87,6 +87,10 @@ body{
       background: $dark-color;
     }
 
+    .empty-text {
+      color: $white-2 !important;
+    }
+
     .loader-wrapper-bis .loader > div {
       background: white;
     }
@@ -644,6 +648,7 @@ h6 {
     .sidebar-list{
       li{
         border-color: $border-color;
+        color: #e7eaec;
         a{
           color: #e7eaec;
         }
@@ -651,6 +656,9 @@ h6 {
     }
   }
   .post-container{
+    .post-head {
+      color: $white-2;
+    }
     .date{
       color:$white-5 ;
     }
@@ -815,7 +823,17 @@ label {
           }
           .blog-info{
             .font-blog{
-              color:$white-5 ;
+              color:$white-5;
+            }
+            .para2{
+              color: $white-5;
+            }
+            .btn-bottom{
+              i{
+                &.no-btn {
+                  color: $white-5;
+                }
+              }
             }
           }
           .blog-head{
@@ -1413,6 +1431,11 @@ tbody{
 .team-section{
   .teams{
     .our-team{
+      .team {
+        i {
+          color: $white;
+        }
+      }
       .employee{
         .e-name{
           color: #e7eaec;

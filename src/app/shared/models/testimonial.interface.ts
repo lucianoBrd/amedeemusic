@@ -5,5 +5,6 @@ export interface Testimonial {
     citation: string,
     name: string,
     designation: string,
+    link: string,
     local: Local,
 }

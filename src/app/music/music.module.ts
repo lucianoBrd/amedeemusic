@@ -8,7 +8,6 @@ import { SharedModule } from '../shared/shared.module'
 import { CountToModule } from 'angular-count-to';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { NgxPayPalModule } from 'ngx-paypal';
 import { Ng5SliderModule } from 'ng5-slider';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
@@ -42,7 +41,6 @@ import { MusicFooterComponent } from './music-footer/music-footer.component';
     MusicTestimonialComponent, 
     MusicFooterComponent,
   ],
-
   imports: [
     CommonModule,
     MusicRoutingModule,

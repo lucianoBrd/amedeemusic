@@ -42,6 +42,10 @@ export class PageAboutComponent implements OnInit, OnDestroy {
       if (this.artist && this.artist.man) {
         this.artistImage = this.artistImagePath + this.artist.man;
       }
+      if (this.artistAbout) {
+        this.metaService.setDescription(this.artistAbout.about);
+        this.metaService.setKeywords(this.language.about + ',' + this.artistAbout.about);
+      }
     });
   }
 

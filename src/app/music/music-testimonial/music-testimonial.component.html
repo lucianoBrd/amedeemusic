@@ -19,9 +19,11 @@
                             <div class="">
                                 <img [src]="quoteImage" alt="quote" class="img-fluid">
                                 <div class="text-center testimonial-info">
-                                    <p class="testimonial-para">{{testimonial.citation}}</p>
-                                    <h6 class="gradient-text text-uppercase m-b-5 font-large">{{testimonial.name}}</h6>
-                                    <h6 class="font-small">{{testimonial.designation}}</h6>
+                                    <a target="_blank" href="{{testimonial.link}}">
+                                        <p class="testimonial-para">{{testimonial.citation}}</p>
+                                        <h6 class="gradient-text text-uppercase m-b-5 font-large">{{testimonial.name}}</h6>
+                                        <h6 class="font-small">{{testimonial.designation}}</h6>
+                                    </a>
                                 </div>
                             </div>
                         </ng-template>                            

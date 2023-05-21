@@ -20,6 +20,9 @@ export class ConfigDB {
 		apiServerLogoImages : '/assets/logo/',
 		siteKey : isDevMode() ? '6Lc7cBwmAAAAAJsPPboi_t6g8LPa5zXGWqBbAdek' : '6LcsbhwmAAAAABxLHB-DH7qqFnY-JZ-3VGi0u92Q',
 		keywords: 'amédée,amedee,amédéemusic,amedeemusic,amedeemusique,amédéemusique,amédée musique,amedee musique,amedee music,amédée music,artiste amédée,artiste amedee,chanteur amédée,chanteur amedee',
+		facebookUrl: 'https://www.facebook.com/sharer.php?u=',
+		twitterUrl: 'https://twitter.com/share?url=',
+		linkedinUrl: 'https://www.linkedin.com/sharing/share-offsite/?url=',
 	}
 }
 

@@ -8,6 +8,7 @@ import { TextService } from '../shared/service/text.service';
 import { PageProjectComponent } from './page-project/page-project.component';
 import { PageAboutComponent } from './page-about/page-about.component';
 import { PageEventComponent } from './page-event/page-event.component';
+import { PageSocialComponent } from './page-social/page-social.component';
 
 const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
@@ -36,6 +37,14 @@ const routes: Routes = [
          data: {
           title: language.about,
           breadcrumb: language.about,         
+        }
+      },
+      {
+        path: 'social',
+        component: PageSocialComponent,
+         data: {
+          title: language.listenToMe,
+          breadcrumb: language.listenToMe,         
         }
       },
       {

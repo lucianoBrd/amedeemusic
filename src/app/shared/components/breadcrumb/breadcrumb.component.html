@@ -13,7 +13,12 @@
                                     <i class="fa-solid fa-house-chimney"></i> {{language.home}}
                                 </a>
                             </li>
-                            <li>
+                            <li *ngIf="breadcrumbs?.parentPath">
+                                <a [routerLink]="[breadcrumbs?.parentPath]">
+                                    <i class="fa-solid fa-angle-double-right mr-3"></i> {{breadcrumbs?.parentBreadcrumb}}
+                                </a>
+                            </li>
+                            <li *ngIf="!breadcrumbs?.parentPath">
                                 <i class="fa-solid fa-angle-double-right mr-3"></i> {{breadcrumbs?.parentBreadcrumb}}
                             </li>
                             <li>
