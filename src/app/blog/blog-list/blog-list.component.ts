@@ -7,8 +7,6 @@ import { List } from 'src/app/shared/models/list.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { PaginationService } from 'src/app/shared/service/pagination.service';
 import { ConfigDB } from 'src/app/shared/data/config';
-import { Artist } from 'src/app/shared/models/artist.interface';
-import { ArtistService } from 'src/app/shared/service/artist.service';
 import { Blog } from 'src/app/shared/models/blog.interface';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { BlogService } from 'src/app/shared/service/blog.service';
@@ -20,15 +18,19 @@ import { LanguageService } from 'src/app/shared/service/language.service';
   styleUrls: ['./blog-list.component.scss'],
 })
 export class BlogListComponent implements OnInit, OnDestroy {
-  public artist: Artist;
   public blogs: Blog[];
   public listBlogs: List<Blog>;
   public language: Language;
-  public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public blogImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'blog/';
 
   public currentPage: number;
   public totalPage: number;
+  
+  public blogPage: string = ConfigDB.data.appServer + '/blog/detail/';
+
+  public facebookUrl: string = ConfigDB.data.facebookUrl;
+  public twitterUrl: string = ConfigDB.data.twitterUrl;
+  public linkedinUrl: string = ConfigDB.data.linkedinUrl;
 
   public route: string = '/api/blogs';
   public paginationRoute: string = this.route;
@@ -46,7 +48,6 @@ export class BlogListComponent implements OnInit, OnDestroy {
     private dataService: DataService, 
     private metaService: MetaService,
     private paginationService: PaginationService,
-    private artistService: ArtistService,
     public blogService: BlogService,
   ) {
     this.language = TextService.getTextByLocal();
@@ -57,10 +58,6 @@ export class BlogListComponent implements OnInit, OnDestroy {
     this.metaService.setTitle(this.language.articleList);
     this.metaService.setKeywords(this.language.articleList);
     this.metaService.setDescription(this.language.articleList);
-
-    this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
-      this.artist = data;
-    });
 
     this.getBlogs(this.route + '?' + this.filtersSearch);
   }

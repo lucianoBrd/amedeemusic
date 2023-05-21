@@ -1,0 +1,45 @@
+<!-- section start -->
+<section class="blog-sec blog-sidebar single_blog_item">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-9 order-lg-2">
+            <div *ngIf="blog">
+              <div class="blog-block">
+                  <div class="blog-box">
+                      <div class="overflow-hidden">
+                        <img class="img-fluid blur-up lazyload" src="{{blogImagePath}}{{blog.image}}" alt="{{blog.slug}}">
+                      </div>
+                  </div>
+              </div>
+              <div class="blog-text m-t-20">
+                  <h6>
+                    {{blog.date | date:'d MMMM y'}}
+                  </h6>
+                  <h3 class="blog-head">{{blog.title}}</h3>
+                  <div class="blog-divider"></div>
+                  <div class="blog-description">
+                    <div [innerHTML]="blog.content"></div>
+                    <h5 class="pull-right">
+                        <a class="m-r-15" target="_blank" href="{{linkedinUrl + blogPage + blog.slug}}">
+                          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                        <a class="m-r-15" target="_blank" href="{{facebookUrl + blogPage + blog.slug}}&t={{blog.title}}">
+                          <i class="fa-brands fa-facebook-f"aria-hidden="true"></i>
+                        </a>
+                        <a class="m-r-15" target="_blank" href="{{twitterUrl + blogPage + blog.slug}}&text={{blog.title}}">
+                          <i class="fa-brands fa-twitter"aria-hidden="true"></i>
+                        </a>
+                    </h5>
+                  </div>
+              </div>
+            </div>
+            <app-empty *ngIf="blog === null"></app-empty>
+            <app-loader-bis *ngIf="blog === undefined"></app-loader-bis>
+          </div>
+          <div class="col-lg-3">
+              <app-blog-sidebar></app-blog-sidebar>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- section end -->

@@ -1,5 +1,5 @@
 <!-- pagination Start -->
-<div class="pagination_sec" *ngIf="list && list['hydra:view'] && totalPage && (totalPage > 1)">
+<div class="pagination_sec" *ngIf="list && list['hydra:view'] && totalPage && (totalPage > 1) && currentPage && (currentPage >= 1)">
   <div class="content_detail__pagination cdp">
       <ul>
           <li *ngIf="list['hydra:view']['hydra:first'] && currentPage > 1">

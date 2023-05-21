@@ -41,11 +41,13 @@ export class BreadcrumbComponent implements OnInit {
       .subscribe(event => {
         let title = event.snapshot.data['title'];
         let parent = event.parent.snapshot.data['breadcrumb'];
+        let parentPath = event.parent.snapshot.data['path'];
         let child = event.snapshot.data['breadcrumb'];
         this.breadcrumbs = {};
         this.title = title;
         this.breadcrumbs = {
           "parentBreadcrumb": parent,
+          "parentPath": parentPath,
           "childBreadcrumb": child
         }
       });

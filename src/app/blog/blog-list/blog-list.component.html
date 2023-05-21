@@ -1,51 +1,63 @@
 <!-- section start -->
 <app-filter [get]="getBlogs" [route]="filterRoute" filterName="search" [filters]="filtersSearch" (onSearch)="onSearch($event)"></app-filter>
-<section class="music blog bg-album" *ngIf="blogs?.length > 0" [ngStyle]="{'background-image': (artist?.blog ? 'url(' + artistImagePath + artist.blog + ')' : '')}">
+<section class="music blog blog-sec blog-sidebar sider">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <ngx-masonry [options]="myOptions" class="masonry-grid m-layout m-t-30">
-                    <div ngxMasonryItem class="m-width m-2-col" (load)="updateMasonryLayout = !updateMasonryLayout" *ngFor="let blog of blogs">
-                      <div class="blog-agency">
-                        <div class="blog-contain">
-                          <img src="{{blogImagePath}}{{blog.image}}" alt="{{blog.slug}}" class="img-fluid">
-                          <div class="img-container">
-                            <div class="blog-info bottom-0">
-                              <div class="d-flex m-b-20">
-                                <div class="d-flex center-text">
-                                  <i class="fa-regular fa-calendar m-r-10" aria-hidden="true"></i>
-                                  <h6 class="m-r-25 font-blog">{{blog.date | date:'d MMMM y'}}</h6>
+            <div class="col-lg-9 order-lg-2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                  <ngx-masonry [options]="myOptions" class="masonry-grid m-layout " *ngIf="blogs?.length > 0">
+                      <div ngxMasonryItem class="m-width m-2-col" (load)="updateMasonryLayout = !updateMasonryLayout" *ngFor="let blog of blogs">
+                        <div class="blog-agency">
+                          <div class="blog-contain">
+                            <img src="{{blogImagePath}}{{blog.image}}" alt="{{blog.slug}}" class="img-fluid">
+                            <div class="img-container">
+                              <div class="blog-info bottom-0">
+                                <div class="d-flex m-b-20">
+                                  <div class="d-flex center-text">
+                                    <i class="fa-regular fa-calendar m-r-10" aria-hidden="true"></i>
+                                    <h6 class="m-r-25 font-blog">{{blog.date | date:'d MMMM y'}}</h6>
+                                  </div>
                                 </div>
-                              </div>
-                              <h5 class="blog-head font-600">{{blog.title}}</h5>
-                              <p class="para2">
-                                {{blogService.plainText(blog.content)}}...
-                              </p>
-                              <div class="btn-bottom m-t-20">
-                                <a [routerLink]="['/blog', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
-                                    <i class="fa-solid fa-book mr-1" aria-hidden="true"></i>
-                                    {{language.readMore}}
-                                </a>
+                                <h5 class="blog-head font-600">{{blog.title}}</h5>
+                                <p class="para2">
+                                  {{blogService.plainText(blog.content)}}
+                                </p>
+                                <div class="btn-bottom m-t-20">
+                                  <a class="m-r-15" target="_blank" href="{{linkedinUrl + blogPage + blog.slug}}">
+                                    <i class="fa-brands fa-linkedin-in no-btn" aria-hidden="true"></i>
+                                  </a>
+                                  <a class="m-r-15" target="_blank" href="{{facebookUrl + blogPage + blog.slug}}&t={{blog.title}}">
+                                    <i class="fa-brands fa-facebook-f no-btn"aria-hidden="true"></i>
+                                  </a>
+                                  <a class="m-r-15" target="_blank" href="{{twitterUrl + blogPage + blog.slug}}&text={{blog.title}}">
+                                    <i class="fa-brands fa-twitter no-btn"aria-hidden="true"></i>
+                                  </a>
+                                </div>
+                                <div class="btn-bottom m-t-20">
+                                  <a [routerLink]="['/blog/detail', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
+                                      <i class="fa-solid fa-book mr-1" aria-hidden="true"></i>
+                                      {{language.readMore}}
+                                  </a>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                </ngx-masonry>
+                  </ngx-masonry>
+                  <app-loader-bis *ngIf="blogs === undefined"></app-loader-bis>
+                  <app-empty *ngIf="blogs?.length == 0"></app-empty>
+                </div>
+                <div class="col-12 mt-1" *ngIf="blogs?.length > 0">
+                    <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listBlogs" [get]="getBlogs" [route]="paginationRoute" [filters]="filtersPagination"></app-pagination>
+                </div>
+              </div>
+              </div>
             </div>
-            <div class="col-12 mt-5">
-                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listBlogs" [get]="getBlogs" [route]="paginationRoute" [filters]="filtersPagination"></app-pagination>
-            </div>
-        </div>
-    </div>
-</section>
-<app-empty *ngIf="blogs?.length == 0"></app-empty>
-<section class="music blog bg-album" *ngIf="blogs === undefined" [ngStyle]="{'background-image': (artist?.blog ? 'url(' + artistImagePath + artist.blog + ')' : '')}">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <app-loader-bis></app-loader-bis>
+            <div class="col-lg-3">
+              <app-blog-sidebar></app-blog-sidebar>
             </div>
         </div>
     </div>

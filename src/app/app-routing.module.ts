@@ -41,6 +41,7 @@ export const routes: Routes = [
     loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
     data: {
       breadcrumb: language.blog,
+      path: '/blog/list',
     },
     canActivate: [AuthGuardMaintenance],
   },

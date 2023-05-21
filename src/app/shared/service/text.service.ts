@@ -122,6 +122,7 @@ export class TextService {
     maintenance: 'Maintenance',
     maintenanceInProcess: 'Maintenance en cours',
     weWillbackSoon: 'Nous serons bientôt de retour',
+    popularPosts: 'Articles populaires',
   };
   static textEn: Language = {
     dark: 'Dark',
@@ -238,6 +239,7 @@ export class TextService {
     maintenance: 'Maintenance',
     maintenanceInProcess: 'Maintenance in process',
     weWillbackSoon: 'We will be back soon',
+    popularPosts: 'Popular posts',
   };
 
 

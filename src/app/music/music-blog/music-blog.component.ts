@@ -23,7 +23,11 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public blogImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'blog/';
 
-  public blogPage: string = ConfigDB.data.apiServer + '/api/blogs';
+  public blogPage: string = ConfigDB.data.appServer + '/blog/detail/';
+
+  public facebookUrl: string = ConfigDB.data.facebookUrl;
+  public twitterUrl: string = ConfigDB.data.twitterUrl;
+  public linkedinUrl: string = ConfigDB.data.linkedinUrl;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 

@@ -108,4 +108,5 @@ export interface Language {
     maintenance: string,
     maintenanceInProcess: string,
     weWillbackSoon: string,
+    popularPosts: string,
 }

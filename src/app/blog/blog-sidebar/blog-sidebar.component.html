@@ -1,0 +1,46 @@
+<!-- section start -->
+<div class="blog-side">
+    <div>
+        <h5 class="blog-title">{{language.referringToMe}}</h5>
+        <div class="sidebar-container borders">
+            <ul class="sidebar-list">
+                <li class="d-flex" *ngFor="let testimonial of testimonials">
+                    <a target="_blank" href="{{testimonial.link}}"> 
+                        <i class="fa fa-angle-right m-r-15" aria-hidden="true"></i>
+                        {{testimonial.name}}
+                    </a>
+                </li>
+                <li *ngIf="testimonials?.length == 0">
+                    {{language.emptyItems}}
+                </li>
+            </ul>
+            <app-loader-bis *ngIf="testimonials === undefined"></app-loader-bis>
+        </div>
+    </div>
+    <div>
+        <h5 class="blog-title">{{language.popularPosts}}</h5>
+        <div class="sidebar-container">
+            <div class="post-container d-flex" *ngFor="let blog of blogs">
+                    <div class="w-35 m-r-25">
+                        <a [routerLink]="['/blog/detail', blog.slug]">
+                            <img src="{{blogImagePath}}{{blog.image}}" alt="{{blog.slug}}" class="img-fluid">
+                            <div class="badge badge-red">{{blog.date | date:'y'}}</div>
+                        </a>
+                    </div>
+                    <div>
+                        <a [routerLink]="['/blog/detail', blog.slug]">
+                            <h5 class="post-head">{{blog.title}}</h5>
+                            <h6 class="date">{{blog.date | date:'d MMMM y'}}</h6>
+                        </a>
+                    </div>
+            </div>
+            <ul class="sidebar-list" *ngIf="blogs?.length == 0">
+                <li>
+                    {{language.emptyItems}}
+                </li>
+            </ul>
+            <app-loader-bis *ngIf="blogs === undefined"></app-loader-bis>
+        </div>
+    </div>
+</div>
+<!-- section end -->

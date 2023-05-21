@@ -31,21 +31,21 @@
                                         <div class="social-list">
                                             <ul>
                                                 <li>
-                                                    <a target="_blank" href="https://www.linkedin.com/shareArticle?url={{blogPage + '/' + blog.slug}}&title={{blog.title}}&summary={{blogService.plainText(blog.content)}}">
+                                                    <a target="_blank" href="{{linkedinUrl + blogPage + blog.slug}}">
                                                         <div class="center-content">
                                                             <i class="fa-brands fa-linkedin-in center-content" aria-hidden="true"></i>
                                                         </div>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a target="_blank" href="https://www.facebook.com/sharer.php?u={{blogPage + '/' + blog.slug}}&t={{blog.title}}">
+                                                    <a target="_blank" href="{{facebookUrl + blogPage + blog.slug}}&t={{blog.title}}">
                                                         <div class="center-content">
                                                             <i class="fa-brands fa-facebook-f center-content"aria-hidden="true"></i>
                                                         </div>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a target="_blank" href="https://twitter.com/share?url={{blogPage + '/' + blog.slug}}&text={{blog.title}}">
+                                                    <a target="_blank" href="{{twitterUrl + blogPage + blog.slug}}&text={{blog.title}}">
                                                         <div class="center-content">
                                                             <i class="fa-brands fa-twitter center-content"aria-hidden="true"></i>
                                                         </div>
@@ -54,7 +54,7 @@
                                             </ul>
                                         </div>
                                         <div class="mt-2">
-                                            <a [routerLink]="['/blog', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
+                                            <a [routerLink]="['/blog/detail', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
                                                 <i class="fa-solid fa-book mr-1" aria-hidden="true"></i>
                                                 {{language.readMore}}
                                             </a>
