@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { CountToModule } from 'angular-count-to';
 
 import { PagesComponent } from './pages.component';
 import { PageContactComponent } from './page-contact/page-contact.component';
@@ -17,7 +15,6 @@ import { PageEventComponent } from './page-event/page-event.component';
 import { PageSocialComponent } from './page-social/page-social.component';
 import { PageTestimonialComponent } from './page-testimonial/page-testimonial.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMasonryModule } from 'ngx-masonry';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 
@@ -40,9 +37,6 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    CarouselModule,
-    CountToModule,
-    NgxMasonryModule,
     GalleryModule,
     LightboxModule,
   ],
