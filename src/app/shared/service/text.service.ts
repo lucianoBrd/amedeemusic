@@ -68,6 +68,7 @@ export class TextService {
     maintenanceInProcess: 'Maintenance en cours',
     weWillbackSoon: 'Nous serons bientôt de retour',
     popularPosts: 'Articles populaires',
+    close: 'Fermer',
   };
   static textEn: Language = {
     dark: 'Dark',
@@ -130,6 +131,7 @@ export class TextService {
     maintenanceInProcess: 'Maintenance in process',
     weWillbackSoon: 'We will be back soon',
     popularPosts: 'Popular posts',
+    close: 'Close',
   };
 
 
