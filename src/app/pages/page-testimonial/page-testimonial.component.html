@@ -1,0 +1,46 @@
+<!-- section start -->
+<app-filter [get]="getTestimonials" [route]="filterRoute" filterName="search" [filters]="filtersSearch" (onSearch)="onSearch($event)"></app-filter>
+<section class="typography_section" *ngIf="testimonials?.length > 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let testimonial of testimonials">
+                <div class="typography-box">
+                    <div class="headings">
+                        <h3>{{testimonial.name}}</h3>
+                    </div>
+                    <div class="typo-content">
+                        <p class="text-center">
+                            <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+                        </p>
+                        <p class="text-center">{{testimonial.citation}}</p>
+                        <hr>
+                        <p class="text-center">
+                            <i class="fa-regular fa-newspaper" aria-hidden="true"></i>
+                        </p>
+                        <p class="text-center">{{testimonial.designation}}</p>
+                        <hr>
+                        <div class="text-center">
+                            <a target="_blank" href="{{testimonial.link}}">
+                                <h6 class="sub-title">{{language.access}} <i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i></h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-2">
+              <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listTestimonials" [get]="getTestimonials" [route]="paginationRoute" [filters]="filtersPagination"></app-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<app-empty *ngIf="testimonials?.length == 0"></app-empty>
+<section class="typography_section" *ngIf="testimonials === undefined">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

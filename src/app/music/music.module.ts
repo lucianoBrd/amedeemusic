@@ -5,8 +5,6 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SwiperModule } from 'swiper/angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module'
-import { CountToModule } from 'angular-count-to';
-import { NgxMasonryModule } from 'ngx-masonry';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng5SliderModule } from 'ng5-slider';
 import { GalleryModule } from 'ng-gallery';
@@ -49,12 +47,10 @@ import { MusicFooterComponent } from './music-footer/music-footer.component';
     NgbModule,
     GalleryModule,
     SharedModule,
-    CountToModule,
     FormsModule,
     ReactiveFormsModule,
     Ng5SliderModule,
     LightboxModule,
-    NgxMasonryModule,
   ],
 })
 

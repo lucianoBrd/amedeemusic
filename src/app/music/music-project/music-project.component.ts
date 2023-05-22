@@ -8,7 +8,6 @@ import { List } from 'src/app/shared/models/list.interface';
 import { Project } from 'src/app/shared/models/project.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { DataService } from 'src/app/shared/service/data.service';
-import { LanguageService } from 'src/app/shared/service/language.service';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { TextService } from 'src/app/shared/service/text.service';
 

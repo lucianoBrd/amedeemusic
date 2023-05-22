@@ -9,6 +9,7 @@ import { PageProjectComponent } from './page-project/page-project.component';
 import { PageAboutComponent } from './page-about/page-about.component';
 import { PageEventComponent } from './page-event/page-event.component';
 import { PageSocialComponent } from './page-social/page-social.component';
+import { PageTestimonialComponent } from './page-testimonial/page-testimonial.component';
 
 const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
@@ -45,6 +46,14 @@ const routes: Routes = [
          data: {
           title: language.listenToMe,
           breadcrumb: language.listenToMe,         
+        }
+      },
+      {
+        path: 'testimonial',
+        component: PageTestimonialComponent,
+         data: {
+          title: language.referringToMe,
+          breadcrumb: language.referringToMe,         
         }
       },
       {

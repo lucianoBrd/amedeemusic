@@ -59,4 +59,5 @@ export interface Language {
     maintenanceInProcess: string,
     weWillbackSoon: string,
     popularPosts: string,
+    close: string,
 }

@@ -38,6 +38,7 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.sidebarService.setProject(this.project);
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
@@ -95,10 +96,10 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
   }
 
   sideBar(project: Project = undefined){
-    if (this.sideBarDispaly=='none' && project) {
-      this.sideBarDispaly='block';
+    if (this.sideBarDispaly == 'none' && project) {
+      this.sideBarDispaly = 'block';
     } else if (project === undefined) {
-      this.sideBarDispaly='none';
+      this.sideBarDispaly = 'none';
     }
     this.getProject(project);
   }

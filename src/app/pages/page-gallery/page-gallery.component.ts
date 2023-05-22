@@ -87,7 +87,7 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     );
     const lightboxRef = this.ngGallery.ref('lightbox');
     lightboxRef.setConfig({
-      imageSize: ImageSize.Cover,
+      imageSize: ImageSize.Contain,
       thumbPosition: ThumbnailsPosition.Top,
     });
     lightboxRef.load(this.items);
