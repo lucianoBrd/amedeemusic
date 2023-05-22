@@ -4,7 +4,6 @@ import { Artist } from 'src/app/shared/models/artist.interface';
 import { ArtistAbout } from 'src/app/shared/models/artistAbout.interface';
 import { Language } from 'src/app/shared/models/language.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
-import { LanguageService } from 'src/app/shared/service/language.service';
 import { MetaService } from 'src/app/shared/service/meta.service';
 import { TextService } from 'src/app/shared/service/text.service';
 

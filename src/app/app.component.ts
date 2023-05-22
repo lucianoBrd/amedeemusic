@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomizerService } from './shared/service/customizer.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { MetaService } from './shared/service/meta.service';
-import { Politic } from './shared/models/politic.interface';
 import { TextService } from './shared/service/text.service';
 import { Language } from './shared/models/language.interface';
 import { ConfigDB } from './shared/data/config';

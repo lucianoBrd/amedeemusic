@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCALE_ID, NgModule, SecurityContext } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { routes } from './app-routing.module';
 import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { AppComponent } from './app.component';
@@ -11,7 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PageMaintenanceComponent } from './page-maintenance/page-maintenance.component';
 import { MusicModule } from './music/music.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SharedModule } from './shared/shared.module';
 import { registerLocaleData } from '@angular/common';
