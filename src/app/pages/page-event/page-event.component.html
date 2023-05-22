@@ -3,7 +3,7 @@
 <section class="typography_section" *ngIf="events?.length > 0">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-3" *ngFor="let event of events">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let event of events">
                 <div class="typography-box">
                     <div class="headings">
                         <h3>{{event.name}}</h3>
@@ -35,7 +35,7 @@
     </div>
 </section>
 <app-empty *ngIf="events?.length == 0"></app-empty>
-<section class="music album" *ngIf="events === undefined">
+<section class="typography_section" *ngIf="events === undefined">
     <div class="container">
         <div class="row">
             <div class="col-12">

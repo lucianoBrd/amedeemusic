@@ -38,7 +38,7 @@ export class DataService {
           )
         }
       ).pipe(
-        //retry(3), 
+        retry(3), 
         catchError(this.handleError),
       );
     }
