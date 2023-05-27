@@ -34,8 +34,12 @@ export class FilterComponent<T> implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.search$.pipe(debounceTime(700), takeUntil(this.destroy$)).subscribe((data: string) => {
-      this.get(this.route + '?' + this.filterName + '=' + data + '&' + this.filters);
-      this.onSearch.emit(data);
+      let search: string = data;
+      if (!search) {
+        search = '';
+      }
+      this.get(this.route + '?' + this.filterName + '=' + search + '&' + this.filters);
+      this.onSearch.emit(search);
     });
   }
 
@@ -45,7 +49,11 @@ export class FilterComponent<T> implements OnInit, OnDestroy {
   }
 
   filterProjects() {
-    this.get(this.route + '?' + this.filterName + '=' + this.search.value + '&' + this.filters);
+    let search: string = this.search.value;
+    if (!search) {
+      search = '';
+    }
+    this.get(this.route + '?' + this.filterName + '=' + search + '&' + this.filters);
   }
 
 }

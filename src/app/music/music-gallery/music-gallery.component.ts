@@ -8,6 +8,7 @@ import { TextService } from 'src/app/shared/service/text.service';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { List } from 'src/app/shared/models/list.interface';
+import { MobileService } from 'src/app/shared/service/mobile.service';
 
 @Component({
   selector: 'app-music-gallery',
@@ -21,16 +22,20 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public galleryImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'gallery/';
 
+  public mobile: boolean = false;
+
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
     private artistService: ArtistService,
+    private mobileService: MobileService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.mobile = this.mobileService.isMobile();
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
@@ -43,11 +48,13 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
             id: -1,
             image: undefined,
           };
-          if (galleries.length == 1) {
-            galleries.push(emptyGallery);
-            galleries.push(emptyGallery);
-          } else if (galleries.length == 2) {
-            galleries.push(emptyGallery);
+          if (!this.mobile) {
+            if (galleries.length == 1) {
+              galleries.push(emptyGallery);
+              galleries.push(emptyGallery);
+            } else if (galleries.length == 2) {
+              galleries.push(emptyGallery);
+            }
           }
         }
         this.galleries = galleries;

@@ -5,6 +5,7 @@ import { TextService } from 'src/app/shared/service/text.service';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Menu } from '../../../models/menu.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { MobileService } from 'src/app/shared/service/mobile.service';
 
 @Component({
   selector: 'app-menu',
@@ -24,13 +25,17 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(public navServices: NavService, private router: Router) {
+  constructor(
+    public navServices: NavService, 
+    private router: Router,
+    private mobileService: MobileService,
+  ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
     this.url = this.router.url;
-    this.mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    this.mobile = this.mobileService.isMobile();
     this.navServices.items.pipe(takeUntil(this.destroy$)).subscribe(menuItems => {
       this.menuItems = menuItems
     });

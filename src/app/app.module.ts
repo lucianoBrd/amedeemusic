@@ -28,6 +28,7 @@ import { DataService } from './shared/service/data.service';
 import { PermissionsService } from './shared/service/permission.service';
 import { FormService } from './shared/service/form.service';
 import { MetaService } from './shared/service/meta.service';
+import { MobileService } from './shared/service/mobile.service';
 import { NavService } from './shared/service/nav.service';
 import { PaginationService } from './shared/service/pagination.service';
 import { PoliticService } from './shared/service/politic.service';
@@ -114,6 +115,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     JsonDateInterceptorService,
     LanguageService,
     MetaService,
+    MobileService,
     NavService,
     PaginationService,
     PoliticService,
