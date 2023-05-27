@@ -8,6 +8,7 @@ import { List } from 'src/app/shared/models/list.interface';
 import { Project } from 'src/app/shared/models/project.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { DataService } from 'src/app/shared/service/data.service';
+import { MobileService } from 'src/app/shared/service/mobile.service';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { TextService } from 'src/app/shared/service/text.service';
 
@@ -24,17 +25,21 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
 
+  public mobile: boolean = false;
+
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dataService: DataService, 
     private sidebarService: SidebarService,
     private artistService: ArtistService,
+    private mobileService: MobileService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.mobile = this.mobileService.isMobile();
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artistAbout = this.artistService.getArtistAbout(data);
       this.artist = data;
@@ -52,11 +57,13 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
             projectPlatforms: [],
             type: undefined
           };
-          if (projects.length == 1) {
-            projects.unshift(emptyProject);
-            projects.push(emptyProject);
-          } else if (projects.length == 2) {
-            projects.push(emptyProject);
+          if (!this.mobile) {
+            if (projects.length == 1) {
+              projects.unshift(emptyProject);
+              projects.push(emptyProject);
+            } else if (projects.length == 2) {
+              projects.push(emptyProject);
+            }
           }
         }
         this.projects = projects;
