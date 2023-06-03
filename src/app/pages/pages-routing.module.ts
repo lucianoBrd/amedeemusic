@@ -33,6 +33,14 @@ const routes: Routes = [
         }
       },
       {
+        path: 'project/:id',
+        component: PageProjectComponent,
+         data: {
+          title: language.myProjects,
+          breadcrumb: language.myProjects,         
+        }
+      },
+      {
         path: 'about',
         component: PageAboutComponent,
          data: {
