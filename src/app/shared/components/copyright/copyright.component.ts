@@ -51,7 +51,9 @@ export class CopyrightComponent implements OnInit, OnDestroy {
     });
     this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Social>) => {
-        this.socials = data['hydra:member'];
+        let socials: Social[] = data['hydra:member'];
+        socials.sort((a, b) => a.fa.localeCompare(b.fa));
+        this.socials = socials;
         this.socialService.setSocials(this.socials);
       },
       (error) => {
