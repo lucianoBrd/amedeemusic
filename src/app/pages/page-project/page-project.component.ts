@@ -11,6 +11,7 @@ import { Project } from 'src/app/shared/models/project.interface';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-project',
@@ -41,6 +42,7 @@ export class PageProjectComponent implements OnInit, OnDestroy {
     private paginationService: PaginationService,
     private sidebarService: SidebarService,
     private artistService: ArtistService,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.language = TextService.getTextByLocal();
   }
@@ -56,6 +58,23 @@ export class PageProjectComponent implements OnInit, OnDestroy {
     });
 
     this.getProjects(this.route);
+
+    this.activatedRoute.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      /* Get id */
+      let id: string = params['id'];
+
+      if (id) {
+        this.dataService.sendGetRequest('/api/projects/' + id).pipe(takeUntil(this.destroy$)).subscribe(
+          (data: Project) => {
+            let project: Project = data;
+  
+            if(project) {
+              this.sideBar(project);
+            }
+          },
+        );
+      }
+    });
   }
 
   ngOnDestroy() {
