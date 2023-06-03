@@ -24,20 +24,20 @@
                     </div>
                     <div class="container">
                         <div class="jp-controls">
-                            <div class="button-container" *ngIf="project.projectPlatforms">
+                            <div class="button-container text-center" *ngIf="project.projectPlatforms">
                                 <a *ngFor="let projectPlatform of project.projectPlatforms" target="_blank" href="{{projectPlatform.link}}">
-                                    <button type="button" class="jp-play" tabindex="0">
+                                    <button type="button" class="jp-play mb-3" tabindex="0">
                                         <i class="{{projectPlatform.fa}}" aria-hidden="true"></i>
                                     </button>
                                 </a>
                             </div>
-                            <div class="button-container" *ngIf="!project.projectPlatforms">
+                            <div class="button-container text-center" *ngIf="!project.projectPlatforms">
                                 <app-loader-bis></app-loader-bis>
                             </div>
                             <button class="btn-sidebar" (click)="sideBar()"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
 
-                        <div class="jp-playlist" *ngIf="project.titles">
+                        <div class="jp-playlist mb-5" *ngIf="project.titles">
                             <ul class="pt-2">
                                 <li *ngFor="let title of project.titles">
                                     <div class="row align-items-center ">
@@ -86,7 +86,7 @@
                                 </ng-template>
                             </ul>
                         </div>
-                        <div class="jp-playlist" *ngIf="!project.titles">
+                        <div class="jp-playlist mb-5" *ngIf="!project.titles">
                             <ul class="pt-2">
                                 <app-loader-bis></app-loader-bis>
                             </ul>
