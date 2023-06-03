@@ -59,7 +59,7 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
           };
           if (!this.mobile) {
             if (projects.length == 1) {
-              projects.unshift(emptyProject);
+              projects.push(emptyProject);
               projects.push(emptyProject);
             } else if (projects.length == 2) {
               projects.push(emptyProject);

@@ -63,7 +63,7 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
           };
           if (!this.mobile) {
             if (blogs.length == 1) {
-              blogs.unshift(emptyBlog);
+              blogs.push(emptyBlog);
               blogs.push(emptyBlog);
             } else if (blogs.length == 2) {
               blogs.push(emptyBlog);
