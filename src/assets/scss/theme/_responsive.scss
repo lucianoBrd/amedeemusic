@@ -2884,10 +2884,8 @@
         a {
           i {
             font-size: 25px;
-            color: $primary;
+            color: $white;
             display: flex;
-            height: 48px;
-            width: 48px;
           }
         }
       }
@@ -3457,8 +3455,14 @@
         margin-left: 0;
       }
     }
-    .cd-animation {
-      height: 290px;
+    &.artist {
+      .album-artist {
+        .cds {
+          .cd-animation {
+            height: 290px;
+          }
+        }
+      }
     }
 
   }

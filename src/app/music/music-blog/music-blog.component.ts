@@ -9,7 +9,6 @@ import { ArtistService } from 'src/app/shared/service/artist.service';
 import { BlogService } from 'src/app/shared/service/blog.service';
 import { DataService } from 'src/app/shared/service/data.service';
 import { LanguageService } from 'src/app/shared/service/language.service';
-import { MobileService } from 'src/app/shared/service/mobile.service';
 import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
@@ -30,7 +29,6 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
   public twitterUrl: string = ConfigDB.data.twitterUrl;
   public linkedinUrl: string = ConfigDB.data.linkedinUrl;
 
-  public mobile: boolean = false;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -38,13 +36,11 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private artistService: ArtistService,
     public blogService: BlogService,
-    private mobileService: MobileService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
-    this.mobile = this.mobileService.isMobile();
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
@@ -61,13 +57,11 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
             content: undefined,
             local: undefined,
           };
-          if (!this.mobile) {
-            if (blogs.length == 1) {
-              blogs.push(emptyBlog);
-              blogs.push(emptyBlog);
-            } else if (blogs.length == 2) {
-              blogs.push(emptyBlog);
-            }
+          if (blogs.length == 1) {
+            blogs.push(emptyBlog);
+            blogs.push(emptyBlog);
+          } else if (blogs.length == 2) {
+            blogs.push(emptyBlog);
           }
         }
           this.blogs = blogs;
