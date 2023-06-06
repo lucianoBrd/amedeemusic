@@ -780,6 +780,11 @@ label {
       box-shadow: 5px 8.66px 30px 0 $border-color;
     }
   }
+  .information {
+    p {
+      color: $white-2;
+    }
+  }
 }
 .blog{
   .blog-agency{
