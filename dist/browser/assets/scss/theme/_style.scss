@@ -1402,6 +1402,7 @@ screenshot section end
       margin-top: 45px;
       margin-bottom: 50px;
       letter-spacing: 0;
+      color: $gray17;
     }
   }
 }
@@ -3619,7 +3620,7 @@ booking section end
     letter-spacing: 0;
     span {
       font-size: 20px;
-      opacity: 0.2;
+      opacity: 0.6;
       border-left: 3px solid $white;
       padding-right: 10px;
       padding-left: 8px;
@@ -13168,7 +13169,7 @@ error css end
           background-image: linear-gradient(rgba($music-light, 0.92) 0%, $music-dark 100%);
           position: relative;
           overflow: hidden;
-          height: 30vh;
+          height: 35vh;
           .animation-circle-inverse {
             opacity: 0.25;
             position: absolute;
