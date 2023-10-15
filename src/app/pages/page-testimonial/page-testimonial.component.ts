@@ -8,6 +8,7 @@ import { DataService } from 'src/app/shared/service/data.service';
 import { PaginationService } from 'src/app/shared/service/pagination.service';
 import { LanguageService } from 'src/app/shared/service/language.service';
 import { Testimonial } from 'src/app/shared/models/testimonial.interface';
+import { ConfigDB } from 'src/app/shared/data/config';
 
 @Component({
   selector: 'app-page-testimonial',
@@ -18,6 +19,7 @@ export class PageTestimonialComponent implements OnInit, OnDestroy {
   public testimonials: Testimonial[];
   public listTestimonials: List<Testimonial>;
   public language: Language;
+  public testimonialImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'testimonial/';
 
   public currentPage: number;
   public totalPage: number;

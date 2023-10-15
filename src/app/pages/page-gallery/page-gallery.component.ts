@@ -10,6 +10,8 @@ import { List } from 'src/app/shared/models/list.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { PaginationService } from 'src/app/shared/service/pagination.service';
 import { ConfigDB } from 'src/app/shared/data/config';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-page-gallery',
@@ -18,6 +20,7 @@ import { ConfigDB } from 'src/app/shared/data/config';
 })
 export class PageGalleryComponent implements OnInit, OnDestroy {
   public galleries: Gallery[];
+  public videoGalleries: Gallery[];
   public listGalleries: List<Gallery>;
   public language: Language;
   public items: GalleryItem[];
@@ -36,6 +39,8 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     public ngGallery: NgGallery, 
     public lightbox: Lightbox,
     private paginationService: PaginationService,
+    private modalService: NgbModal,
+    private sanitizer: DomSanitizer,
   ) {
     this.language = TextService.getTextByLocal();
   }
@@ -57,12 +62,22 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
   public getGalleries = (route: string) => {
     this.listGalleries = undefined;
     this.galleries = undefined;
+    this.videoGalleries = undefined;
     this.currentPage = undefined;
     this.totalPage = undefined;
     this.dataService.sendGetRequest(route).pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Gallery>) => {
         this.listGalleries = data;
-        this.galleries = this.listGalleries['hydra:member'];
+        this.galleries = [];
+        this.videoGalleries = [];
+
+        this.listGalleries['hydra:member'].forEach(g => {
+          if (g.type === 'image') {
+            this.galleries.push(g);
+          } else {
+            this.videoGalleries.push(g);
+          }
+        });
 
         this.currentPage = this.paginationService.getPageNumber(route);
         this.totalPage = this.paginationService.getTotalPageNumber<Gallery>(this.listGalleries);
@@ -72,10 +87,19 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
       (error) => {
         this.listGalleries = null;
         this.galleries = [];
+        this.videoGalleries = [];
 
         this.updateNgGallery();
       }
     );
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true, size: 'lg' });
+  }
+
+  updateVideoUrl(url: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   updateNgGallery() {

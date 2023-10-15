@@ -7,6 +7,7 @@ import { List } from 'src/app/shared/models/list.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { PaginationService } from 'src/app/shared/service/pagination.service';
 import { Event } from 'src/app/shared/models/event.interface';
+import { ConfigDB } from 'src/app/shared/data/config';
 
 @Component({
   selector: 'app-page-event',
@@ -17,6 +18,7 @@ export class PageEventComponent implements OnInit, OnDestroy {
   public events: Event[];
   public listEvents: List<Event>;
   public language: Language;
+  public eventImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'event/';
 
   public currentPage: number;
   public totalPage: number;

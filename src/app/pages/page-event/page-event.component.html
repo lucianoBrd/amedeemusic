@@ -9,6 +9,7 @@
                         <h3>{{event.name}}</h3>
                     </div>
                     <div class="typo-content">
+                        <img [src]="eventImagePath + event.image" alt="{{event.name}}" class="img-fluid mb-4" *ngIf="event.image">
                         <p class="text-center">
                             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                         </p>

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Language } from 'src/app/shared/models/language.interface';
 import { Gallery } from 'src/app/shared/models/gallery.interface';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -8,6 +9,7 @@ import { TextService } from 'src/app/shared/service/text.service';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { List } from 'src/app/shared/models/list.interface';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-music-gallery',
@@ -27,6 +29,8 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataService, 
     private artistService: ArtistService,
+    private modalService: NgbModal,
+    private sanitizer: DomSanitizer,
   ) {
     this.language = TextService.getTextByLocal();
   }
@@ -43,6 +47,9 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
           let emptyGallery: Gallery = {
             id: -1,
             image: undefined,
+            extension: undefined,
+            type: undefined,
+            mimeType: undefined,
           };
           if (galleries.length == 1) {
             galleries.push(emptyGallery);
@@ -62,6 +69,14 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true, size: 'lg' });
+  }
+
+  updateVideoUrl(url: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   galleryCarouselOptions={

@@ -509,6 +509,12 @@ section {
       }
     }
   }
+  .owl-item {
+    img, video {
+      display: block;
+      width: 100%;
+    }
+  }
 }
 .menu-on {
   header {

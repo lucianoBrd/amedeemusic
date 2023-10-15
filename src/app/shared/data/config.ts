@@ -14,7 +14,7 @@ export class ConfigDB {
 		},
 		appName : 'AmédéeMusic',
 		appContact : 'amedee.management@gmail.com',
-		apiServer : isDevMode() ? 'http://127.0.0.1:8000' : ('https://api.' + ConfigDB.domain),
+		apiServer : isDevMode() ? 'https://127.0.0.1:8000' : ('https://api.' + ConfigDB.domain),
 		appServer : isDevMode() ? ('http://' + ConfigDB.domain) : ('https://' + ConfigDB.domain),
 		apiServerImages : '/uploads/images/',
 		apiServerLogoImages : '/assets/logo/',
