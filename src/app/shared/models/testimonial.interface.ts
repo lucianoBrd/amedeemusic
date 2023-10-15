@@ -7,4 +7,5 @@ export interface Testimonial {
     designation: string,
     link: string,
     local: Local,
+    image: string,
 }

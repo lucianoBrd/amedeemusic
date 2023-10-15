@@ -19,6 +19,7 @@ export class MusicTestimonialComponent implements OnInit, OnDestroy {
   public testimonials: Testimonial[];
   public artist: Artist;
   public language: Language;
+  public testimonialImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'testimonial/';
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
 
   public quoteImage: string = 'assets/images/music/testimonial/quote.png';

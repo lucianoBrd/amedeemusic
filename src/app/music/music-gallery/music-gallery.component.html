@@ -18,16 +18,25 @@
                 <owl-carousel-o class="gallery-slider" [options]="galleryCarouselOptions">
                     <ng-container *ngFor="let gallery of galleries">
                         <ng-template carouselSlide class="item"  *ngIf="gallery.id != -1">
-                            <img src="{{galleryImagePath}}{{gallery.image}}" alt="gallery-{{gallery.id}}" class="img-gallery">
-                            <div class="abs-center w-100 text-container">
-                                <a target="_blank" href="{{galleryImagePath}}{{gallery.image}}">
+                            <img *ngIf="gallery.type === 'image'" src="{{galleryImagePath}}{{gallery.image}}" alt="gallery-{{gallery.id}}" class="img-gallery">
+                            <video *ngIf="gallery.type === 'video'" onloadedmetadata="this.muted = true; this.playsinline = true;" oncanplay="this.play()" autoplay loop playsinline="" muted="" onplaying="this.controls=false" alt="gallery-{{gallery.id}}" class="img-gallery">
+                                <source [src]="updateVideoUrl(galleryImagePath + gallery.image)" type='{{gallery.mimeType}}'>
+                            </video>
+                            <div *ngIf="gallery.type === 'video'" class="abs-center w-100 text-container">
+                                <a href="javascript:void(0)" (click)="openVerticallyCentered(content)">
                                     <h5 class="text-white overlay-text text-center">
-                                        {{language.download}}
-                                        <span><i class="fa-solid fa-download" aria-hidden="true"></i></span>
+                                        <span><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                                     </h5>
+                                    <ng-template #content let-modal>
+                                        <div class="modal-body video-modal">
+                                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <iframe class="mfp-iframe" frameborder="0" allowfullscreen="" [src]="updateVideoUrl(galleryImagePath + gallery.image + '?autoplay=1')"></iframe>
+                                        </div>
+                                    </ng-template>
                                 </a>
                             </div>
-                            <div class="overlay"></div>           
                         </ng-template>
                         <ng-template carouselSlide class="item" *ngIf="gallery.id == -1"></ng-template>
                     </ng-container>

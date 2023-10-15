@@ -4,4 +4,5 @@ export interface Event {
     date: Date,
     place: string,
     link: string,
+    image: string,
 }

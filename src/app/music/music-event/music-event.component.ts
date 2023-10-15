@@ -5,6 +5,7 @@ import { List } from 'src/app/shared/models/list.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { DataService } from 'src/app/shared/service/data.service';
 import { TextService } from 'src/app/shared/service/text.service';
+import { ConfigDB } from 'src/app/shared/data/config';
 
 @Component({
   selector: 'app-music-event',
@@ -14,6 +15,7 @@ import { TextService } from 'src/app/shared/service/text.service';
 export class MusicEventComponent implements OnInit, OnDestroy {
   public events: Event[];
   public language: Language;
+  public eventImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'event/';
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
