@@ -9,6 +9,7 @@
                         <h3>{{testimonial.name}}</h3>
                     </div>
                     <div class="typo-content">
+                        <img [src]="testimonialImagePath + testimonial.image" alt="{{testimonial.name}}" class="img-fluid mb-4" *ngIf="testimonial.image">
                         <p class="text-center">
                             <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
                         </p>
