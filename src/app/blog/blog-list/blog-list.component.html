@@ -11,7 +11,9 @@
                       <div ngxMasonryItem class="m-width m-2-col" (load)="updateMasonryLayout = !updateMasonryLayout" *ngFor="let blog of blogs">
                         <div class="blog-agency">
                           <div class="blog-contain">
-                            <img src="{{blogImagePath}}{{blog.image}}" alt="{{blog.slug}}" class="img-fluid">
+                            <div class="d-flex justify-content-center mt-2">
+                              <img src="{{blogImagePath}}{{blog.image}}" alt="{{blog.slug}}" class="img-fluid">
+                            </div>
                             <div class="img-container">
                               <div class="blog-info bottom-0">
                                 <div class="d-flex m-b-20">

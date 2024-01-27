@@ -3788,6 +3788,11 @@ booking section end
     }
   }
   &.artist {
+    .album-artist,.img-project {
+      max-height: 50vh;
+      width: auto !important;
+      max-width: 100%;
+    }
     .album-artist {
       &:hover {
         .overlay-img {

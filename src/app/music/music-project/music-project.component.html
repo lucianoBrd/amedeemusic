@@ -19,33 +19,33 @@
                     <ng-container *ngFor="let project of projects">
                         <ng-template carouselSlide class="item" *ngIf="project.id != -1">
                             <div class="d-flex justify-content-center">
-                            <div class="album-artist text-center">
-                                <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid set-relative overlay-img img-project">
-                                <div>
-                                    <div class="overlay-box2"></div>
-                                </div>
-                                <div class="set-abs bottom-0 w-100 text-left set-z-index">
-                                    <div class="singers">
-                                        <div class="m-b-10">
-                                            <h5 class="name">{{project.name}}</h5>
-                                            <h6 class="musician">{{project.type.name}} • {{project.date | date:'y'}}</h6>
-                                            <h6 class="musician" *ngIf="!artist">Amédée</h6>
-                                            <h6 class="musician" *ngIf="artist">{{artist.name}}</h6>
-                                        </div>
-                                        <div class="text-center">
-                                            <a (click)="sideBar(project)" class="btn btn-default btn-gradient m-0-auto">
-                                                <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                {{language.listen}}
-                                            </a>
+                                <div class="album-artist text-center">
+                                    <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid set-relative overlay-img img-project">
+                                    <div>
+                                        <div class="overlay-box2"></div>
+                                    </div>
+                                    <div class="set-abs bottom-0 w-100 text-left set-z-index">
+                                        <div class="singers">
+                                            <div class="m-b-10">
+                                                <h5 class="name">{{project.name}}</h5>
+                                                <h6 class="musician">{{project.type.name}} • {{project.date | date:'y'}}</h6>
+                                                <h6 class="musician" *ngIf="!artist">Amédée</h6>
+                                                <h6 class="musician" *ngIf="artist">{{artist.name}}</h6>
+                                            </div>
+                                            <div class="text-center">
+                                                <a (click)="sideBar(project)" class="btn btn-default btn-gradient m-0-auto">
+                                                    <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                    {{language.listen}}
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="set-abs cds">
-                                    <img src="assets/images/music/project/cd.svg" alt="cd" class="cd-animation">
-                                    <img src="assets/images/music/project/ellipse.svg" alt="elipse" class="elipse">
+                                    <div class="set-abs cds">
+                                        <img src="assets/images/music/project/cd.svg" alt="cd" class="cd-animation">
+                                        <img src="assets/images/music/project/ellipse.svg" alt="elipse" class="elipse">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </ng-template>
                         <ng-template carouselSlide class="item" *ngIf="project.id == -1">
                             
