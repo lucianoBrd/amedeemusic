@@ -4,13 +4,12 @@ import { Language } from 'src/app/shared/models/language.interface';
 import { MetaService } from 'src/app/shared/service/meta.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { Gallery } from 'src/app/shared/models/gallery.interface';
-import { GalleryItem, ImageItem, ImageSize, Gallery as NgGallery, ThumbnailsPosition } from 'ng-gallery';
+import { GalleryItem, ImageItem, VideoItem, ImageSize, Gallery as NgGallery, ThumbnailsPosition } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { List } from 'src/app/shared/models/list.interface';
 import { DataService } from 'src/app/shared/service/data.service';
 import { PaginationService } from 'src/app/shared/service/pagination.service';
 import { ConfigDB } from 'src/app/shared/data/config';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -39,7 +38,6 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     public ngGallery: NgGallery, 
     public lightbox: Lightbox,
     private paginationService: PaginationService,
-    private modalService: NgbModal,
     private sanitizer: DomSanitizer,
   ) {
     this.language = TextService.getTextByLocal();
@@ -52,6 +50,15 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     this.metaService.setDescription(this.language.gallery);
 
     this.getGalleries(this.route);
+
+    this.lightbox.opened.subscribe(res => {
+      setTimeout(() => {
+        const video: HTMLMediaElement = document.querySelector(".g-active-item video");
+        if(video) {
+          video.play();
+        }
+      });
+    });
   }
 
   ngOnDestroy() {
@@ -94,21 +101,30 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     );
   }
 
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true, size: 'lg' });
-  }
-
   updateVideoUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   updateNgGallery() {
-    this.items = this.galleries.map(
-      item => new ImageItem({ 
-        src: this.galleryImagePath + item.image, 
-        thumb: this.galleryImagePath + item.image 
-      })
-    );
+    this.items = [
+      ...this.galleries.map(
+        item => new ImageItem({ 
+          src: this.galleryImagePath + item.image, 
+          thumb: this.galleryImagePath + item.image,
+          alt: 'gallery-' + item.id 
+        })
+      ),
+      ...this.videoGalleries.map(
+        item => new VideoItem({ 
+          //src: [{url: (this.galleryImagePath + item.image), type: item.mimeType}],
+          thumb: 'assets/images/music/icons/play.png',
+          poster: 'assets/images/music/icons/play.png',
+          autoplay: true,
+          controls: true
+        })
+      )
+    ];
+    
     const lightboxRef = this.ngGallery.ref('lightbox');
     lightboxRef.setConfig({
       imageSize: ImageSize.Contain,
