@@ -3351,7 +3351,7 @@
     &.artist {
       .album-artist {
         .cds {
-          top: 85%;
+          top: 75%;
           transform: translate(-50%, -35%);
         }
       }
@@ -3459,7 +3459,10 @@
       .album-artist {
         .cds {
           .cd-animation {
-            height: 290px;
+            height: 30vh;
+          }
+          .elipse {
+            height: 4vh;
           }
         }
       }
