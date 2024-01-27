@@ -15,10 +15,10 @@
                 </div>
             </div>
             <div class="col-12">
-                <owl-carousel-o [options]="blogCarouselOptions">
+                <owl-carousel-o class="blog-slider" [options]="blogCarouselOptions">
                     <ng-container *ngFor="let blog of blogs">
                         <ng-template carouselSlide class="item" *ngIf="blog.id != -1">
-                                <div class="img-container">
+                                <div class="img-container blog-item">
                                     <img src="{{blogImagePath + blog.image}}" alt="{{blog.slug}}" class="img-fluid">
                                     <div class="overlay"></div>
                                     <div class="blog-info set-abs bottom-0">

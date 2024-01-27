@@ -6157,7 +6157,7 @@
         }
       }
       .music-testimonial-slider {
-        &.owl-theme {
+        .owl-theme {
           .owl-nav {
             .owl-prev {
               left: -8px;
@@ -8795,10 +8795,10 @@
         margin-top: 20px;
       }
       .music-testimonial-slider {
-        &.owl-theme {
+        .owl-theme {
           .item {
             img {
-              height: 30px;
+              height: 20vh;
             }
           }
         }

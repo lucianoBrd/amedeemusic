@@ -54,6 +54,7 @@ export class MusicTestimonialComponent implements OnInit, OnDestroy {
 
   testimoialCarouselOptions={
     items: 1,
+    autoHeight: true,
     margin: 0,
     dots: false,
     nav: true,
