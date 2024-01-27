@@ -107,7 +107,7 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
       ),
       ...this.videoGalleries.map(
         item => new VideoItem({ 
-          src: [{url: (this.galleryImagePath + item.image), type: item.mimeType}],
+          //src: [{url: (this.galleryImagePath + item.image), type: item.mimeType}],
           thumb: 'assets/images/music/icons/play.png',
           poster: 'assets/images/music/icons/play.png',
           autoplay: true,
