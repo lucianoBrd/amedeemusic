@@ -81,7 +81,8 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
 
   galleryCarouselOptions={
     items: 3,
-    autoHeight: true,
+    autoHeight: false,
+    autoWidth: true,
     nav: true,
     navText: ['<i class="fa-solid fa-arrow-left fa-xl" aria-hidden="true"></i>', '<i class="fa-solid fa-arrow-right fa-xl" aria-hidden="true"></i>'],
     autoplay: false,
@@ -93,7 +94,8 @@ export class MusicGalleryComponent implements OnInit, OnDestroy {
     responsive: {
         0: {
             items: 1,
-            margin: 10
+            margin: 10,
+            autoHeight: true
         },
         460: {
             items: 2
