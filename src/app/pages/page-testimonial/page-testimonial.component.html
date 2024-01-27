@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let testimonial of testimonials">
-                <div class="typography-box">
+                <div class="typography-box h-100">
                     <div class="headings">
                         <h3>{{testimonial.name}}</h3>
                     </div>
-                    <div class="typo-content">
+                    <div class="typo-content text-center">
                         <img [src]="testimonialImagePath + testimonial.image" alt="{{testimonial.name}}" class="img-fluid mb-4" *ngIf="testimonial.image">
                         <p class="text-center">
                             <i class="fa-solid fa-quote-left" aria-hidden="true"></i>

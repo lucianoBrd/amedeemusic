@@ -3788,6 +3788,11 @@ booking section end
     }
   }
   &.artist {
+    .album-artist,.img-project {
+      max-height: 50vh;
+      width: auto !important;
+      max-width: 100%;
+    }
     .album-artist {
       &:hover {
         .overlay-img {
@@ -3830,19 +3835,19 @@ booking section end
         filter: grayscale(100%);
         z-index: 1;
         opacity: 0.2;
-        top: 75%;
+        top: 65%;
         left: 50%;
         transform: translate(-50%, -25%);
         .cd-animation {
           transition: all 0.3s ease;
-          height: 334px;
+          height: 40vh;
         }
         .elipse {
           display: inline;
           width: auto;
           top: 50%;
           transform: translate(80%, -50%);
-          height: 80px;
+          height: 6vh;
         }
         img {
           display: inline;

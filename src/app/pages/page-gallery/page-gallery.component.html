@@ -2,38 +2,34 @@
 <section class="resume portfolio-section zoom-gallery filter-section" *ngIf="galleries?.length > 0 || videoGalleries?.length > 0">
     <div class="container">
         <div class="p-4col-width">
-            <div class="isotopeContainer row" gallerize>
+            <div class="isotopeContainer row">
                 <ng-container>
-                    <figure class="p-width" itemprop="associatedMedia" *ngFor="let gallery of galleries">
-                        <a href="javascript:void(0)" itemprop="contentUrl">
-                          <img alt="gallery-{{gallery.id}}" src="{{galleryImagePath}}{{gallery.image}}" class="img-fluid" />
+                    <figure class="p-width text-center" itemprop="associatedMedia" *ngFor="let gallery of galleries; let i = index">
+                        <a href="javascript:void(0)" (click)="lightbox.open(i)" itemprop="contentUrl">
+                            <div class="d-flex justify-content-center gallery-item">
+                                <img alt="gallery-{{gallery.id}}" src="{{galleryImagePath}}{{gallery.image}}" class="img-fluid" />
+                            </div>
                         </a>
                         <a target="_blank" href="{{galleryImagePath}}{{gallery.image}}">
-                            <h5 class="mt-2 text-center">
+                            <small class="mt-2">
                                 {{language.download}}
                                 <span><i class="fa-solid fa-download" aria-hidden="true"></i></span>
-                            </h5>
+                            </small>
                         </a>
                     </figure>
-                    <figure class="p-width" itemprop="associatedMedia" *ngFor="let gallery of videoGalleries">
-                        <a href="javascript:void(0)" (click)="openVerticallyCentered(content)">
-                            <video onloadedmetadata="this.muted = true; this.playsinline = true;" oncanplay="this.play()"  autoplay loop playsinline="" muted="" onplaying="this.controls=false" alt="gallery-{{gallery.id}}" class="img-fluid">
-                                <source [src]="updateVideoUrl(galleryImagePath + gallery.image)" type='{{gallery.mimeType}}'>
-                            </video>
-                            <ng-template #content let-modal>
-                                <div class="modal-body video-modal">
-                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <iframe class="mfp-iframe" frameborder="0" allowfullscreen="" [src]="updateVideoUrl(galleryImagePath + gallery.image + '?autoplay=1')"></iframe>
-                                </div>
-                            </ng-template>
+                    <figure class="p-width text-center" itemprop="associatedMedia" *ngFor="let gallery of videoGalleries; let i = index">
+                        <a href="javascript:void(0)" (click)="lightbox.open(i + galleries?.length)" itemprop="contentUrl">
+                            <div class="d-flex justify-content-center gallery-item">
+                                <video onloadedmetadata="this.muted = true; this.playsinline = true;" oncanplay="this.play()"  autoplay loop playsinline="" muted="" onplaying="this.controls=false" alt="gallery-{{gallery.id}}" class="img-fluid">
+                                    <source [src]="updateVideoUrl(galleryImagePath + gallery.image)" type='{{gallery.mimeType}}'>
+                                </video>
+                            </div>
                         </a>
                         <a target="_blank" href="{{galleryImagePath}}{{gallery.image}}">
-                            <h5 class="mt-2 text-center">
+                            <small class="mt-2">
                                 {{language.download}}
                                 <span><i class="fa-solid fa-download" aria-hidden="true"></i></span>
-                            </h5>
+                            </small>
                         </a>
                     </figure>
                 </ng-container>

@@ -18,7 +18,7 @@
                 <owl-carousel-o [options]="testimoialCarouselOptions" class="music-testimonial-slider">
                     <ng-container *ngFor="let testimonial of testimonials">
                         <ng-template carouselSlide class="item">
-                            <div class="">
+                            <div class="item">
                                 <img [src]="quoteImage" alt="quote" class="img-fluid">
                                 <div class="text-center testimonial-info">
                                     <a target="_blank" href="{{testimonial.link}}">

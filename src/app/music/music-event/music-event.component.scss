@@ -1,3 +1,8 @@
 hr {
     border-top: 1px solid #fff;
 }
+.album-list img {
+    max-height: 30vh;
+    width: auto !important;
+    max-width: 100%;
+}
