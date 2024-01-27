@@ -49,16 +49,7 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
     this.metaService.setKeywords(this.language.gallery);
     this.metaService.setDescription(this.language.gallery);
 
-    this.getGalleries(this.route);
-
-    this.lightbox.opened.subscribe(res => {
-      setTimeout(() => {
-        const video: HTMLMediaElement = document.querySelector(".g-active-item video");
-        if(video) {
-          video.play();
-        }
-      });
-    });
+    this.getGalleries(this.route);    
   }
 
   ngOnDestroy() {
@@ -116,7 +107,7 @@ export class PageGalleryComponent implements OnInit, OnDestroy {
       ),
       ...this.videoGalleries.map(
         item => new VideoItem({ 
-          //src: [{url: (this.galleryImagePath + item.image), type: item.mimeType}],
+          src: [{url: (this.galleryImagePath + item.image), type: item.mimeType}],
           thumb: 'assets/images/music/icons/play.png',
           poster: 'assets/images/music/icons/play.png',
           autoplay: true,
