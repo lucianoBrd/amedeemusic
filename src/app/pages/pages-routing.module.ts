@@ -33,7 +33,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'project/:id',
+        path: 'project/:slug',
         component: PageProjectComponent,
          data: {
           title: language.myProjects,

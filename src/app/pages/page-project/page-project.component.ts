@@ -60,11 +60,11 @@ export class PageProjectComponent implements OnInit, OnDestroy {
     this.getProjects(this.route);
 
     this.activatedRoute.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      /* Get id */
-      let id: string = params['id'];
+      /* Get slug */
+      let slug: string = params['slug'];
 
-      if (id) {
-        this.dataService.sendGetRequest('/api/projects/' + id).pipe(takeUntil(this.destroy$)).subscribe(
+      if (slug) {
+        this.dataService.sendGetRequest('/api/projects/' + slug).pipe(takeUntil(this.destroy$)).subscribe(
           (data: Project) => {
             let project: Project = data;
   

@@ -55,7 +55,7 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
         this.project.projectPlatforms = undefined;
         this.project.titles = undefined;
       }
-      this.dataService.sendGetRequest('/api/projects/' + project.id).pipe(takeUntil(this.destroy$)).subscribe(
+      this.dataService.sendGetRequest('/api/projects/' + project.slug).pipe(takeUntil(this.destroy$)).subscribe(
         (data: Project) => {
           if (data) {
             if (data.projectPlatforms) {

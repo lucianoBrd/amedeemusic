@@ -50,7 +50,8 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
             image: undefined,
             titles: [],
             projectPlatforms: [],
-            type: undefined
+            type: undefined,
+            slug: undefined,
           };
           if (projects.length == 1) {
             projects.push(emptyProject);
