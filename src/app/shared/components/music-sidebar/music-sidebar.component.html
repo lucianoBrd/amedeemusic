@@ -1,5 +1,5 @@
 <!-- sidebar Start-->
-<div *ngIf="project" id="side-section" class="music side-section" [style.display]="sideBarDispaly">
+<div *ngIf="project" id="side-section" class="music side-section" [ngClass]="{'fullscreen': fullscreen}" [style.display]="sideBarDispaly">
     <div class="jp-jplayer"></div>
     <div class="jp-audio" role="application" aria-label="media player">
         <div class="jp-type-playlist">
@@ -14,7 +14,10 @@
                             </div>
                             <h6 class="now-play">{{project.date | date:'d MMMM y'}}</h6>
                         </div>
-                        <img src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">
+                        <a *ngIf="!fullscreen" [routerLink]="['/page/project', project.slug]">
+                            <img src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">
+                        </a>
+                        <img *ngIf="fullscreen" src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">
                         <div class="author-text">
                             <h5 class="m-b-10 song-text">{{project.name}}</h5>
                             <h6 class="song-sub-text" *ngIf="project.type">{{project.type.name}}</h6>

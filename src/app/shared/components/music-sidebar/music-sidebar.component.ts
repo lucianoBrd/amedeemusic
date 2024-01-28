@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { Project } from 'src/app/shared/models/project.interface';
 import { ConfigDB } from 'src/app/shared/data/config';
@@ -19,6 +19,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./music-sidebar.component.scss']
 })
 export class MusicSidebarComponent implements OnInit, OnDestroy {
+  @Input()
+  public fullscreen: boolean = false;
+
   public artist: Artist;
   public project: Project;
   public language: Language;
@@ -55,7 +58,7 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
         this.project.projectPlatforms = undefined;
         this.project.titles = undefined;
       }
-      this.dataService.sendGetRequest('/api/projects/' + project.id).pipe(takeUntil(this.destroy$)).subscribe(
+      this.dataService.sendGetRequest('/api/projects/' + project.slug).pipe(takeUntil(this.destroy$)).subscribe(
         (data: Project) => {
           if (data) {
             if (data.projectPlatforms) {

@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let event of events">
-                <div class="album-list h-100 overlay-box text-center">
+                <div class="album-list h-100 overlay-box text-center mb-2">
                     <img [src]="eventImagePath + event.image" alt="{{event.name}}" class="img-fluid mb-4" *ngIf="event.image">
                     <h5 class="text-uppercase list-head">{{event.name}}</h5>
                     <div>

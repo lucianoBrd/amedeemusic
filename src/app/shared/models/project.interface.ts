@@ -10,4 +10,5 @@ export interface Project {
     titles: Title[],
     projectPlatforms: ProjectPlatform[],
     type: Type,
+    slug: string,
 }

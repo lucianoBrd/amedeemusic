@@ -10,6 +10,7 @@ import { PageAboutComponent } from './page-about/page-about.component';
 import { PageEventComponent } from './page-event/page-event.component';
 import { PageSocialComponent } from './page-social/page-social.component';
 import { PageTestimonialComponent } from './page-testimonial/page-testimonial.component';
+import { PageProjectInfoComponent } from './page-project-info/page-project-info.component';
 
 const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
@@ -33,7 +34,15 @@ const routes: Routes = [
         }
       },
       {
-        path: 'project/:id',
+        path: 'project/:slug',
+        component: PageProjectInfoComponent,
+         data: {
+          title: language.myProjects,
+          breadcrumb: language.myProjects,         
+        }
+      },
+      {
+        path: 'project/info/:slug',
         component: PageProjectComponent,
          data: {
           title: language.myProjects,

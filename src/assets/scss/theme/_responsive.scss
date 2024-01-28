@@ -8514,7 +8514,9 @@
     }
   }
   .side-section {
-    width: 270px;
+    &:not(.fullscreen) {
+      width: 270px;
+    }
   }
   .slider-container {
     .trainers-slider {

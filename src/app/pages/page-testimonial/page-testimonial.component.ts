@@ -75,6 +75,15 @@ export class PageTestimonialComponent implements OnInit, OnDestroy {
 
         this.currentPage = this.paginationService.getPageNumber(route);
         this.totalPage = this.paginationService.getTotalPageNumber<Testimonial>(this.listTestimonials);
+
+        let keywords:string = this.language.referringToMe;
+
+        for (let index = 0; index < this.testimonials.length; index++) {
+          const testimonial: Testimonial = this.testimonials[index];
+          keywords += ',' + testimonial.name + ',' + testimonial.citation;
+        }
+
+        this.metaService.setKeywords(keywords);
       },
       (error) => {
         this.listTestimonials = null;
