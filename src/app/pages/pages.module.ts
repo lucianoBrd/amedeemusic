@@ -10,6 +10,7 @@ import { PageContactComponent } from './page-contact/page-contact.component';
 import { PagePrivacyPolicyComponent } from './page-privacy-policy/page-privacy-policy.component';
 import { PageGalleryComponent } from './page-gallery/page-gallery.component';
 import { PageProjectComponent } from './page-project/page-project.component';
+import { PageProjectInfoComponent } from './page-project-info/page-project-info.component';
 import { PageAboutComponent } from './page-about/page-about.component';
 import { PageEventComponent } from './page-event/page-event.component';
 import { PageSocialComponent } from './page-social/page-social.component';
@@ -25,6 +26,7 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     PagePrivacyPolicyComponent,
     PageGalleryComponent,
     PageProjectComponent,
+    PageProjectInfoComponent,
     PageAboutComponent,
     PageEventComponent,
     PageSocialComponent,

@@ -1,0 +1,13 @@
+<!-- section start -->
+<app-music-sidebar [fullscreen]="true"></app-music-sidebar>
+<app-empty *ngIf="project === null"></app-empty>
+<section class="music artist bg-artist" *ngIf="project === undefined">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->
