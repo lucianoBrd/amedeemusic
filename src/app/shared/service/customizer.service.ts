@@ -49,9 +49,13 @@ export class CustomizerService {
     localStorage.setItem(Cookie.layoutType, layout);
   }
 
-  setLanguage(language: string) {
-    this.data.settings.languageCode = language;
-    localStorage.setItem(Cookie.languageCode, language);
+  setLanguage(language: string):boolean {
+    if (language === 'en' || language === 'fr') {
+      this.data.settings.languageCode = language;
+      localStorage.setItem(Cookie.languageCode, language);
+      return true;
+    }
+    return false;
   }
 
 }

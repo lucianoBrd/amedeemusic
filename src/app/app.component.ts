@@ -49,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
+
   }
 
   ngOnDestroy() {
@@ -68,8 +68,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   customizeLanguage(val) {
-    if (val === 'en' || val === 'fr') {
-      this.customize.setLanguage(val);
+    let result:boolean = this.customize.setLanguage(val);
+
+    if (result) {
       /* Refresh page */
       window.location.reload();
     }
