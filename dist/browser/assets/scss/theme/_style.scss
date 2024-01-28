@@ -12825,16 +12825,21 @@ error css end
   }
 }
 .side-section {
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 400px;
+  &:not(.fullscreen) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 400px;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+
+  min-height: 100vh;
+  height: auto;
   background: $white;
   display: none;
   z-index: 608;
   box-shadow: 0 3px 15px 3px rgba(46, 97, 220, 0.35);
-  overflow-y: scroll;
 }
 .parallex-section {
   .parallex-container {
