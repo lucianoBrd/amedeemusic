@@ -62,7 +62,7 @@ export class PageProjectComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
       /* Get slug */
       let slug: string = params['slug'];
-
+      
       if (slug) {
         this.dataService.sendGetRequest('/api/projects/' + slug).pipe(takeUntil(this.destroy$)).subscribe(
           (data: Project) => {

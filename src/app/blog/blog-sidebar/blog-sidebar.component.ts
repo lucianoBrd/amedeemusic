@@ -8,6 +8,7 @@ import { Blog } from 'src/app/shared/models/blog.interface';
 import { Testimonial } from 'src/app/shared/models/testimonial.interface';
 import { LanguageService } from 'src/app/shared/service/language.service';
 import { List } from 'src/app/shared/models/list.interface';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 
 @Component({
   selector: 'app-blog-sidebar',
@@ -16,6 +17,7 @@ import { List } from 'src/app/shared/models/list.interface';
 })
 export class BlogSidebarComponent implements OnInit, OnDestroy {
   public blogs: Blog[];
+  public locale: string;
   public testimonials: Testimonial[];
   public language: Language;
   public blogImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'blog/';
@@ -24,11 +26,16 @@ export class BlogSidebarComponent implements OnInit, OnDestroy {
   
   constructor(
     private dataService: DataService,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+
     this.dataService.sendGetRequest('/api/testimonials/randoms?local.local=' + LanguageService.getLanguageCodeOnly()).pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Testimonial>) => {
         this.testimonials = data['hydra:member'];

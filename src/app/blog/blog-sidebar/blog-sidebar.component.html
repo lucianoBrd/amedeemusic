@@ -22,13 +22,13 @@
         <div class="sidebar-container">
             <div class="post-container d-flex" *ngFor="let blog of blogs">
                     <div class="w-35 m-r-25">
-                        <a [routerLink]="['/blog/detail', blog.slug]">
+                        <a [routerLink]="locale ? ['/', locale, 'blog', 'detail', blog.slug] : ['/blog/detail', blog.slug]">
                             <img src="{{blogImagePath}}{{blog.image}}" alt="{{blog.slug}}" class="img-fluid">
                             <div class="badge badge-red">{{blog.date | date:'y'}}</div>
                         </a>
                     </div>
                     <div>
-                        <a [routerLink]="['/blog/detail', blog.slug]">
+                        <a [routerLink]="locale ? ['/', locale, 'blog', 'detail', blog.slug] : ['/blog/detail', blog.slug]">
                             <h5 class="post-head">{{blog.title}}</h5>
                             <h6 class="date">{{blog.date | date:'d MMMM y'}}</h6>
                         </a>

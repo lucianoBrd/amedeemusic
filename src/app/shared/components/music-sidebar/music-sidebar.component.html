@@ -14,7 +14,7 @@
                             </div>
                             <h6 class="now-play">{{project.date | date:'d MMMM y'}}</h6>
                         </div>
-                        <a *ngIf="!fullscreen" [routerLink]="['/page/project', project.slug]">
+                        <a *ngIf="!fullscreen" [routerLink]="locale ? ['/', locale, 'page', 'project', project.slug] : ['/page/project', project.slug]">
                             <img src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">
                         </a>
                         <img *ngIf="fullscreen" src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">
@@ -40,7 +40,7 @@
                             <button class="btn-sidebar" (click)="sideBar()"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
 
-                        <div class="jp-playlist mb-5" *ngIf="project.titles">
+                        <div class="jp-playlist" [ngClass]="fullscreen ? 'pb-5' : 'mb-5'" *ngIf="project.titles">
                             <ul class="pt-2">
                                 <li class="mb-3" *ngFor="let title of project.titles">
                                     <div class="row align-items-center ">
@@ -89,7 +89,7 @@
                                 </ng-template>
                             </ul>
                         </div>
-                        <div class="jp-playlist mb-5" *ngIf="!project.titles">
+                        <div class="jp-playlist" [ngClass]="fullscreen ? 'pb-5' : 'mb-5'" *ngIf="!project.titles">
                             <ul class="pt-2">
                                 <app-loader-bis></app-loader-bis>
                             </ul>

@@ -13,6 +13,7 @@ import { NavService } from 'src/app/shared/service/nav.service';
 import { SocialService } from 'src/app/shared/service/social.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { PoliticService } from '../../service/politic.service';
+import { LocaleService } from '../../service/locale.service';
 
 @Component({
   selector: 'app-copyright',
@@ -35,11 +36,16 @@ export class CopyrightComponent implements OnInit, OnDestroy {
     private politicService: PoliticService,
     private dataService: DataService, 
     private modalService: NgbModal, 
+    private localeService: LocaleService,
   ) { 
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.navServices.updateMenuItems(data);
+    });
+
     this.navServices.items.pipe(takeUntil(this.destroy$)).subscribe(menuItems => {
       let mi: Menu[] = [];
       menuItems.forEach(menuItem => {

@@ -8,7 +8,7 @@
                         <h2>{{language.referringToMe}}</h2>
                     </div>
                     <div class="sub-title">
-                        <a [routerLink]="['/page/testimonial']">
+                        <a [routerLink]="locale ? ['/', locale, 'page', 'testimonial'] : ['/page/testimonial']">
                             {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
                         </a>
                     </div>

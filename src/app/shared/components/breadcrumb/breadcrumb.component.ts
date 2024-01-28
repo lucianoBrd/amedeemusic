@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, PRIMARY_OUTLET, Router } from '@angular/router';
-import { map } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Subject, map } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { TextService } from '../../service/text.service';
 import { Language } from '../../models/language.interface';
+import { LocaleService } from '../../service/locale.service';
 
 
 @Component({
@@ -11,16 +12,19 @@ import { Language } from '../../models/language.interface';
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
-export class BreadcrumbComponent implements OnInit {
-
+export class BreadcrumbComponent implements OnInit, OnDestroy {
+  public locale: string;
   public url: any;
   public breadcrumbs;
   public title: string;
   public language: Language;
 
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal(); 
     this.router.events
@@ -47,13 +51,21 @@ export class BreadcrumbComponent implements OnInit {
         this.title = title;
         this.breadcrumbs = {
           "parentBreadcrumb": parent,
-          "parentPath": parentPath,
+          "parentPath": this.locale ? '/' + this.locale + parentPath : parentPath,
           "childBreadcrumb": child
         }
       });
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

@@ -14,28 +14,37 @@ export class NavService {
 
    constructor() {
       this.language = TextService.getTextByLocal();
+
+      this.updateMenuItems();
+
+      // Array
+      this.items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
+   }
+
+   updateMenuItems(locale: string|null = null) {
       this.MENUITEMS = [
-         { path: '/', title: this.language.home, type: 'link' },
+         { path: (locale ? '/' + locale + '/' : '/'), title: this.language.home, type: 'link' },
          {
             title: this.language.pages, type: 'sub', children: [
-               { path: '/page/project', title: this.language.myProjects, type: 'link' },
-               { path: '/page/social', title: this.language.listenToMe, type: 'link' },
-               { path: '/page/about', title: this.language.about, type: 'link' },
-               { path: '/page/gallery', title: this.language.gallery, type: 'link' },
-               { path: '/page/event', title: this.language.listOfEvents, type: 'link' },
-               { path: '/page/testimonial', title: this.language.referringToMe, type: 'link' },
-               { path: '/page/contact', title: this.language.contact, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/project' : '/page/project'), title: this.language.myProjects, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/social' : '/page/social'), title: this.language.listenToMe, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/about' : '/page/about'), title: this.language.about, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/gallery' : '/page/gallery'), title: this.language.gallery, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/event' : '/page/event'), title: this.language.listOfEvents, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/testimonial' : '/page/testimonial'), title: this.language.referringToMe, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/contact' : '/page/contact'), title: this.language.contact, type: 'link' },
             ],
          },
          {
             title: this.language.blog, type: 'sub', children: [
-               { path: '/blog/list', title: this.language.articleList, type: 'link' },
+               { path: (locale ? '/' + locale + '/blog/list' : '/blog/list'), title: this.language.articleList, type: 'link' },
             ],
          },
       ];
 
-      // Array
-      this.items = new BehaviorSubject<Menu[]>(this.MENUITEMS);
+      if(this.items !== undefined) {
+         this.items.next(this.MENUITEMS);
+      }
    }
 
 }

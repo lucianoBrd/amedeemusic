@@ -8,7 +8,7 @@
                         <h2 class="text-uppercase">{{language.listenToMe}}</h2>
                     </div>
                     <div class="sub-title">
-                        <a [routerLink]="['/page/social']">
+                        <a [routerLink]="locale ? ['/', locale, 'page', 'social'] : ['/page/social']">
                             {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
                         </a>
                     </div>

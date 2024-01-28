@@ -6,6 +6,7 @@ import { routes } from './app-routing.module';
 import { RecaptchaComponent, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { RouterModule as AppRouterModule } from './router/router.module';
 import { BlogModule } from './blog/blog.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PageMaintenanceComponent } from './page-maintenance/page-maintenance.component';
@@ -34,6 +35,7 @@ import { PaginationService } from './shared/service/pagination.service';
 import { PoliticService } from './shared/service/politic.service';
 import { SidebarService } from './shared/service/sidebar.service';
 import { SocialService } from './shared/service/social.service';
+import { LocaleService } from './shared/service/locale.service';
 import { TextService } from './shared/service/text.service';
 import { ArtistService } from './shared/service/artist.service';
 import { BlogService } from './shared/service/blog.service';
@@ -42,6 +44,7 @@ import { Cookie } from './shared/data/cookie';
 registerLocaleData(localeFr);
 
 const language: Language = TextService.getTextByLocal();
+const languageCode: string = LanguageService.getLanguageCodeOnly();
 const cookieConfig:NgcCookieConsentConfig = {
   cookie: {
     domain: ConfigDB.domain
@@ -96,6 +99,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     FormsModule,
     SharedModule,
     PagesModule,
+    AppRouterModule,
     BlogModule,
     RecaptchaModule,
     RecaptchaFormsModule,
@@ -121,10 +125,11 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     PoliticService,
     SidebarService,
     SocialService,
+    LocaleService,
     TextService,
     ConfigDB,
     Cookie,
-    { provide: LOCALE_ID, useValue: LanguageService.getLanguage() },
+    { provide: LOCALE_ID, useValue: languageCode },
     { provide: HTTP_INTERCEPTORS, useClass: JsonDateInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]

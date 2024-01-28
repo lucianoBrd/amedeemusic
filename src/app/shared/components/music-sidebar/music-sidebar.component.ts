@@ -12,6 +12,7 @@ import { TitlePlatform } from 'src/app/shared/models/titlePlatform.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { Artist } from 'src/app/shared/models/artist.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocaleService } from '../../service/locale.service';
 
 @Component({
   selector: 'app-music-sidebar',
@@ -23,6 +24,7 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
   public fullscreen: boolean = false;
 
   public artist: Artist;
+  public locale: string;
   public project: Project;
   public language: Language;
   public projectImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'project/';
@@ -36,11 +38,16 @@ export class MusicSidebarComponent implements OnInit, OnDestroy {
     private sidebarService: SidebarService,
     private artistService: ArtistService,
     private modalService: NgbModal,
+    private localeService: LocaleService,
   ) { 
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+
     this.sidebarService.setProject(this.project);
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;

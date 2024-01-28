@@ -8,7 +8,7 @@
                         <h2>{{language.blog}}</h2>
                     </div>
                     <div class="sub-title">
-                        <a [routerLink]="['/blog/list']">
+                        <a [routerLink]="locale ? ['/', locale, 'blog', 'list'] : ['/blog/list']">
                             {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -54,7 +54,7 @@
                                             </ul>
                                         </div>
                                         <div class="mt-2">
-                                            <a [routerLink]="['/blog/detail', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
+                                            <a [routerLink]="locale ? ['/', locale, 'blog', 'detail', blog.slug] : ['/blog/detail', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
                                                 <i class="fa-solid fa-book mr-1" aria-hidden="true"></i>
                                                 {{language.readMore}}
                                             </a>

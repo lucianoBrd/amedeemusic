@@ -38,7 +38,7 @@ const routes: Routes = [
         component: PageProjectInfoComponent,
          data: {
           title: language.myProjects,
-          breadcrumb: language.myProjects,         
+          breadcrumb: language.myProjects,    
         }
       },
       {

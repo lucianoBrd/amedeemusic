@@ -8,6 +8,7 @@ import { Testimonial } from 'src/app/shared/models/testimonial.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { DataService } from 'src/app/shared/service/data.service';
 import { LanguageService } from 'src/app/shared/service/language.service';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
@@ -17,6 +18,7 @@ import { TextService } from 'src/app/shared/service/text.service';
 })
 export class MusicTestimonialComponent implements OnInit, OnDestroy {
   public testimonials: Testimonial[];
+  public locale: string;
   public artist: Artist;
   public language: Language;
   public testimonialImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'testimonial/';
@@ -29,11 +31,16 @@ export class MusicTestimonialComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataService, 
     private artistService: ArtistService,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+    
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
