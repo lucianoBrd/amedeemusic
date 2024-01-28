@@ -35,6 +35,7 @@ import { PaginationService } from './shared/service/pagination.service';
 import { PoliticService } from './shared/service/politic.service';
 import { SidebarService } from './shared/service/sidebar.service';
 import { SocialService } from './shared/service/social.service';
+import { LocaleService } from './shared/service/locale.service';
 import { TextService } from './shared/service/text.service';
 import { ArtistService } from './shared/service/artist.service';
 import { BlogService } from './shared/service/blog.service';
@@ -124,6 +125,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     PoliticService,
     SidebarService,
     SocialService,
+    LocaleService,
     TextService,
     ConfigDB,
     Cookie,

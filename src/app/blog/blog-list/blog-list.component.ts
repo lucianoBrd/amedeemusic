@@ -11,6 +11,7 @@ import { Blog } from 'src/app/shared/models/blog.interface';
 import { NgxMasonryOptions } from 'ngx-masonry';
 import { BlogService } from 'src/app/shared/service/blog.service';
 import { LanguageService } from 'src/app/shared/service/language.service';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -19,6 +20,7 @@ import { LanguageService } from 'src/app/shared/service/language.service';
 })
 export class BlogListComponent implements OnInit, OnDestroy {
   public blogs: Blog[];
+  public locale: string;
   public listBlogs: List<Blog>;
   public language: Language;
   public blogImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'blog/';
@@ -49,11 +51,16 @@ export class BlogListComponent implements OnInit, OnDestroy {
     private metaService: MetaService,
     private paginationService: PaginationService,
     public blogService: BlogService,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+    
     /* Set title + meta */
     this.metaService.setTitle(this.language.articleList);
     this.metaService.setKeywords(this.language.articleList);

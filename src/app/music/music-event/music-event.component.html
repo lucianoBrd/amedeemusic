@@ -8,7 +8,7 @@
                         <h2>{{language.listOfEvents}}</h2>
                     </div>
                     <div class="sub-title">
-                        <a [routerLink]="['/page/event']">
+                        <a [routerLink]="locale ? ['/', locale, 'page', 'event'] : ['/page/event']">
                             {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
                         </a>
                     </div>

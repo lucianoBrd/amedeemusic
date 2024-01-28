@@ -9,6 +9,7 @@ import { ArtistService } from 'src/app/shared/service/artist.service';
 import { BlogService } from 'src/app/shared/service/blog.service';
 import { DataService } from 'src/app/shared/service/data.service';
 import { LanguageService } from 'src/app/shared/service/language.service';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 import { TextService } from 'src/app/shared/service/text.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { TextService } from 'src/app/shared/service/text.service';
 })
 export class MusicBlogComponent implements OnInit, OnDestroy {
   public artist: Artist;
+  public locale: string;
   public blogs: Blog[];
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
@@ -36,11 +38,16 @@ export class MusicBlogComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private artistService: ArtistService,
     public blogService: BlogService,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });

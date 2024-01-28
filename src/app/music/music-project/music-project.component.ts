@@ -8,6 +8,7 @@ import { List } from 'src/app/shared/models/list.interface';
 import { Project } from 'src/app/shared/models/project.interface';
 import { ArtistService } from 'src/app/shared/service/artist.service';
 import { DataService } from 'src/app/shared/service/data.service';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 import { SidebarService } from 'src/app/shared/service/sidebar.service';
 import { TextService } from 'src/app/shared/service/text.service';
 
@@ -18,6 +19,7 @@ import { TextService } from 'src/app/shared/service/text.service';
 })
 export class MusicProjectComponent implements OnInit, OnDestroy {
   public artist: Artist;
+  public locale: string;
   public artistAbout: ArtistAbout;
   public projects: Project[];
   public language: Language;
@@ -30,11 +32,16 @@ export class MusicProjectComponent implements OnInit, OnDestroy {
     private dataService: DataService, 
     private sidebarService: SidebarService,
     private artistService: ArtistService,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+    
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artistAbout = this.artistService.getArtistAbout(data);
       this.artist = data;

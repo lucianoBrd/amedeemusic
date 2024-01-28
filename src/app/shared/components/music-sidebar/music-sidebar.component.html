@@ -14,7 +14,7 @@
                             </div>
                             <h6 class="now-play">{{project.date | date:'d MMMM y'}}</h6>
                         </div>
-                        <a *ngIf="!fullscreen" [routerLink]="['/page/project', project.slug]">
+                        <a *ngIf="!fullscreen" [routerLink]="locale ? ['/', locale, 'page', 'project', project.slug] : ['/page/project', project.slug]">
                             <img src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">
                         </a>
                         <img *ngIf="fullscreen" src="{{projectImagePath}}{{project.image}}" alt="{{project.name}}" class="img-fluid girls img-project">

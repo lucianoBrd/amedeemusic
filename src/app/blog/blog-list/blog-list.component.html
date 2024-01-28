@@ -38,7 +38,7 @@
                                   </a>
                                 </div>
                                 <div class="btn-bottom m-t-20">
-                                  <a [routerLink]="['/blog/detail', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
+                                  <a [routerLink]="locale ? ['/', locale, 'blog', 'detail', blog.slug] : ['/blog/detail', blog.slug]" class="btn btn-default btn-gradient m-0-auto">
                                       <i class="fa-solid fa-book mr-1" aria-hidden="true"></i>
                                       {{language.readMore}}
                                   </a>

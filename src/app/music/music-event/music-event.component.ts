@@ -6,6 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DataService } from 'src/app/shared/service/data.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 
 @Component({
   selector: 'app-music-event',
@@ -14,6 +15,7 @@ import { ConfigDB } from 'src/app/shared/data/config';
 })
 export class MusicEventComponent implements OnInit, OnDestroy {
   public events: Event[];
+  public locale: string;
   public language: Language;
   public eventImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'event/';
 
@@ -21,11 +23,16 @@ export class MusicEventComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+    
     this.dataService.sendGetRequest('/api/events/lasts').pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Event>) => {
         this.events = data['hydra:member'];

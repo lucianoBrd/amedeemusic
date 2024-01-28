@@ -71,7 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
     let result:boolean = this.customize.setLanguage(val);
 
     if (result) {
-      /* Refresh page */
       window.location.replace(val);
     }
   }
