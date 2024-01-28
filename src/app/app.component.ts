@@ -72,7 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (result) {
       /* Refresh page */
-      window.location.reload();
+      window.location.replace(val);
     }
   }
 }
