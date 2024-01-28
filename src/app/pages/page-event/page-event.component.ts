@@ -73,6 +73,15 @@ export class PageEventComponent implements OnInit, OnDestroy {
 
         this.currentPage = this.paginationService.getPageNumber(route);
         this.totalPage = this.paginationService.getTotalPageNumber<Event>(this.listEvents);
+
+        let keywords:string = this.language.listOfEvents;
+
+        for (let index = 0; index < this.events.length; index++) {
+          const event: Event = this.events[index];
+          keywords += ',' + event.name;
+        }
+
+        this.metaService.setKeywords(keywords);
       },
       (error) => {
         this.listEvents = null;

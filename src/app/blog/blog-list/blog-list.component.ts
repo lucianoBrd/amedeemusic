@@ -88,6 +88,15 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
         this.currentPage = this.paginationService.getPageNumber(route);
         this.totalPage = this.paginationService.getTotalPageNumber<Blog>(this.listBlogs);
+
+        let keywords:string = this.language.articleList;
+
+        for (let index = 0; index < this.blogs.length; index++) {
+          const blog: Blog = this.blogs[index];
+          keywords += ',' + blog.title;
+        }
+
+        this.metaService.setKeywords(keywords);
       },
       (error) => {
         this.listBlogs = null;

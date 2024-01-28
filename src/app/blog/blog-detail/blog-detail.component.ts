@@ -54,7 +54,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
           if(this.blog) {
             const content: string = this.blogService.plainText(this.blog.content);
-            this.metaService.setTitle(this.blog.title);
+            this.metaService.setTitle(this.blog.title + ': ' + this.blog.title);
             this.metaService.setKeywords(this.language.post + ', ' + this.blog.title + ', ' + content);
             this.metaService.setDescription(content);
           }

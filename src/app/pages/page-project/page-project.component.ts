@@ -103,6 +103,15 @@ export class PageProjectComponent implements OnInit, OnDestroy {
 
         this.currentPage = this.paginationService.getPageNumber(route);
         this.totalPage = this.paginationService.getTotalPageNumber<Project>(this.listProjects);
+
+        let keywords:string = this.language.myProjects;
+
+        for (let index = 0; index < this.projects.length; index++) {
+          const project: Project = this.projects[index];
+          keywords += ',' + project.name;
+        }
+
+        this.metaService.setKeywords(keywords);
       },
       (error) => {
         this.listProjects = null;

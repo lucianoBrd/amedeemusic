@@ -66,7 +66,9 @@ export class PageProjectInfoComponent implements OnInit, OnDestroy {
               }
             }
             this.project = data;
+            this.metaService.setTitle(this.language.myProjects + ': ' + this.project.name);
             this.metaService.setKeywords(keywords);
+            this.metaService.setDescription(this.language.myProjects + ': ' + this.project.name);
             this.sideBar(this.project);
           },
           (error) => {
