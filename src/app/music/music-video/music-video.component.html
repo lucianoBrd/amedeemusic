@@ -1,69 +1,92 @@
 <!-- video section Start-->
-<section *ngIf="video" class="music bg-video format" [ngStyle]="{'background-image': (artist?.video ? 'url(' + artistImagePath + artist.video + ')' : '')}">
+<section *ngIf="videos?.length > 0" class="music bg-video format" [ngStyle]="{'background-image': (artist?.video ? 'url(' + artistImagePath + artist.video + ')' : '')}">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <img src="{{videoImagePath}}{{video.image}}" alt="{{video.name}}" class="img-fluid">
-            </div>
-            <div class="col-md-6">
-                <div class=" center-text">
-                    <div>
-                        <div class="format-small-text">
-                            <h6 class="gradient-text hash-video">#{{language.video}}</h6>
-                        </div>
-                        <div class="format-head-text">
-                            <h3 class="about-font-header">{{video.name}}</h3>
-                        </div>
-                        <div class="format-sub-text">
-                            <div class="sub-heading" *ngIf="video.date">
-                                <h6 class="sub-small-text">{{video.date | date:'d MMMM y'}}</h6>
-                            </div>
-                            <p class="text-white sub-para" *ngIf="videoDescription">
-                                {{videoDescription.description}}
-                            </p>
-                        </div>
-                        <div class="m-b-40">
-                            <div class="link-horizontal">
-                                <ul>
-                                    <li>
-                                        <a class="button icon-btn d-flex" (click)="openVerticallyCentered(content)" *ngIf="safeVideoLink">
-                                            <i class="fa fa-play video-icon center-content m-0"  aria-hidden="true"></i>
-                                            <ng-template #content let-modal>
-                                                <div class="modal-body video-modal">
-                                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    <iframe class="mfp-iframe" frameborder="0" allowfullscreen="" [src]="safeVideoLink"></iframe>
-                                                </div>
-                                            </ng-template>
-                                            <div class="watch-now center-content">
-                                                <h6 class="watch">{{language.watchNow}}</h6>
-                                            </div>
-                                        </a>
-                                        <a target="_blank" href="{{video.link}}" class="button icon-btn d-flex" *ngIf="!safeVideoLink">
-                                            <i class="fa fa-play video-icon center-content m-0"  aria-hidden="true"></i>
-                                            <div class="watch-now center-content">
-                                                <h6 class="watch">{{language.watchNow}}</h6>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="d-flex" *ngIf="artist">
-                            <a target="_blank" href="{{artist.videosLink}}">
-                                <h6 class="watch">
-                                    {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
-                                </h6>
-                            </a>
-                        </div>
+            <div class="col-md-10 offset-md-1">
+                <div class="title title4">
+                    <div class="main-title">
+                        <h2>{{language.video}}</h2>
+                    </div>
+                    <div class="sub-title">
+                        <a [routerLink]="locale ? ['/', locale, 'page', 'video'] : ['/page/video']">
+                            {{language.seeAll}}<i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
+            </div>
+            <div class="col-12">
+                <owl-carousel-o class="video-slider" [options]="videoCarouselOptions">
+                    <ng-container *ngFor="let video of videos">
+                        <ng-template carouselSlide class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="{{videoImagePath}}{{video.image}}" alt="{{video.name}}" class="img-fluid">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class=" center-text">
+                                        <div>
+                                            <div class="format-small-text">
+                                                <h6 class="gradient-text hash-video">#{{language.video}}</h6>
+                                            </div>
+                                            <div class="format-head-text">
+                                                <h3 class="about-font-header">{{video.name}}</h3>
+                                            </div>
+                                            <div class="format-sub-text">
+                                                <div class="sub-heading" *ngIf="video.date">
+                                                    <h6 class="sub-small-text">{{video.date | date:'d MMMM y'}}</h6>
+                                                </div>
+                                                <p class="text-white sub-para" *ngIf="video.videoDescription">
+                                                    {{video.videoDescription.description}}
+                                                </p>
+                                            </div>
+                                            <div class="m-b-40">
+                                                <div class="link-horizontal">
+                                                    <ul>
+                                                        <li>
+                                                            <a class="button icon-btn d-flex" (click)="openVerticallyCentered(content)" *ngIf="video.safeVideoLink">
+                                                                <i class="fa fa-play video-icon center-content m-0"  aria-hidden="true"></i>
+                                                                <ng-template #content let-modal>
+                                                                    <div class="modal-body video-modal">
+                                                                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        <iframe class="mfp-iframe" frameborder="0" allowfullscreen="" [src]="video.safeVideoLink"></iframe>
+                                                                    </div>
+                                                                </ng-template>
+                                                                <div class="watch-now center-content">
+                                                                    <h6 class="watch">{{language.watchNow}}</h6>
+                                                                </div>
+                                                            </a>
+                                                            <a target="_blank" href="{{video.link}}" class="button icon-btn d-flex" *ngIf="!video.safeVideoLink">
+                                                                <i class="fa fa-play video-icon center-content m-0"  aria-hidden="true"></i>
+                                                                <div class="watch-now center-content">
+                                                                    <h6 class="watch">{{language.watchNow}}</h6>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex" *ngIf="artist">
+                                                <a target="_blank" href="{{artist.videosLink}}">
+                                                    <h6 class="watch">
+                                                        <i class="fa fa-brands fa-youtube" aria-hidden="true"></i>
+                                                        <i class="fa fa-arrow-right m-l-15" aria-hidden="true"></i>
+                                                    </h6>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                </owl-carousel-o>
             </div>
         </div>
     </div>
 </section>
-<section *ngIf="video === undefined" class="music bg-video format" [ngStyle]="{'background-image': (artist?.video ? 'url(' + artistImagePath + artist.video + ')' : '')}">
+<section *ngIf="videos === undefined" class="music bg-video format" [ngStyle]="{'background-image': (artist?.video ? 'url(' + artistImagePath + artist.video + ')' : '')}">
     <div class="container">
         <div class="row">
             <div class="col-12">

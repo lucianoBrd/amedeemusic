@@ -10,7 +10,9 @@ import { DataService } from 'src/app/shared/service/data.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { VideoDescription } from 'src/app/shared/models/videoDescription.interface';
 import { LanguageService } from 'src/app/shared/service/language.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { VideoService } from 'src/app/shared/service/video.service';
+import { List } from 'src/app/shared/models/list.interface';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 
 @Component({
   selector: 'app-music-video',
@@ -19,14 +21,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class MusicVideoComponent implements OnInit, OnDestroy {
   public artist: Artist;
-  public video: Video;
-  public videoDescription: VideoDescription;
+  public locale: string;
+  public videos: Video[];
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
   public videoImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'video/';
-
-  public videoId;
-  public safeVideoLink: SafeResourceUrl;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -34,41 +33,46 @@ export class MusicVideoComponent implements OnInit, OnDestroy {
     private dataService: DataService, 
     private artistService: ArtistService,
     private modalService: NgbModal,
-    private _sanitizer: DomSanitizer,
+    private readonly videoService: VideoService,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
+    
     this.artistService.loadedArtist$.pipe(takeUntil(this.destroy$)).subscribe((data: Artist) => {
       this.artist = data;
     });
-    this.dataService.sendGetRequest('/api/videos/last').pipe(takeUntil(this.destroy$)).subscribe(
-      (data: Video) => {
-        if (data) {
-          this.videoId = this.youtubeParser(data.link);
-          if (this.videoId) {
-            this.safeVideoLink = this._sanitizer.bypassSecurityTrustResourceUrl('//www.youtube.com/embed/' + this.videoId + '?autoplay=1');
-          }
-          
-          if (data.videoDescriptions) {
-            let videoDescriptions: VideoDescription[] = data.videoDescriptions;
-            videoDescriptions.sort((a, b) => a.id - b.id);
+    this.dataService.sendGetRequest('/api/videos/lasts').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: List<Video>) => {
+        let videos: Video[] = data['hydra:member'];
+        if (videos) {
+          for (let i = 0; i < videos.length; i++) {
+            let video: Video = videos[i];
+            video.safeVideoLink = this.videoService.getSafeVideoLink(video.link);
+            
+            if (video.videoDescriptions) {
+              let videoDescriptions: VideoDescription[] = video.videoDescriptions;
+              videoDescriptions.sort((a, b) => a.id - b.id);
 
-            for (let index = videoDescriptions.length - 1; index >= 0; index--) {
-              const videoDescription: VideoDescription = videoDescriptions[index];
-              if (videoDescription.local.local == LanguageService.getLanguageCodeOnly()) {
-                this.videoDescription = videoDescription;
-                break;
+              for (let j = videoDescriptions.length - 1; j >= 0; j--) {
+                const videoDescription: VideoDescription = videoDescriptions[j];
+                if (videoDescription.local.local == LanguageService.getLanguageCodeOnly()) {
+                  video.videoDescription = videoDescription;
+                  break;
+                }
               }
             }
-            data.videoDescriptions = videoDescriptions;
           }
         }
-        this.video = data;
+        this.videos = videos;
       },
       (error) => {
-        this.video = null;
+        this.videos = [];
       }
     );
   }
@@ -82,9 +86,16 @@ export class MusicVideoComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { centered: true, size: 'lg' });
   }
 
-  youtubeParser(url: string){
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    var match = url.match(regExp);
-    return (match&&match[7].length==11)? match[7] : false;
+  videoCarouselOptions={
+    items: 1,
+    autoHeight: true,
+    margin: 0,
+    dots: false,
+    nav: true,
+    navText: ['<i class="fa-solid fa-arrow-left fa-xl" aria-hidden="true"></i>', '<i class="fa-solid fa-arrow-right fa-xl" aria-hidden="true"></i>'],
+    autoplay: false,
+    slideSpeed: 300,
+    paginationSpeed: 400,
+    loop: true
   }
 }

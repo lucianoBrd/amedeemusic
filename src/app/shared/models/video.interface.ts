@@ -1,3 +1,4 @@
+import { SafeResourceUrl } from "@angular/platform-browser";
 import { VideoDescription } from "./videoDescription.interface";
 
 export interface Video {
@@ -7,4 +8,6 @@ export interface Video {
     name: string,
     date: Date,
     videoDescriptions: VideoDescription[],
+    videoDescription: VideoDescription,
+    safeVideoLink: SafeResourceUrl,
 }

@@ -12,6 +12,8 @@ import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
 import VanillaTilt from 'vanilla-tilt';
 import { LocaleService } from 'src/app/shared/service/locale.service';
+import { Video } from 'src/app/shared/models/video.interface';
+import { VideoService } from 'src/app/shared/service/video.service';
 
 @Component({
   selector: 'app-music-header',
@@ -21,6 +23,7 @@ import { LocaleService } from 'src/app/shared/service/locale.service';
 export class MusicHeaderComponent implements OnInit, OnDestroy {
   public socials: Social[];
   public artist: Artist;
+  public video: Video;
   public locale: string;
   public project: Project;
   public language: Language;
@@ -36,6 +39,7 @@ export class MusicHeaderComponent implements OnInit, OnDestroy {
     private socialService: SocialService,
     private el: ElementRef,
     private localeService: LocaleService,
+    private readonly videoService: VideoService,
   ) {
     this.language = TextService.getTextByLocal();
   }
@@ -56,6 +60,17 @@ export class MusicHeaderComponent implements OnInit, OnDestroy {
       },
       (error) => {
         this.project = null;
+      }
+    );
+    this.dataService.sendGetRequest('/api/videos/last/light').pipe(takeUntil(this.destroy$)).subscribe(
+      (data: Video) => {
+        if (data) {
+          data.safeVideoLink = this.videoService.getSafeVideoLink(data.link);
+        }
+        this.video = data;
+      },
+      (error) => {
+        this.video = null;
       }
     );
     VanillaTilt.init(this.el.nativeElement.querySelectorAll('.tilt-artist'), {
