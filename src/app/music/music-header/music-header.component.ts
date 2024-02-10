@@ -11,6 +11,7 @@ import { SocialService } from 'src/app/shared/service/social.service';
 import { TextService } from 'src/app/shared/service/text.service';
 import { ConfigDB } from 'src/app/shared/data/config';
 import VanillaTilt from 'vanilla-tilt';
+import { LocaleService } from 'src/app/shared/service/locale.service';
 
 @Component({
   selector: 'app-music-header',
@@ -20,6 +21,7 @@ import VanillaTilt from 'vanilla-tilt';
 export class MusicHeaderComponent implements OnInit, OnDestroy {
   public socials: Social[];
   public artist: Artist;
+  public locale: string;
   public project: Project;
   public language: Language;
   public artistImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'artist/';
@@ -33,11 +35,15 @@ export class MusicHeaderComponent implements OnInit, OnDestroy {
     private artistService: ArtistService,
     private socialService: SocialService,
     private el: ElementRef,
+    private localeService: LocaleService,
   ) {
     this.language = TextService.getTextByLocal();
   }
 
   ngOnInit() {
+    this.localeService.loadedLocale$.pipe(takeUntil(this.destroy$)).subscribe((data: string) => {
+      this.locale = data;
+    });
     this.socialService.loadedSocials$.pipe(takeUntil(this.destroy$)).subscribe((data: Social[]) => {
       this.socials = data;
     });

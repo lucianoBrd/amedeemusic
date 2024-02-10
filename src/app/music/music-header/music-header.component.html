@@ -43,7 +43,9 @@
                     <div class="song-text-container h-100">
                         <div class="d-flex h-100">
                             <div class="center-img">
-                                <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid img-project">
+                                <a [routerLink]="locale ? ['/', locale, 'page', 'project', project.slug] : ['/page/project', project.slug]">
+                                    <img src="{{projectImagePath}}{{project.image}}" alt="project" class="img-fluid img-project">
+                                </a>
                             </div>
                             <div class="song-text">
                                 <h5 class="text-white song-head">{{language.latestNovelty}}</h5>
