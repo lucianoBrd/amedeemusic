@@ -11,6 +11,7 @@ import { PageEventComponent } from './page-event/page-event.component';
 import { PageSocialComponent } from './page-social/page-social.component';
 import { PageTestimonialComponent } from './page-testimonial/page-testimonial.component';
 import { PageProjectInfoComponent } from './page-project-info/page-project-info.component';
+import { PageVideoComponent } from './page-video/page-video.component';
 
 const language: Language = TextService.getTextByLocal();
 const routes: Routes = [
@@ -79,6 +80,14 @@ const routes: Routes = [
          data: {
           title: language.listOfEvents,
           breadcrumb: language.listOfEvents,         
+        }
+      },
+      {
+        path: 'video',
+        component: PageVideoComponent,
+         data: {
+          title: language.listOfVideos,
+          breadcrumb: language.listOfVideos,         
         }
       },
       {

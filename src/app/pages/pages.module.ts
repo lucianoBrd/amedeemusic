@@ -15,6 +15,7 @@ import { PageAboutComponent } from './page-about/page-about.component';
 import { PageEventComponent } from './page-event/page-event.component';
 import { PageSocialComponent } from './page-social/page-social.component';
 import { PageTestimonialComponent } from './page-testimonial/page-testimonial.component';
+import { PageVideoComponent } from './page-video/page-video.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
@@ -31,6 +32,7 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     PageEventComponent,
     PageSocialComponent,
     PageTestimonialComponent,
+    PageVideoComponent,
   ],
   imports: [
     CommonModule,
