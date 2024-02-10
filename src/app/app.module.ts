@@ -37,6 +37,7 @@ import { SidebarService } from './shared/service/sidebar.service';
 import { SocialService } from './shared/service/social.service';
 import { LocaleService } from './shared/service/locale.service';
 import { TextService } from './shared/service/text.service';
+import { VideoService } from './shared/service/video.service';
 import { ArtistService } from './shared/service/artist.service';
 import { BlogService } from './shared/service/blog.service';
 import { Language } from './shared/models/language.interface';
@@ -127,6 +128,7 @@ RecaptchaComponent.prototype.ngOnDestroy = function() {
     SocialService,
     LocaleService,
     TextService,
+    VideoService,
     ConfigDB,
     Cookie,
     { provide: LOCALE_ID, useValue: languageCode },

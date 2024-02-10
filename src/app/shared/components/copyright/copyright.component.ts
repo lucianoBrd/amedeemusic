@@ -58,7 +58,9 @@ export class CopyrightComponent implements OnInit, OnDestroy {
     this.dataService.sendGetRequest('/api/socials').pipe(takeUntil(this.destroy$)).subscribe(
       (data: List<Social>) => {
         let socials: Social[] = data['hydra:member'];
-        socials.sort((a, b) => a.fa.localeCompare(b.fa));
+        if (socials) {
+          socials.sort((a, b) => a.fa.localeCompare(b.fa));
+        }
         this.socials = socials;
         this.socialService.setSocials(this.socials);
       },
@@ -71,7 +73,7 @@ export class CopyrightComponent implements OnInit, OnDestroy {
       (data: List<Politic>) => {
         let politics: Politic[] = data['hydra:member'];
 
-        if (politics) {
+        if (politics && politics.length > 0) {
           this.politic = politics[politics.length - 1];
           this.politicService.setPolitic(this.politic);
         } else {

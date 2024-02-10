@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, PRIMARY_OUTLET, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, PRIMARY_OUTLET, Router, Scroll } from '@angular/router';
 import { Subject, map } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { TextService } from '../../service/text.service';
@@ -31,8 +31,12 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
       .pipe(filter((event) => {
         if (event instanceof NavigationEnd) {
           this.url = event.url;
+          return true;
+        } else if (event instanceof Scroll && event.routerEvent instanceof NavigationEnd) {
+          this.url = event.routerEvent.url;
+          return true;
         }
-        return event instanceof NavigationEnd
+        return false;
       }))
       .pipe(map(() => this.activatedRoute))
       .pipe(map((route) => {
@@ -50,9 +54,9 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
         this.breadcrumbs = {};
         this.title = title;
         this.breadcrumbs = {
-          "parentBreadcrumb": parent,
-          "parentPath": this.locale ? '/' + this.locale + parentPath : parentPath,
-          "childBreadcrumb": child
+          'parentBreadcrumb': parent,
+          'parentPath': this.locale ? '/' + this.locale + parentPath : parentPath,
+          'childBreadcrumb': child
         }
       });
   }

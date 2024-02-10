@@ -31,6 +31,7 @@ export class NavService {
                { path: (locale ? '/' + locale + '/page/about' : '/page/about'), title: this.language.about, type: 'link' },
                { path: (locale ? '/' + locale + '/page/gallery' : '/page/gallery'), title: this.language.gallery, type: 'link' },
                { path: (locale ? '/' + locale + '/page/event' : '/page/event'), title: this.language.listOfEvents, type: 'link' },
+               { path: (locale ? '/' + locale + '/page/video' : '/page/video'), title: this.language.listOfVideos, type: 'link' },
                { path: (locale ? '/' + locale + '/page/testimonial' : '/page/testimonial'), title: this.language.referringToMe, type: 'link' },
                { path: (locale ? '/' + locale + '/page/contact' : '/page/contact'), title: this.language.contact, type: 'link' },
             ],

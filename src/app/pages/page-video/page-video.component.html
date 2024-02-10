@@ -1,0 +1,55 @@
+<!-- section start -->
+<app-filter [get]="getVideos" [route]="filterRoute" filterName="search" (onSearch)="onSearch($event)"></app-filter>
+<section class="typography_section" *ngIf="videos?.length > 0">
+    <div class="container">
+        <div class="row">
+            <figure class="col-lg-4 col-md-6 col-sm-12 mb-3" itemprop="associatedMedia" *ngFor="let video of videos; let i = index">
+                <div class="typography-box h-100">
+                    <div class="headings">
+                        <h3>{{video.name}}</h3>
+                    </div>
+                    <div class="typo-content text-center">
+                        <a href="javascript:void(0)" (click)="lightbox.open(i)" itemprop="contentUrl" *ngIf="video.safeVideoLink">
+                            <img [src]="videoImagePath + video.image" alt="{{video.name}}" class="img-fluid mb-4">
+                        </a>
+                        <a target="_blank" href="{{video.link}}" *ngIf="!video.safeVideoLink">
+                            <img [src]="videoImagePath + video.image" alt="{{video.name}}" class="img-fluid mb-4">
+                        </a>
+                        <p class="text-center" *ngIf="video.date">
+                            <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                        </p>
+                        <p class="text-center" *ngIf="video.date">{{video.date | date:'d MMMM y'}}</p>
+                        <hr *ngIf="video.date && video.videoDescription">
+                        <p class="text-center" *ngIf="video.videoDescription">
+                            <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+                        </p>
+                        <p class="text-center" *ngIf="video.videoDescription">{{video.videoDescription.description}}</p>
+                        <hr>
+                        <div class="text-center">
+                            <a href="javascript:void(0)" (click)="lightbox.open(i)" itemprop="contentUrl" *ngIf="video.safeVideoLink">
+                                <h6 class="sub-title">{{language.watchNow}} <i class="fa fa-play m-l-15" aria-hidden="true"></i></h6>
+                            </a>
+                            <a target="_blank" href="{{video.link}}" *ngIf="!video.safeVideoLink">
+                                <h6 class="sub-title">{{language.watchNow}} <i class="fa fa-play m-l-15" aria-hidden="true"></i></h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </figure>
+            <div class="col-12 mt-2">
+                <app-pagination [currentPage]="currentPage" [totalPage]="totalPage" [list]="listVideos" [get]="getVideos" [route]="paginationRoute" [filters]="filtersPagination"></app-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<app-empty *ngIf="videos?.length == 0"></app-empty>
+<section class="typography_section" *ngIf="videos === undefined">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-loader-bis></app-loader-bis>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

@@ -28,6 +28,7 @@ export interface Language {
     access: string,
     download: string,
     listOfEvents: string,
+    listOfVideos: string,
     video: string,
     watchNow: string,
     seeAll: string,
