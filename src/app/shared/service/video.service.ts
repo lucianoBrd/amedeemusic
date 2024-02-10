@@ -16,6 +16,15 @@ export class VideoService {
     return safeVideoLink;
   }
 
+  public getVideoLink(link: string, parameters: string = ''): string {
+    let safeVideoLink: string;
+    const videoId: string|boolean = this.youtubeParser(link);
+    if (videoId) {
+      safeVideoLink = ('//www.youtube.com/embed/' + videoId + '?autoplay=1' + parameters);
+    }
+    return safeVideoLink;
+  }
+
   public youtubeParser(url: string): string|boolean {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);

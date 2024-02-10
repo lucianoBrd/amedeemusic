@@ -11,6 +11,8 @@ import { Video } from 'src/app/shared/models/video.interface';
 import { LanguageService } from 'src/app/shared/service/language.service';
 import { VideoDescription } from 'src/app/shared/models/videoDescription.interface';
 import { VideoService } from 'src/app/shared/service/video.service';
+import { Lightbox } from 'ng-gallery/lightbox';
+import { GalleryItem, YoutubeItem, ImageSize, Gallery as NgGallery, ThumbnailsPosition } from 'ng-gallery';
 
 @Component({
   selector: 'app-page-video',
@@ -21,6 +23,7 @@ export class PageVideoComponent implements OnInit, OnDestroy {
   public videos: Video[];
   public listVideos: List<Video>;
   public language: Language;
+  public items: GalleryItem[];
   public videoImagePath: String = ConfigDB.data.apiServer + ConfigDB.data.apiServerImages + 'video/';
 
   public currentPage: number;
@@ -38,6 +41,8 @@ export class PageVideoComponent implements OnInit, OnDestroy {
     private metaService: MetaService,
     private paginationService: PaginationService,
     private readonly videoService: VideoService,
+    public ngGallery: NgGallery, 
+    public lightbox: Lightbox,
   ) {
     this.language = TextService.getTextByLocal();
   }
@@ -110,12 +115,33 @@ export class PageVideoComponent implements OnInit, OnDestroy {
         }
 
         this.metaService.setKeywords(keywords);
+
+        this.updateNgGallery();
       },
       (error) => {
         this.listVideos = null;
         this.videos = [];
+
+        this.updateNgGallery();
       }
     );
+  }
+
+  updateNgGallery() {
+    this.items = this.videos.map(
+      item => new YoutubeItem({ 
+        src: (this.videoService.youtubeParser(item.link) ? new String(this.videoService.youtubeParser(item.link)).toString() : item.link),
+        thumb: (this.videoImagePath + item.image),
+        autoplay: true,
+      })
+    );
+    
+    const lightboxRef = this.ngGallery.ref('lightbox');
+    lightboxRef.setConfig({
+      imageSize: ImageSize.Contain,
+      thumbPosition: ThumbnailsPosition.Top,
+    });
+    lightboxRef.load(this.items);
   }
 
 }
